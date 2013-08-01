@@ -11,7 +11,22 @@ class User < ActiveRecord::Base
   has_many :friendships_as_proposee, class_name: "Friendship", foreign_key: :proposee_id
   has_many :user_networks
 
+  def friends_networks
 
+  proposee_networks = self.friendships_as_proposer.each do |friendship|
+      friendship.proposee.user_networks.map do |network|
+        network.wifi_network
+      end
+    end
+
+    proposer_networks = self.friendships_as_proposee.all.each do |friendship|
+      friendship.proposer.user_networks.map do |network|
+        network.wifi_network
+      end
+    end
+
+    proposer_networks + proposee_networks
+  end
 
 
 end
