@@ -10,6 +10,7 @@ UnifiApp::Application.routes.draw do
 
   resources :wifi_networks
 
+  root to: "user_networks#index"
 
   devise_for :users
 
