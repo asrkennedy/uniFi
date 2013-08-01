@@ -1,0 +1,31 @@
+<h1>Listing user_networks</h1>
+
+<table>
+  <tr>
+    <th>Nickname</th>
+    <th>Wifi network</th>
+    <th>User</th>
+    <th>User sharing pref</th>
+    <th>User score</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @user_networks.each do |user_network| %>
+  <tr>
+    <td><%= user_network.nickname %></td>
+    <td><%= user_network.wifi_network_id %></td>
+    <td><%= user_network.user_id %></td>
+    <td><%= user_network.user_sharing_pref %></td>
+    <td><%= user_network.user_score %></td>
+    <td><%= link_to 'Show', user_network %></td>
+    <td><%= link_to 'Edit', edit_user_network_path(user_network) %></td>
+    <td><%= link_to 'Destroy', user_network, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User network', new_user_network_path %>

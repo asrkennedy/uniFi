@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nickname:</b>
+  <%= @user_network.nickname %>
+</p>
+
+<p>
+  <b>Wifi network:</b>
+  <%= @user_network.wifi_network_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @user_network.user_id %>
+</p>
+
+<p>
+  <b>User sharing pref:</b>
+  <%= @user_network.user_sharing_pref %>
+</p>
+
+<p>
+  <b>User score:</b>
+  <%= @user_network.user_score %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_network_path(@user_network) %> |
+<%= link_to 'Back', user_networks_path %>

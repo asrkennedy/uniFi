@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nickname: MyString
+  wifi_network_id: 1
+  user_id: 1
+  user_sharing_pref: MyString
+  user_score: 1
+
+two:
+  nickname: MyString
+  wifi_network_id: 1
+  user_id: 1
+  user_sharing_pref: MyString
+  user_score: 1

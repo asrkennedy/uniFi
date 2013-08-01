@@ -1,0 +1,49 @@
+<%= form_for(@wifi_network) do |f| %>
+  <% if @wifi_network.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@wifi_network.errors.count, "error") %> prohibited this wifi_network from being saved:</h2>
+
+      <ul>
+      <% @wifi_network.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :ssid %><br />
+    <%= f.text_field :ssid %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.text_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :lat %><br />
+    <%= f.text_field :lat %>
+  </div>
+  <div class="field">
+    <%= f.label :lng %><br />
+    <%= f.text_field :lng %>
+  </div>
+  <div class="field">
+    <%= f.label :password_required %><br />
+    <%= f.check_box :password_required %>
+  </div>
+  <div class="field">
+    <%= f.label :score %><br />
+    <%= f.number_field :score %>
+  </div>
+  <div class="field">
+    <%= f.label :street_address %><br />
+    <%= f.text_field :street_address %>
+  </div>
+  <div class="field">
+    <%= f.label :postcode %><br />
+    <%= f.text_field :postcode %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

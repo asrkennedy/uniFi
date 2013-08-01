@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Proposer:</b>
+  <%= @friendship.proposer %>
+</p>
+
+<p>
+  <b>Proposee:</b>
+  <%= @friendship.proposee %>
+</p>
+
+<p>
+  <b>Proposer sharing pref:</b>
+  <%= @friendship.proposer_sharing_pref %>
+</p>
+
+<p>
+  <b>Proposee sharing pref:</b>
+  <%= @friendship.proposee_sharing_pref %>
+</p>
+
+
+<%= link_to 'Edit', edit_friendship_path(@friendship) %> |
+<%= link_to 'Back', friendships_path %>

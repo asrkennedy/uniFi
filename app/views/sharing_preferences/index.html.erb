@@ -1,0 +1,23 @@
+<h1>Listing sharing_preferences</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sharing_preferences.each do |sharing_preference| %>
+  <tr>
+    <td><%= sharing_preference.name %></td>
+    <td><%= link_to 'Show', sharing_preference %></td>
+    <td><%= link_to 'Edit', edit_sharing_preference_path(sharing_preference) %></td>
+    <td><%= link_to 'Destroy', sharing_preference, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sharing preference', new_sharing_preference_path %>

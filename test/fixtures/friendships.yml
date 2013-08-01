@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  proposer: 
+  proposee: 
+  proposer_sharing_pref: MyString
+  proposee_sharing_pref: MyString
+
+two:
+  proposer: 
+  proposee: 
+  proposer_sharing_pref: MyString
+  proposee_sharing_pref: MyString

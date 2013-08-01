@@ -1,0 +1,17 @@
+class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :street_address, :postcode, :biography, :user_image, :role
+
+  has_many :friendships_as_proposer, class_name: "Friendship", foreign_key: :proposer_id
+  has_many :friendships_as_proposee, class_name: "Friendship", foreign_key: :proposee_id
+  has_many :user_networks
+
+
+
+
+end

@@ -1,0 +1,21 @@
+<%= form_for(@sharing_preference) do |f| %>
+  <% if @sharing_preference.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sharing_preference.errors.count, "error") %> prohibited this sharing_preference from being saved:</h2>
+
+      <ul>
+      <% @sharing_preference.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

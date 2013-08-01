@@ -15,6 +15,7 @@ gem 'fog', "~>1.3.1"
 gem 'bootstrap-datepicker-rails'
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
+gem 'devise'
 
 
 group :development do

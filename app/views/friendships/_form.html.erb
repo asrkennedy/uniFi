@@ -1,0 +1,33 @@
+<%= form_for(@friendship) do |f| %>
+  <% if @friendship.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@friendship.errors.count, "error") %> prohibited this friendship from being saved:</h2>
+
+      <ul>
+      <% @friendship.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :proposer %><br />
+    <%= f.text_field :proposer %>
+  </div>
+  <div class="field">
+    <%= f.label :proposee %><br />
+    <%= f.text_field :proposee %>
+  </div>
+  <div class="field">
+    <%= f.label :proposer_sharing_pref %><br />
+    <%= f.text_field :proposer_sharing_pref %>
+  </div>
+  <div class="field">
+    <%= f.label :proposee_sharing_pref %><br />
+    <%= f.text_field :proposee_sharing_pref %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

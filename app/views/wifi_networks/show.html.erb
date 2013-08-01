@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Ssid:</b>
+  <%= @wifi_network.ssid %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%= @wifi_network.password %>
+</p>
+
+<p>
+  <b>Lat:</b>
+  <%= @wifi_network.lat %>
+</p>
+
+<p>
+  <b>Lng:</b>
+  <%= @wifi_network.lng %>
+</p>
+
+<p>
+  <b>Password required:</b>
+  <%= @wifi_network.password_required %>
+</p>
+
+<p>
+  <b>Score:</b>
+  <%= @wifi_network.score %>
+</p>
+
+<p>
+  <b>Street address:</b>
+  <%= @wifi_network.street_address %>
+</p>
+
+<p>
+  <b>Postcode:</b>
+  <%= @wifi_network.postcode %>
+</p>
+
+
+<%= link_to 'Edit', edit_wifi_network_path(@wifi_network) %> |
+<%= link_to 'Back', wifi_networks_path %>

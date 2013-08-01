@@ -1,0 +1,2 @@
+module SharingPreferencesHelper
+end

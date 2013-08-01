@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ssid: MyString
+  password: MyString
+  lat: 1.5
+  lng: 1.5
+  password_required: false
+  score: 1
+  street_address: MyString
+  postcode: MyString
+
+two:
+  ssid: MyString
+  password: MyString
+  lat: 1.5
+  lng: 1.5
+  password_required: false
+  score: 1
+  street_address: MyString
+  postcode: MyString
