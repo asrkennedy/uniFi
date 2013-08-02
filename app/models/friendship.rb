@@ -1,7 +1,7 @@
 class Friendship < ActiveRecord::Base
   belongs_to :proposer, class_name: "User"
   belongs_to :proposee, class_name: "User"
-  attr_accessible :proposee_sharing_pref, :proposer_sharing_pref
+  attr_accessible :proposee_sharing_pref, :proposer_sharing_pref, :proposee_id, :proposer_id
 
 def make_friendship
   Friendship.create proposer_id: current_user.id, proposee_id: params[@user.id], proposer_sharing_pref: params[:proposer_sharing_pref], proposee_sharing_pref: nil, confirmed: false
