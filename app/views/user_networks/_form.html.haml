@@ -1,0 +1,17 @@
+%h1 We will use this form to add/edit a UserNetwork
+
+=nested_form_for(@user_network) do |f|
+  %div.field
+    =f.label :nickname
+    =f.text_field :nickname
+  %div.field
+    =f.label :user_sharing_pref
+    =f.select(:user_sharing_pref, ['public', 'acquaintance', 'friend', 'close friend'])
+  %div.field
+    =f.label :user_score
+    =f.text_field :user_score
+  %div.field
+    =f.submit
+  %div.form_fields
+    =render 'fields', f: f
+

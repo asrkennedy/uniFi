@@ -1,0 +1,18 @@
+nested form should go here....
+
+=f.fields_for :wifi_networks do |wifi_form|
+  %div.field
+    =wifi_form.label :ssid
+    =wifi_form.text_field :ssid
+  %div.field
+    =wifi_form.label :password
+    =wifi_form.text_field :password
+  %div.field
+    =wifi_form.label :password_required
+    =wifi_form.select(:passworld_required, [true, false])
+  %div.field
+    =wifi_form.label :street_address
+    =wifi_form.text_field :street_addresss
+  %div.field
+    =wifi_form.label :postcode
+    =wifi_form.text_field :postcode
