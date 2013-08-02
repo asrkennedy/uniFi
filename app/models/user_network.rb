@@ -8,7 +8,6 @@ class UserNetwork < ActiveRecord::Base
   def shareable_with(user)
     owner_friendship_as_proposer = Friendship.where({proposer_id: self.user_id, proposee_id: user.id}).first
     owner_friendship_as_proposee = Friendship.where({proposee_id: self.user_id, proposer_id: user.id}).first
-binding.pry
     case self.user_sharing_pref
       when "public" then return true
       when "acquaintance" then
