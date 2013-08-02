@@ -1,12 +1,9 @@
 UnifiApp::Application.routes.draw do
   resources :friendships
 
-
   resources :sharing_preferences
 
-
   resources :user_networks
-
 
   resources :wifi_networks
 
