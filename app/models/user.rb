@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 
   def proposees_visible_networks
    proposees_array = self.friendships_as_proposer.map {|friendship| [friendship.proposee, friendship.proposee_sharing_pref]}
-   proposees_array.map do |item| { [item[0].user_networks, item[1]] }
+   proposees_array.map {|item|  [item[0].user_networks, item[1]] }
 
 
 
