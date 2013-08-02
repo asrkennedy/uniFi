@@ -30,7 +30,7 @@ class UserNetworksController < ApplicationController
     @user_network = UserNetwork.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html # new.html.haml
       format.json { render json: @user_network }
     end
   end
