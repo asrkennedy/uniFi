@@ -22,4 +22,26 @@ class User < ActiveRecord::Base
     user_networks.flatten.map{|network| network.wifi_network}.uniq
   end
 
+
+
+  def proposees_visible_networks
+   proposees_array = self.friendships_as_proposer.map {|friendship| [friendship.proposee, friendship.proposee_sharing_pref]}
+   proposees_array.map do |item| { [item[0].user_networks, item[1]] }
+
+
+
+
+
+  end
+
+
+
+  def visible_networks
+    # stuff
+  end
+
+
+
+
+
 end
