@@ -1,6 +1,6 @@
 - if current_user.friends
   - current_user.friends.each do |friend|
-    = link_to friend.image, user_path(friend.id)
+    = link_to friend.user_image, user_path(friend.id)
     = friend.first_name
     = friend.last_name
     = friend.biography
