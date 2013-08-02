@@ -1,4 +1,7 @@
-class WifiNetworksController < ApplicationController
+class WifiNetworksController < ApplicationController\
+
+    before_filter :authenticate_user!
+
   # GET /wifi_networks
   # GET /wifi_networks.json
   def index

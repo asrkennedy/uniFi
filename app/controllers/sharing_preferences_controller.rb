@@ -1,4 +1,7 @@
 class SharingPreferencesController < ApplicationController
+
+    before_filter :authenticate_user!
+
   # GET /sharing_preferences
   # GET /sharing_preferences.json
   def index

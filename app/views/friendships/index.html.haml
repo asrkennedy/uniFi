@@ -1,0 +1,16 @@
+- if current_user.friends
+  - current_user.friends.each do |friend|
+    = link_to friend.image, user_path(friend.id)
+    = friend.first_name
+    = friend.last_name
+    = friend.biography
+    Networks:
+    = friend.user_networks.size
+    Friends:
+    = friend.friends.size
+    %br
+-else
+  %p You have no friends.
+
+
+= link_to 'New Friendship', new_friendship_path

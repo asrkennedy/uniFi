@@ -1,4 +1,5 @@
 UnifiApp::Application.routes.draw do
+
   resources :friendships
 
   resources :sharing_preferences
@@ -7,9 +8,16 @@ UnifiApp::Application.routes.draw do
 
   resources :wifi_networks
 
+  # resources :users do
+  #   get "/friendships", as: :friendships, on: :member, action: "friendship"
+  # end
+
   root to: "user_networks#index"
 
   devise_for :users
+
+  get '/users/:id', to: "users#show", as: 'user'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

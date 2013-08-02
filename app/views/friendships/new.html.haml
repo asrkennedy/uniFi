@@ -1,0 +1,12 @@
+%h2 Current Users
+
+-@users.each do |user|
+  - unless current_user.friends_ids.include? user.id
+    = link_to user.first_name, user_path(user)
+    = link_to user.last_name, user_path(user)
+    = user.biography
+    = user.user_networks.size
+    = user.friends.size
+    %br
+
+= link_to 'Back', friendships_path

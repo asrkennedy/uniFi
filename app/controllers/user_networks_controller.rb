@@ -1,4 +1,7 @@
 class UserNetworksController < ApplicationController
+
+    before_filter :authenticate_user!
+
   # GET /user_networks
   # GET /user_networks.json
   def index

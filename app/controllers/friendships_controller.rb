@@ -1,4 +1,7 @@
 class FriendshipsController < ApplicationController
+
+    before_filter :authenticate_user!
+
   # GET /friendships
   # GET /friendships.json
   def index
@@ -25,9 +28,9 @@ class FriendshipsController < ApplicationController
   # GET /friendships/new.json
   def new
     @friendship = Friendship.new
-
+    @users = User.all
     respond_to do |format|
-      format.html # new.html.erb
+      format.html # new.html.haml
       format.json { render json: @friendship }
     end
   end
