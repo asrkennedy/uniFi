@@ -5,6 +5,10 @@ class Friendship < ActiveRecord::Base
 
 def make_friendship
   Friendship.create proposer_id: current_user.id, proposee_id: params[@user.id], proposer_sharing_pref: params[:proposer_sharing_pref], proposee_sharing_pref: nil, confirmed: false
+
+# validates :proposer_sharing_pref, inclusion: { in: User::SHARING_PREFERENCES }
+# validates :proposee_sharing_pref, inclusion: { in: User::SHARING_PREFERENCES }
+
 end
 
 # def show_users
@@ -15,7 +19,5 @@ end
 #     user.friends.size
 #     end
 # end
-
-
 
 end

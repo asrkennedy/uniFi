@@ -3,18 +3,39 @@ class UserNetwork < ActiveRecord::Base
   belongs_to :wifi_network
   belongs_to :user
 
-
+  validates :user_sharing_pref, inclusion: { in: User::SHARING_PREFERENCES }
 
   def shareable_with(user)
-
     owner_friendship_as_proposer = Friendship.where({proposer_id: self.user_id, proposee_id: user.id}).first
     owner_friendship_as_proposee = Friendship.where({proposee_id: self.user_id, proposer_id: user.id}).first
-
-    if owner_friendship_as_proposer
-      owner_friendship_as_proposer.proposer_sharing_pref == self.user_sharing_pref || self.user_sharing_pref == "public"
-    elsif owner_friendship_as_proposee
-      owner_friendship_as_proposee.proposee_sharing_pref == self.user_sharing_pref || self.user_sharing_pref == "public"
+    case self.user_sharing_pref
+      when "public" then return true
+      when "acquaintance" then
+        if owner_friendship_as_proposer
+          ["acquaintance", "friend", "close friend"].include?(owner_friendship_as_proposer.proposer_sharing_pref)
+        elsif owner_friendship_as_proposee
+          ["acquaintance", "friend", "close friend"].include?(owner_friendship_as_proposee.proposee_sharing_pref)
+        end
+      when "friend" then
+        if owner_friendship_as_proposer
+          ["friend", "close friend"].include?(owner_friendship_as_proposer.proposer_sharing_pref)
+        elsif owner_friendship_as_proposee
+          ["friend", "close friend"].include?(owner_friendship_as_proposee.proposee_sharing_pref)
+        end
+      when "close friend" then
+        if owner_friendship_as_proposer
+          owner_friendship_as_proposer.proposer_sharing_pref == "close friend"
+        elsif owner_friendship_as_proposee
+          owner_friendship_as_proposee.proposee_sharing_pref == "close friend"
+        end
+      else
+        return false
     end
-  end
+end
+
+
+
+
+
 
 end

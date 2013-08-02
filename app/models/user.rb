@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :friendships_as_proposee, class_name: "Friendship", foreign_key: :proposee_id
   has_many :user_networks
 
+  SHARING_PREFERENCES = ['acquaintance', 'friend', 'close friend']
+
   def friends
     proposees = self.friendships_as_proposer.map {|friendship| friendship.proposee}
     proposers = self.friendships_as_proposee.map {|friendship| friendship.proposer}
@@ -23,22 +25,20 @@ class User < ActiveRecord::Base
   end
 
 
-
-  def proposees_visible_networks
-   proposees_array = self.friendships_as_proposer.map {|friendship| [friendship.proposee, friendship.proposee_sharing_pref]}
-   array_of_networks_and_friendship_sharing_prefs = proposees_array.map {|item|  [item[0].user_networks, item[1]] }
+  def friends_ids
+    self.friends.map do |friend|
+      friend.id
+    end
   end
 
-  def visible_networks
-    # stuff
+  def friends_visible_networks
+    proposees = self.friendships_as_proposer.map {|friendship| friendship.proposee}
+    proposees_networks = proposees.map{|proposee| proposee.user_networks}.flatten
+
+    proposers = self.friendships_as_proposee.map {|friendship| friendship.proposer}
+    proposer_networks = proposers.map{|proposer| proposer.user_networks}.flatten
+
+    networks = proposer_networks + proposees_networks
+    visible_networks = networks.select{|network| network.shareable_with(self)}
   end
-
-def friends_ids
-  self.friends.map do |friend|
-    friend.id
-  end
-end
-
-
-
 end
