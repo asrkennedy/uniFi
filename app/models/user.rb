@@ -11,7 +11,6 @@ class User < ActiveRecord::Base
   has_many :friendships_as_proposee, class_name: "Friendship", foreign_key: :proposee_id
   has_many :user_networks
 
-
   def friends
     proposees = self.friendships_as_proposer.map {|friendship| friendship.proposee}
     proposers = self.friendships_as_proposee.map {|friendship| friendship.proposer}
