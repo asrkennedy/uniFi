@@ -16,7 +16,8 @@ gem 'bootstrap-datepicker-rails'
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 gem 'devise'
-
+gem 'faker'
+gem 'populator'
 
 group :development do
   gem 'pry-rails'
