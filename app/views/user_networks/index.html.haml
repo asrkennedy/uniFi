@@ -1,30 +1,62 @@
--if current_user.friends.any?
+-unless @proposers_of_unconfirmed_friendships.blank?
   -@proposers_of_unconfirmed_friendships.each do |proposer|
     %p Unconfirmed Friendships:
     = "#{proposer.first_name} #{proposer.last_name}"
     = link_to 'Confirm', confirm_friend_path(proposer)
     = link_to 'Deny', deny_friend_path(proposer)
-%br
 
--@user_networks.each do |user_network|
-  %table
-    %tr
-      %td
-        = user_network.nickname
-      %td
-        = user_network.wifi_network_id
-      %td
-        = user_network.user_id
-      %td
-        = user_network.user_sharing_pref
-      %td
-        = user_network.user_score
-      %td
-        = link_to 'Show', user_network
-      %td
-        = link_to 'Edit', edit_user_network_path(user_network)
-      %td
-        = link_to 'Destroy', user_network, method: :delete, data: { confirm: 'Are you sure?' }
 
-= link_to 'New User network', new_user_network_path
-= link_to 'Friends', friendships_path
+= link_to 'Your Friends', friendships_path
+= link_to 'Add A Network', new_user_network_path
+
+-unless @users_networks.blank?
+  %h2 Your Wi-Fi Networks
+  %ul
+    -@users_networks.each do |network|
+      %li
+        %h3
+          -unless network.nickname.blank?
+            = network.nickname
+            ,
+          SSID:
+          = network.wifi_network.ssid
+          , Password:
+          = network.wifi_network.password
+        %p
+          Address:
+          =network.address
+        %p
+          =network.sharing_string
+        %p
+          =network.rating_string
+        %p
+          Details for this Wi-Fi network were last updated
+          = distance_of_time_in_words(Time.now, network.wifi_network.updated_at)
+          ago
+          = link_to 'Edit', edit_user_network_path(network)
+
+-unless @users_friends_networks.blank?
+  %h2 Wi-Fi Networks Shared By Your Friends
+  %ul
+    -@users_friends_networks.each do |wifi_network|
+      %li
+        %h3
+          SSID:
+          = wifi_network.ssid
+          , Password:
+          = wifi_network.password
+        %p
+          Address:
+          =wifi_network.full_street_address
+        %p
+          Shared By: would be nice to see which friends shared it here
+
+
+        %p
+          =wifi_network.rating_string
+        %p
+          Details for this Wi-Fi network were last updated
+          = distance_of_time_in_words(Time.now, wifi_network.updated_at)
+          ago
+          = link_to 'Add To Your Networks'
+

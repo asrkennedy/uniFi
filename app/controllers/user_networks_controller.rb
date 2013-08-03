@@ -6,7 +6,8 @@ class UserNetworksController < ApplicationController
   # GET /user_networks.json
   def index
 
-    @user_networks = UserNetwork.all
+    @users_networks = UserNetwork.where(user_id: current_user.id)
+    @users_friends_networks = current_user.friends_visible_networks
     @proposers_of_unconfirmed_friendships = current_user.find_unconfirmed_friendships
 
     respond_to do |format|
@@ -46,7 +47,7 @@ class UserNetworksController < ApplicationController
   # POST /user_networks
   # POST /user_networks.json
   def create
-    params[:user_network]["wifi_network_attributes"]["postcode"] = params[:user_network]["wifi_network_attributes"]["postcode"].delete!(' ').upcase
+    params[:user_network]["wifi_network_attributes"]["postcode"] = params[:user_network]["wifi_network_attributes"]["postcode"].delete(' ').upcase
 
     wifi_network_hash = {
       ssid: params[:user_network]["wifi_network_attributes"]["ssid"],
@@ -72,7 +73,7 @@ class UserNetworksController < ApplicationController
   # PUT /user_networks/1
   # PUT /user_networks/1.json
   def update
-    params[:user_network]["wifi_network_attributes"]["postcode"] = params[:user_network]["wifi_network_attributes"]["postcode"].delete!(' ').upcase
+    params[:user_network]["wifi_network_attributes"]["postcode"] = params[:user_network]["wifi_network_attributes"]["postcode"].delete(' ').upcase
     @user_network = UserNetwork.find(params[:id])
     respond_to do |format|
       if @user_network.update_attributes(params[:user_network])

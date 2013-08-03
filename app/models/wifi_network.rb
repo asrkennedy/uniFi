@@ -10,13 +10,18 @@ class WifiNetwork < ActiveRecord::Base
     "#{self.house}, #{self.street_address}, #{self.city}, #{self.postcode}, #{self.country}"
   end
 
+
   def average_user_rating
     total_score = 0
     self.user_networks.each do |user_network|
       total_score += user_network.user_score.to_f
     end
-    total_score/self.user_networks.count
+    (total_score/self.user_networks.count).round(2)
   end
 
+
+    def rating_string
+      "Average Uni-Fi user rating: #{self.average_user_rating}"
+    end
 
 end

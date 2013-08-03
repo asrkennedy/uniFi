@@ -6,30 +6,49 @@ class UserNetwork < ActiveRecord::Base
   validates :user_sharing_pref, inclusion: { in: User::SHARING_PREFERENCES }
   accepts_nested_attributes_for :wifi_network
 
+  def address
+    "#{self.wifi_network.house}, #{self.wifi_network.street_address}, #{self.wifi_network.city}, #{self.wifi_network.postcode}, #{self.wifi_network.country}"
+  end
+
+  def sharing_string
+    case self.user_sharing_pref
+      when "public" then x = "Public"
+      when "private" then return "This network is private, only you can see it"
+      when "acquaintance" then x = "Acquaintances, Friends and Close Friends"
+      when "friend" then x = "Friends and Close friends"
+      when "close friend" then x = "Close Friends"
+    end
+    "Visibility: #{x}"
+  end
+
+  def rating_string
+    "Your rating: #{user_score} out of 5 (average Uni-Fi user rating: #{self.wifi_network.average_user_rating})"
+  end
 
   def shareable_with(user)
     owner_friendship_as_proposer = Friendship.where({proposer_id: self.user_id, proposee_id: user.id}).first
     owner_friendship_as_proposee = Friendship.where({proposee_id: self.user_id, proposer_id: user.id}).first
+
     case self.user_sharing_pref
       when "public" then return true
       when "private" then return false
       when "acquaintance" then
         if owner_friendship_as_proposer
-          ["acquaintance", "friend", "close friend"].include?(owner_friendship_as_proposer.proposer_sharing_pref)
+          ["acquaintance", "friend", "close friend"].include?(owner_friendship_as_proposer.proposer_sharing_pref.downcase)
         elsif owner_friendship_as_proposee
-          ["acquaintance", "friend", "close friend"].include?(owner_friendship_as_proposee.proposee_sharing_pref)
+          ["acquaintance", "friend", "close friend"].include?(owner_friendship_as_proposee.proposee_sharing_pref.downcase)
         end
       when "friend" then
         if owner_friendship_as_proposer
-          ["friend", "close friend"].include?(owner_friendship_as_proposer.proposer_sharing_pref)
+          ["friend", "close friend"].include?(owner_friendship_as_proposer.proposer_sharing_pref.downcase)
         elsif owner_friendship_as_proposee
-          ["friend", "close friend"].include?(owner_friendship_as_proposee.proposee_sharing_pref)
+          ["friend", "close friend"].include?(owner_friendship_as_proposee.proposee_sharing_pref.downcase)
         end
       when "close friend" then
         if owner_friendship_as_proposer
-          owner_friendship_as_proposer.proposer_sharing_pref == "close friend"
+          owner_friendship_as_proposer.proposer_sharing_pref.downcase == "close friend"
         elsif owner_friendship_as_proposee
-          owner_friendship_as_proposee.proposee_sharing_pref == "close friend"
+          owner_friendship_as_proposee.proposee_sharing_pref.downcase == "close friend"
         end
       else
         return false

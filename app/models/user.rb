@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
 
     networks = proposer_networks + proposees_networks
     visible_networks = networks.select{|network| network.shareable_with(self)}
+    visible_networks.flatten.map{|network| network.wifi_network}.uniq
   end
 
   def make_friendship(current_user, user, sharing_preferences)
@@ -92,7 +93,7 @@ class User < ActiveRecord::Base
       friend_requests.map do |friend_request|
         friend_request.proposer
     end
-  # returns array of proposers (users) of friend requests
+  # returns an array of proposers (users) of friend requests
   end
 
 
