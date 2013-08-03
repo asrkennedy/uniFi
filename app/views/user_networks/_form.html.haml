@@ -5,14 +5,16 @@
   %div.field
     =f.label :nickname
     =f.text_field :nickname
-  %div.field
-    =f.label :user_sharing_pref
-    =f.select(:user_sharing_pref, ['public', 'acquaintance', 'friend', 'close friend', 'private'])
+  %div.form_fields
+    =render 'fields', f: f
   %div.field
     =f.label :user_score
     =f.select(:user_score, [1,2,3,4,5], selected: 3)
   %div.field
+    =f.label :user_sharing_pref
+    =f.select(:user_sharing_pref, ['public', 'acquaintance', 'friend', 'close friend', 'private'], selected: "private")
+  #sharing_warning
+  %div.field
     =f.submit
-  %div.form_fields
-    =render 'fields', f: f
+
 
