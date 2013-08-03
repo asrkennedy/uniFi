@@ -1,6 +1,6 @@
 nested form should go here....
 
-=f.fields_for :wifi_networks do |wifi_form|
+=f.fields_for :wifi_network do |wifi_form|
   %div.field
     =wifi_form.label :ssid
     =wifi_form.text_field :ssid
@@ -9,10 +9,10 @@ nested form should go here....
     =wifi_form.text_field :password
   %div.field
     =wifi_form.label :password_required
-    =wifi_form.select(:passworld_required, [true, false])
+    =wifi_form.select(:password_required, [true, false])
   %div.field
     =wifi_form.label :street_address
-    =wifi_form.text_field :street_addresss
+    =wifi_form.text_field :street_address
   %div.field
     =wifi_form.label :postcode
     =wifi_form.text_field :postcode
