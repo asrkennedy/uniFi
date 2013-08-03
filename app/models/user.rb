@@ -49,6 +49,35 @@ class User < ActiveRecord::Base
   # validates :proposee_sharing_pref, inclusion: { in: User::SHARING_PREFERENCES }
   end
 
+  def confirm_friendship(current_user, user, sharing_preferences)
+    proposee_friendships = Friendship.where(proposee_id: current_user)
+    friend_requests = proposee_friendships.where(confirmed: nil)
+    f = friend_requests.where(proposer_id: user)
+    f.each do |friend|
+      friend.proposee_sharing_pref = sharing_preferences
+      friend.confirmed = true
+      friend.save
+    end
+  end
+
+  def deny_friendship(current_user, user)
+    proposee_friendships = Friendship.where(proposee_id: current_user)
+    f = proposee_friendships.where(proposer_id: user)
+    f.first.destroy
+  end
+
+  def defriend(current_user, user)
+    proposee_friendships = Friendship.where(proposee_id: current_user)
+      if proposee_friendships.empty?
+        proposee_friendships = Friendship.where(proposer_id: current_user)
+      end
+    f = proposee_friendships.where(proposer_id: user)
+      if f.empty?
+        f = proposee_friendships.where(proposee_id: user)
+      end
+    f.first.destroy
+  end
+
   def check_friendship(current_user, user)
     if Friendship.where(proposer_id: current_user.id) == Friendship.where(proposee_id: user.id)
       return true
@@ -56,5 +85,15 @@ class User < ActiveRecord::Base
       return false
     end
   end
+
+  def find_unconfirmed_friendships (current_user)
+  proposee_friendships = Friendship.where(proposee_id: current_user)
+  friend_requests = proposee_friendships.where(confirmed: nil)
+    friend_requests.map do |friend_request|
+      friend_request.proposer_id
+    end
+  # returns array of proposer_id of friend requests
+  end
+
 
 end

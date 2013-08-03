@@ -1,0 +1,9 @@
+= form_tag friend_confirm_relationship_path(@user) do
+  %p
+    %select{ :name => "sharing_preferences" }
+      = "Please define your relationship"
+      %option{:value => "Close Friend"}= "Close Friend"
+      %option{:value => "Friend"}= "Friend"
+      %option{:value => "Acquaintance"}= "Acquaintance"
+  %p
+    = submit_tag "Submit"

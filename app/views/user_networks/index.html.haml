@@ -1,0 +1,30 @@
+-if current_user.friends.any?
+  - current_user.find_unconfirmed_friendships(current_user).each do |friend|
+    %p Unconfirmed Friendships:
+    - @user = User.find(friend)
+    = @user.first_name
+    = @user.last_name
+    = link_to 'Confirm', confirm_friend_path(@user)
+    = link_to 'Deny', deny_friend_path(@user)
+    %br
+
+-@user_networks.each do |user_network|
+  %tr
+    %td
+      = user_network.nickname
+    %td
+      = user_network.wifi_network_id
+    %td
+      = user_network.user_id
+    %td
+      = user_network.user_sharing_pref
+    %td
+      = user_network.user_score
+    %td
+      = link_to 'Show', user_network
+    %td
+      = link_to 'Edit', edit_user_network_path(user_network)
+    %td
+      = link_to 'Destroy', user_network, method: :delete, data: { confirm: 'Are you sure?' }
+
+= link_to 'New User network', new_user_network_path
