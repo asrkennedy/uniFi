@@ -20,7 +20,7 @@
           Friends:
           = user.friends.size
         %td
-          = link_to "Add Friend", friendships_new(user)
+          = link_to "Add Friend", new_friend_path(user)
           / Need to change this route to include the id
 
 = link_to 'Back', friendships_path
