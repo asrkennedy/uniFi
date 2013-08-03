@@ -86,13 +86,13 @@ class User < ActiveRecord::Base
     end
   end
 
-  def find_unconfirmed_friendships (current_user)
-  proposee_friendships = Friendship.where(proposee_id: current_user)
-  friend_requests = proposee_friendships.where(confirmed: nil)
-    friend_requests.map do |friend_request|
-      friend_request.proposer_id
+  def find_unconfirmed_friendships
+    proposee_friendships = Friendship.where(proposee_id: self.id)
+    friend_requests = proposee_friendships.where(confirmed: nil)
+      friend_requests.map do |friend_request|
+        friend_request.proposer
     end
-  # returns array of proposer_id of friend requests
+  # returns array of proposers (users) of friend requests
   end
 
 

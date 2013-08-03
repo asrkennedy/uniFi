@@ -5,7 +5,9 @@ class UserNetworksController < ApplicationController
   # GET /user_networks
   # GET /user_networks.json
   def index
+
     @user_networks = UserNetwork.all
+    @proposers_of_unconfirmed_friendships = current_user.find_unconfirmed_friendships
 
     respond_to do |format|
       format.html # index.html.erb
