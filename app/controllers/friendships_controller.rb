@@ -24,6 +24,15 @@ class FriendshipsController < ApplicationController
     end
   end
 
+  def new_friend
+    @friendship = Friendship.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @friendship }
+    end
+  end
+
   # GET /friendships/new
   # GET /friendships/new.json
   def new

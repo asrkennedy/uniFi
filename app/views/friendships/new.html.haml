@@ -1,12 +1,26 @@
 %h2 Current Users
 
--@users.each do |user|
-  - unless current_user.friends_ids.include? user.id
-    = link_to user.first_name, user_path(user)
-    = link_to user.last_name, user_path(user)
-    = user.biography
-    = user.user_networks.size
-    = user.friends.size
-    %br
+%table
+  -@users.each do |user|
+    %tr
+      - unless current_user.friends_ids.include? user.id
+        - if user.user_image. != nil
+          %td
+            = link_to user.user_image, user_path(user)
+        %td
+          = link_to user.first_name, user_path(user)
+        %td
+          = link_to user.last_name, user_path(user)
+        %td
+          = user.biography
+        %td
+          Networks:
+          = user.user_networks.size
+        %td
+          Friends:
+          = user.friends.size
+        %td
+          = link_to "Add Friend", friendships_new(user)
+          / Need to change this route to include the id
 
 = link_to 'Back', friendships_path
