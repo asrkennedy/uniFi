@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130802123055) do
+ActiveRecord::Schema.define(:version => 20130803143524) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "proposer_id"
@@ -70,14 +70,17 @@ ActiveRecord::Schema.define(:version => 20130802123055) do
   create_table "wifi_networks", :force => true do |t|
     t.string   "ssid"
     t.string   "password"
-    t.float    "lat"
-    t.float    "lng"
+    t.float    "latitude"
+    t.float    "longitude"
     t.boolean  "password_required"
     t.integer  "score"
     t.string   "street_address"
     t.string   "postcode"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.string   "house"
+    t.string   "city"
+    t.string   "country"
   end
 
 end

@@ -93,6 +93,7 @@ GEM
       nokogiri (~> 1.5.0)
       ruby-hmac
     formatador (0.2.4)
+    geocoder (1.1.8)
     haml (4.0.3)
       tilt
     hike (1.2.3)
@@ -231,6 +232,7 @@ DEPENDENCIES
   devise
   faker
   fog (~> 1.3.1)
+  geocoder
   haml
   jquery-rails
   kaminari

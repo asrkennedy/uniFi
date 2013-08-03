@@ -18,6 +18,7 @@ gem 'bootstrap-kaminari-views'
 gem 'devise'
 gem 'faker'
 gem 'populator'
+gem 'geocoder'
 
 
 group :development do
