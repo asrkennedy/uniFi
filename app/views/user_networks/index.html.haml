@@ -9,22 +9,23 @@
     %br
 
 -@user_networks.each do |user_network|
-  %tr
-    %td
-      = user_network.nickname
-    %td
-      = user_network.wifi_network_id
-    %td
-      = user_network.user_id
-    %td
-      = user_network.user_sharing_pref
-    %td
-      = user_network.user_score
-    %td
-      = link_to 'Show', user_network
-    %td
-      = link_to 'Edit', edit_user_network_path(user_network)
-    %td
-      = link_to 'Destroy', user_network, method: :delete, data: { confirm: 'Are you sure?' }
+  %table
+    %tr
+      %td
+        = user_network.nickname
+      %td
+        = user_network.wifi_network_id
+      %td
+        = user_network.user_id
+      %td
+        = user_network.user_sharing_pref
+      %td
+        = user_network.user_score
+      %td
+        = link_to 'Show', user_network
+      %td
+        = link_to 'Edit', edit_user_network_path(user_network)
+      %td
+        = link_to 'Destroy', user_network, method: :delete, data: { confirm: 'Are you sure?' }
 
 = link_to 'New User network', new_user_network_path
