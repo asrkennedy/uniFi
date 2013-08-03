@@ -72,15 +72,10 @@ class User < ActiveRecord::Base
     proposee_friendships << Friendship.where(proposer_id: current_user.id)
 
     proposee_friendships.flatten.map do |friendship|
-      if friendship.proposer_id == user.id
-        f = friendship
-        f.destroy
-      elsif friendship.proposee_id == user.id
-        f = friendship
-        f.destroy
-      end
+     if friendship.proposer_id == user.id || friendship.proposee_id == user.id
+     friendship.destroy
     end
-
+  end
   end
 
   def check_friendship(current_user, user)
