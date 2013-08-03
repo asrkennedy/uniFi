@@ -6,7 +6,6 @@ class UserNetwork < ActiveRecord::Base
   validates :user_sharing_pref, inclusion: { in: User::SHARING_PREFERENCES }
   accepts_nested_attributes_for :wifi_network
 
-  # before_save :validates_uniqueness_of_children_network
 
   def shareable_with(user)
     owner_friendship_as_proposer = Friendship.where({proposer_id: self.user_id, proposee_id: user.id}).first
@@ -37,11 +36,11 @@ class UserNetwork < ActiveRecord::Base
 end
 
 
-# def validates_uniqueness_of_children_network
-#   duplicate = WifiNetwork.where(ssid: self.child.ssid).first
-#   wifi_network == duplicate if duplicate
+  def check_whether_nested_wifi_network_already_exists
+    existing_wifi_network = WifiNetwork.where({ssid: self.wifi_network.ssid, password: self.wifi_network.password, postcode: self.wifi_network.postcode}).first
+    self.wifi_network_id == existing_wifi_network.id if existing_wifi_network
 
-# end
+  end
 
 
 

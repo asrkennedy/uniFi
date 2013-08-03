@@ -1,7 +1,7 @@
 %h1 We will use this form to add/edit a UserNetwork
 
 =nested_form_for(@user_network) do |f|
-  -f.hidden_field :user_id, {value: @user.id}
+  =f.hidden_field :user_id, {value: @user.id}
   %div.field
     =f.label :nickname
     =f.text_field :nickname

@@ -46,8 +46,18 @@ class UserNetworksController < ApplicationController
   # POST /user_networks
   # POST /user_networks.json
   def create
-    @user_network = UserNetwork.new(params[:user_network])
+    wifi_network_hash = {
+      ssid: params[:user_network]["wifi_network_attributes"]["ssid"],
+      password: params[:user_network]["wifi_network_attributes"]["password"],
+      postcode: params[:user_network]["wifi_network_attributes"]["postcode"]
+    }
+    existing_wifi_network = WifiNetwork.where(wifi_network_hash).first
+    # params[:user_network]["wifi_network_attributes"]["id"] = existing_wifi_network.id.to_s if existing_wifi_network
 
+
+    @user_network = UserNetwork.new(params[:user_network])
+    @user_network.wifi_network_id = existing_wifi_network.id
+    binding.pry
     respond_to do |format|
       if @user_network.save
         format.html { redirect_to @user_network, notice: 'User network was successfully created.' }
@@ -62,8 +72,8 @@ class UserNetworksController < ApplicationController
   # PUT /user_networks/1
   # PUT /user_networks/1.json
   def update
-    @user_network = UserNetwork.find(params[:id])
 
+    @user_network = UserNetwork.find(params[:id])
     respond_to do |format|
       if @user_network.update_attributes(params[:user_network])
         format.html { redirect_to @user_network, notice: 'User network was successfully updated.' }
