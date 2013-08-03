@@ -68,15 +68,14 @@ class User < ActiveRecord::Base
   end
 
   def defriend(current_user, user)
-    proposee_friendships = Friendship.where(proposee_id: current_user)
-      if proposee_friendships.empty?
-        proposee_friendships = Friendship.where(proposer_id: current_user)
-      end
-    f = proposee_friendships.where(proposer_id: user)
-      if f.empty?
-        f = proposee_friendships.where(proposee_id: user)
-      end
-    f.first.destroy
+    proposee_friendships = Friendship.where(proposee_id: current_user.id)
+    proposee_friendships << Friendship.where(proposer_id: current_user.id)
+
+    proposee_friendships.flatten.map do |friendship|
+     if friendship.proposer_id == user.id || friendship.proposee_id == user.id
+     friendship.destroy
+    end
+  end
   end
 
   def check_friendship(current_user, user)
