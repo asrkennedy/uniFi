@@ -20,7 +20,9 @@ UnifiApp::Application.routes.draw do
 
   get '/users/:id', to: "users#show", as: 'user'
   post '/users/:id/friend_add_relationship', to: "users#friend_add_relationship", as: :friend_add_relationship
+  post '/users/:id/friend_confirm_relationship', to: "users#friend_confirm_relationship", as: :friend_confirm_relationship
   get '/users/:id/add_friend', to: "users#new_friend", as: :new_friend
+  get '/users/:id/confirm_friend', to: "users#confirm_friend", as: :confirm_friend
 
 
   # The priority is based upon order of creation:
