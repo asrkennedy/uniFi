@@ -51,14 +51,18 @@ class User < ActiveRecord::Base
 
   def confirm_friendship(current_user, user, sharing_preferences)
     proposee_friendships = Friendship.where(proposee_id: current_user)
-    f = proposee_friendships.where(confirmed: nil)
-    f = Friendship.where(proposee_id: current_user)
+    friend_requests = proposee_friendships.where(confirmed: nil)
+    f = friend_requests.where(proposer_id: user)
     f.each do |friend|
       friend.proposee_sharing_pref = sharing_preferences
       friend.confirmed = true
       friend.save
     end
   end
+
+  # def deny_friendship
+
+  # end
 
   def check_friendship(current_user, user)
     if Friendship.where(proposer_id: current_user.id) == Friendship.where(proposee_id: user.id)
