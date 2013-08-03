@@ -1,6 +1,8 @@
 UnifiApp::Application.routes.draw do
 
-  resources :friendships
+  resources :friendships do
+      get '/friend/:id', to: "friendships#new_friend", on: :collection, as: :new_friend
+    end
 
   resources :sharing_preferences
 
@@ -17,6 +19,8 @@ UnifiApp::Application.routes.draw do
   devise_for :users
 
   get '/users/:id', to: "users#show", as: 'user'
+  post '/users/:id/friend_add_relationship', to: "users#friend_add_relationship", as: :friend_add_relationship
+  get '/users/:id/add_friend', to: "users#new_friend", as: :new_friend
 
 
   # The priority is based upon order of creation:

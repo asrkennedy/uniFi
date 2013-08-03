@@ -1,0 +1,20 @@
+-# Drop-down for friend sharing preferences
+= form_tag friend_add_relationship_path(@user) do
+  %p
+    %select{ :name => "sharing_preferences" }
+      = "Please define your relationship"
+      %option{:value => "Close Friend"}= "Close Friend"
+      %option{:value => "Friend"}= "Friend"
+      %option{:value => "Acquaintance"}= "Acquaintance"
+  %p
+    = submit_tag "Submit"
+
+-# - @user.make_friendship(current_user, params[:sharing_preferences])
+-# - if current_user.check_friendship(current_user, @user)
+-#   %h2
+-#     You are now friends with
+-#     = @user.first_name
+-#     = @user.last_name
+
+
+

@@ -41,4 +41,20 @@ class User < ActiveRecord::Base
     networks = proposer_networks + proposees_networks
     visible_networks = networks.select{|network| network.shareable_with(self)}
   end
+
+  def make_friendship(current_user, user, sharing_preferences)
+      Friendship.create proposer_id: current_user.id, proposee_id: self.id, proposer_sharing_pref: sharing_preferences, proposee_sharing_pref: nil
+
+  # validates :proposer_sharing_pref, inclusion: { in: User::SHARING_PREFERENCES }
+  # validates :proposee_sharing_pref, inclusion: { in: User::SHARING_PREFERENCES }
+  end
+
+  def check_friendship(current_user, user)
+    if Friendship.where(proposer_id: current_user.id) == Friendship.where(proposee_id: user.id)
+      return true
+    else
+      return false
+    end
+  end
+
 end

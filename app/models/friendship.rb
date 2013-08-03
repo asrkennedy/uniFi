@@ -3,12 +3,7 @@ class Friendship < ActiveRecord::Base
   belongs_to :proposee, class_name: "User"
   attr_accessible :proposee_sharing_pref, :proposer_sharing_pref, :proposee_id, :proposer_id
 
-def make_friendship (user, sharing_preferences)
-  Friendship.create proposer_id: current_user.id, proposee_id: user.id, proposer_sharing_pref: sharing_preferences, proposee_sharing_pref: nil, confirmed: false
 
-# validates :proposer_sharing_pref, inclusion: { in: User::SHARING_PREFERENCES }
-# validates :proposee_sharing_pref, inclusion: { in: User::SHARING_PREFERENCES }
-end
 
 # def show_users
 #   User.all do |user|
