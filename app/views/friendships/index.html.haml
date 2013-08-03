@@ -19,6 +19,8 @@
         %td
           Friends:
           = friend.friends.size
+        %td
+          = link_to "Defriend", defriend_path(friend)
   - else
     %p You have no friends.
 

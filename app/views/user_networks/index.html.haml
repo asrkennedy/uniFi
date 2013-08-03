@@ -2,9 +2,10 @@
   - current_user.find_unconfirmed_friendships(current_user).each do |friend|
     %p Unconfirmed Friendships:
     - @user = User.find(friend)
-    = link_to @user.first_name, confirm_friend_path(@user)
+    = @user.first_name
     = @user.last_name
-    =
+    = link_to 'Confirm', confirm_friend_path(@user)
+    = link_to 'Deny', deny_friend_path(@user)
     %br
 
 -@user_networks.each do |user_network|

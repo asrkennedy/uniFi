@@ -33,7 +33,6 @@ class UsersController < ApplicationController
   def friend_add_relationship
     @user = User.find(params[:id])
     @user.make_friendship(current_user, @user, params[:sharing_preferences])
-    binding.pry if $debug
     friend_name = @user.first_name + " " + @user.last_name
     redirect_to friendships_path, notice: "You and #{friend_name} are now friends."
   end
@@ -43,6 +42,20 @@ class UsersController < ApplicationController
     @user.confirm_friendship(current_user, @user, params[:sharing_preferences])
     friend_name = @user.first_name + " " + @user.last_name
     redirect_to friendships_path, notice: "You have confirmed your friendship with #{friend_name}."
+  end
+
+  def deny_friend
+    @user = User.find(params[:id])
+    @user.deny_friendship(current_user, @user)
+    friend_name = @user.first_name + " " + @user.last_name
+    redirect_to friendships_path, notice: "You have rejected #{friend_name}'s friend request."
+  end
+
+  def defriend
+    @user = User.find(params[:id])
+    @user.defriend(current_user, @user)
+    friend_name = @user.first_name + " " + @user.last_name
+    redirect_to friendships_path, notice: "You have defriended #{friend_name}."
   end
 
 end

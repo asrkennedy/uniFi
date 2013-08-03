@@ -60,9 +60,23 @@ class User < ActiveRecord::Base
     end
   end
 
-  # def deny_friendship
+  def deny_friendship(current_user, user)
+    proposee_friendships = Friendship.where(proposee_id: current_user)
+    f = proposee_friendships.where(proposer_id: user)
+    f.first.destroy
+  end
 
-  # end
+  def defriend(current_user, user)
+    proposee_friendships = Friendship.where(proposee_id: current_user)
+      if proposee_friendships.empty?
+        proposee_friendships = Friendship.where(proposer_id: current_user)
+      end
+    f = proposee_friendships.where(proposer_id: user)
+      if f.empty?
+        f = proposee_friendships.where(proposee_id: user)
+      end
+    f.first.destroy
+  end
 
   def check_friendship(current_user, user)
     if Friendship.where(proposer_id: current_user.id) == Friendship.where(proposee_id: user.id)
