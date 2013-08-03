@@ -12,6 +12,7 @@ class UserNetwork < ActiveRecord::Base
     owner_friendship_as_proposee = Friendship.where({proposee_id: self.user_id, proposer_id: user.id}).first
     case self.user_sharing_pref
       when "public" then return true
+      when "private" then return false
       when "acquaintance" then
         if owner_friendship_as_proposer
           ["acquaintance", "friend", "close friend"].include?(owner_friendship_as_proposer.proposer_sharing_pref)
@@ -35,12 +36,6 @@ class UserNetwork < ActiveRecord::Base
     end
 end
 
-
-  def check_whether_nested_wifi_network_already_exists
-    existing_wifi_network = WifiNetwork.where({ssid: self.wifi_network.ssid, password: self.wifi_network.password, postcode: self.wifi_network.postcode}).first
-    self.wifi_network_id == existing_wifi_network.id if existing_wifi_network
-
-  end
 
 
 

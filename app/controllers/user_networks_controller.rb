@@ -28,7 +28,6 @@ class UserNetworksController < ApplicationController
   # GET /user_networks/new.json
   def new
     @user_network = UserNetwork.new
-    @user = current_user
     @user_network.wifi_network ||= WifiNetwork.new
 
     respond_to do |format|
@@ -40,7 +39,6 @@ class UserNetworksController < ApplicationController
   # GET /user_networks/1/edit
   def edit
     @user_network = UserNetwork.find(params[:id])
-    @user = current_user
   end
 
   # POST /user_networks
@@ -48,16 +46,13 @@ class UserNetworksController < ApplicationController
   def create
     wifi_network_hash = {
       ssid: params[:user_network]["wifi_network_attributes"]["ssid"],
-      password: params[:user_network]["wifi_network_attributes"]["password"],
       postcode: params[:user_network]["wifi_network_attributes"]["postcode"]
     }
     existing_wifi_network = WifiNetwork.where(wifi_network_hash).first
     # params[:user_network]["wifi_network_attributes"]["id"] = existing_wifi_network.id.to_s if existing_wifi_network
 
-
     @user_network = UserNetwork.new(params[:user_network])
-    @user_network.wifi_network_id = existing_wifi_network.id
-    binding.pry
+    @user_network.wifi_network_id = existing_wifi_network.id if existing_wifi_network
     respond_to do |format|
       if @user_network.save
         format.html { redirect_to @user_network, notice: 'User network was successfully created.' }
