@@ -44,7 +44,12 @@ class UserNetworksController < ApplicationController
         longitude: wifi_network.longitude,
         latitude: wifi_network.latitude,
         average_user_rating: wifi_network.average_user_rating,
-        updated_at: wifi_network.updated_at
+        updated_at: wifi_network.updated_at,
+        shared_by: wifi_network.user_networks.map do |user_network|
+                            if user_network.shareable_with(current_user)
+                              user_network.user.full_name
+                            end
+                          end
       }
       @users_friends_networks_hashes_array << network_hash
     end
