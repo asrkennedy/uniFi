@@ -1,5 +1,5 @@
 class WifiNetwork < ActiveRecord::Base
-  attr_accessible :latitude, :longitude, :password, :password_required, :postcode, :score, :ssid, :street_address, :house, :city, :country
+  attr_accessible :latitude, :longitude, :password, :password_required, :postcode, :ssid, :street_address, :house, :city, :country
   has_many :user_networks
 
   geocoded_by :full_street_address

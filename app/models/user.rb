@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :street_address, :postcode, :biography, :user_image, :user_image_cache, :remove_user_image, :role, :remember_me
 
-  validates_presence_of :user_image
+  # validates_presence_of :user_image
   # validates_integrity_of :user_image
   # validates_processing_of :user_image
 
@@ -20,10 +20,9 @@ class User < ActiveRecord::Base
 
   SHARING_PREFERENCES = ['public', 'acquaintance', 'friend', 'close friend', 'private']
 
-
-  def role?(role)
-   self.role == role.to_s
- end
+    def role?(role)
+     self.role == role.to_s
+   end
 
   def full_name
     "#{first_name} #{last_name}"
@@ -39,7 +38,6 @@ class User < ActiveRecord::Base
     user_networks = self.friends.map{|friend| friend.user_networks}
     user_networks.flatten.map{|network| network.wifi_network}.uniq
   end
-
 
   def friends_ids
     self.friends.map do |friend|
