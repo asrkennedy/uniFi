@@ -64,6 +64,43 @@ $(function() {
           content: ""
         });
 
+  // get the public networks
+    $.getJSON('/user_networks.json', function(data){
+      var networks_array = data.public_networks;
+      for(var i = 0; i < networks_array.length; i++){
+        var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(networks_array[i].latitude, networks_array[i].longitude),
+          map: map,
+          title: 'Public Network [SSID: ' + networks_array[i].ssid + ', Password: ' + networks_array[i].password + ']',
+          wifi_network_id: networks_array[i].wifi_network_id,
+          ssid: networks_array[i].ssid,
+          password: networks_array[i].password,
+          password_required: networks_array[i].password_required,
+          address: networks_array[i].address,
+          longitude: networks_array[i].longitude,
+          latitude: networks_array[i].latitude,
+          average_user_rating: networks_array[i].average_user_rating,
+          updated_at: networks_array[i].updated_at,
+        })//closes google maps marker
+
+        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+        //create an event to happen on clicking each marker
+        google.maps.event.addListener(marker, 'click', function() {
+          //content string
+          infowindow.content = '<div id="content"><h4>Public Network [SSID: ' + this.ssid + ', Password: ' + this.password + ']</h4>' +
+            '<ul>' +
+            '<li>Address: ' + this.address + '</li>' +
+            '<li>Average Uni-Fi user rating: ' + this.average_user_rating + ' out of 5</li>' +
+            '</ul>' +
+            '</div>';
+          //finally, define what happens when we click the marker
+          infowindow.open(map, this);
+        });  //closes the google maps listener event
+      } //closes for loop
+    }) // closes getJSON
+
+
+
   // now get the user's networks
   $.getJSON('/user_networks.json', function(data){
     var users_networks_array = data.users_networks
@@ -94,6 +131,7 @@ $(function() {
           '<ul>' +
           '<li>Address: ' + this.address + '</li>' +
           '<li>Your rating: ' + this.user_score + ' out of 5 (average Uni-Fi user rating: ' + this.average_user_rating + ')</li>' +
+          '<li>Sharing level: ' + this.user_sharing_pref + '</li>' +
           '</ul>' +
           '</div>';
         //finally, define what happens when we click the marker
@@ -139,40 +177,8 @@ $(function() {
     } //closes for loop
   }) // closes getJSON
 
-  // now get the public networks
-  $.getJSON('/user_networks.json', function(data){
-    var networks_array = data.public_networks;
-    for(var i = 0; i < networks_array.length; i++){
-      var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(networks_array[i].latitude, networks_array[i].longitude),
-        map: map,
-        title: 'Public Network [SSID: ' + networks_array[i].ssid + ', Password: ' + networks_array[i].password + ']',
-        wifi_network_id: networks_array[i].wifi_network_id,
-        ssid: networks_array[i].ssid,
-        password: networks_array[i].password,
-        password_required: networks_array[i].password_required,
-        address: networks_array[i].address,
-        longitude: networks_array[i].longitude,
-        latitude: networks_array[i].latitude,
-        average_user_rating: networks_array[i].average_user_rating,
-        updated_at: networks_array[i].updated_at,
-      })//closes google maps marker
 
-      marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
-      //create an event to happen on clicking each marker
-      google.maps.event.addListener(marker, 'click', function() {
-        //content string
-        infowindow.content = '<div id="content"><h4>Public Network [SSID: ' + this.ssid + ', Password: ' + this.password + ']</h4>' +
-          '<ul>' +
-          '<li>Address: ' + this.address + '</li>' +
-          '<li>Average Uni-Fi user rating: ' + this.average_user_rating + ' out of 5</li>' +
-          '</ul>' +
-          '</div>';
-        //finally, define what happens when we click the marker
-        infowindow.open(map, this);
-      });  //closes the google maps listener event
-    } //closes for loop
-  }) // closes getJSON
+
 
 
 }); // closes document ready

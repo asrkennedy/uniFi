@@ -9,6 +9,13 @@
 = link_to 'Your Friends', friendships_path
 = link_to 'Add A Network', new_user_network_path
 
+= form_tag user_networks_path, :method => :get do
+  =label_tag :postcode
+  =text_field_tag :postcode
+  =label_tag :distance
+  =text_field_tag :distance
+  =submit_tag "Search", :name => nil
+
 #map-canvas
 
 -unless @users_networks.blank?
@@ -39,6 +46,7 @@
 
 -unless @users_friends_networks.blank?
   %h2 Wi-Fi Networks Shared By Your Friends
+  %h4 (excludes those already in your networks)
   %ul
     -@users_friends_networks.each do |wifi_network|
       %li
@@ -61,13 +69,15 @@
         %p
           =wifi_network.rating_string
         %p
+
           Details for this Wi-Fi network were last updated
           = distance_of_time_in_words(Time.now, wifi_network.updated_at)
           ago
-          = link_to 'Add To Your Networks'
+          = link_to "Add To Your Networks", new_user_network_path(wifi_network_id: wifi_network.id)
 
 -unless @public_networks.blank?
   %h2 Wi-Fi Networks Shared Publicly By All Uni-Fi Users
+  %h4 (excludes those already in your networks)
   %ul
     -@public_networks.each do |wifi_network|
       %li
@@ -85,7 +95,8 @@
           Details for this Wi-Fi network were last updated
           = distance_of_time_in_words(Time.now, wifi_network.updated_at)
           ago
-          = link_to 'Add To Your Networks'
+
+
 
 
 

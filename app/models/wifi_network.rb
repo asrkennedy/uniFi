@@ -28,4 +28,8 @@ class WifiNetwork < ActiveRecord::Base
       self.user_networks.map{|network| network.user_sharing_pref }.include?("public")
     end
 
+    def is_not_a_user_network_of(user)
+      !((self.user_networks.map{|network| network.user_id}).include?(user.id))
+    end
+
 end

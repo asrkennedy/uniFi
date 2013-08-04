@@ -5,11 +5,14 @@ class UserNetworksController < ApplicationController
   # GET /user_networks
   # GET /user_networks.json
   def index
-
     @users_networks = UserNetwork.where(user_id: current_user.id)
-    @users_friends_networks = current_user.friends_visible_networks
+    # if (params[:distance] != nil && params[:postcode] != nil)
+      # @public_networks = (WifiNetwork.near('params[:postcode]', params[:distance].to_f).select {|network| network.is_public}).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
+    # else
+      @public_networks = (WifiNetwork.all.select {|network| network.is_public}).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
+    # end
+    @users_friends_networks = (current_user.friends_visible_networks).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
     @proposers_of_unconfirmed_friendships = current_user.find_unconfirmed_friendships
-    @public_networks = WifiNetwork.all.select {|network| network.is_public}
 
 # build custom API
     @user_networks_hashes_array = []
@@ -96,8 +99,9 @@ class UserNetworksController < ApplicationController
   # GET /user_networks/new
   # GET /user_networks/new.json
   def new
+
     @user_network = UserNetwork.new
-    @user_network.wifi_network ||= WifiNetwork.new
+    @user_network.wifi_network = WifiNetwork.where(id: params[:wifi_network_id]).first || WifiNetwork.new
 
     respond_to do |format|
       format.html # new.html.haml
@@ -135,6 +139,8 @@ class UserNetworksController < ApplicationController
       end
     end
   end
+
+
 
   # PUT /user_networks/1
   # PUT /user_networks/1.json
