@@ -3,7 +3,7 @@ class WifiNetwork < ActiveRecord::Base
   has_many :user_networks
 
   geocoded_by :full_street_address
-  after_validation :geocode
+  after_validation :geocode, :if => :address_changed?
 
 
   def full_street_address

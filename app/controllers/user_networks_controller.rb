@@ -5,13 +5,19 @@ class UserNetworksController < ApplicationController
   # GET /user_networks
   # GET /user_networks.json
   def index
-    @users_networks = UserNetwork.where(user_id: current_user.id)
-    # if (params[:distance] != nil && params[:postcode] != nil)
-      # @public_networks = (WifiNetwork.near('params[:postcode]', params[:distance].to_f).select {|network| network.is_public}).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
-    # else
+    if !params[:distance].blank?
+      unless params[:postcode].blank?
+        @public_networks = (WifiNetwork.near(params[:postcode].delete(' ').upcase, params[:distance].to_f).select {|network| network.is_public}).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
+        @users_friends_networks = (current_user.friends_visible_networks).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
+        @users_networks = UserNetwork.where(user_id: current_user.id)
+      end
+    else
       @public_networks = (WifiNetwork.all.select {|network| network.is_public}).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
-    # end
-    @users_friends_networks = (current_user.friends_visible_networks).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
+      @users_friends_networks = (current_user.friends_visible_networks).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
+      @users_networks = UserNetwork.where(user_id: current_user.id)
+    end
+
+
     @proposers_of_unconfirmed_friendships = current_user.find_unconfirmed_friendships
 
 # build custom API
