@@ -20,7 +20,7 @@ class UserNetworksController < ApplicationController
         user_score: user_network.user_score,
         user_sharing_pref: user_network.user_sharing_pref,
         user_name: user_network.user.full_name,
-        wifi_network_id: user_network.wifi_network.id,
+        # wifi_network_id: user_network.wifi_network.id,
         ssid: user_network.wifi_network.ssid,
         password:user_network.wifi_network.password,
         password_required: user_network.wifi_network.password_required,
