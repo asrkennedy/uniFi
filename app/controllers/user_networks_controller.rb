@@ -11,15 +11,69 @@ class UserNetworksController < ApplicationController
     @proposers_of_unconfirmed_friendships = current_user.find_unconfirmed_friendships
     @public_networks = WifiNetwork.all.select {|network| network.is_public}
 
-    @networks_hash = {
-      users_networks: @users_networks,
-      users_friends_networks: @users_friends_networks,
-      public_networks: @public_networks
-         }
+# build custom API
+    @user_networks_hashes_array = []
+    @users_networks.each do |user_network|
+      network_hash = {
+        id: user_network.id,
+        nickname: user_network.nickname,
+        user_score: user_network.user_score,
+        user_sharing_pref: user_network.user_sharing_pref,
+        user_name: user_network.user.full_name,
+        wifi_network_id: user_network.wifi_network.id,
+        ssid: user_network.wifi_network.ssid,
+        password:user_network.wifi_network.password,
+        password_required: user_network.wifi_network.password_required,
+        address: user_network.wifi_network.full_street_address,
+        longitude: user_network.wifi_network.longitude,
+        latitude: user_network.wifi_network.latitude,
+        average_user_rating: user_network.wifi_network.average_user_rating,
+        updated_at: user_network.wifi_network.updated_at
+      }
+      @user_networks_hashes_array << network_hash
+    end
+
+    @users_friends_networks_hashes_array = []
+    @users_friends_networks.each do |wifi_network|
+      network_hash = {
+        wifi_network_id: wifi_network.id,
+        ssid: wifi_network.ssid,
+        password:wifi_network.password,
+        password_required: wifi_network.password_required,
+        address: wifi_network.full_street_address,
+        longitude: wifi_network.longitude,
+        latitude: wifi_network.latitude,
+        average_user_rating: wifi_network.average_user_rating,
+        updated_at: wifi_network.updated_at
+      }
+      @users_friends_networks_hashes_array << network_hash
+    end
+
+    @public_networks_hashes_array = []
+    @public_networks.each do |wifi_network|
+      network_hash = {
+        wifi_network_id: wifi_network.id,
+        ssid: wifi_network.ssid,
+        password:wifi_network.password,
+        password_required: wifi_network.password_required,
+        address: wifi_network.full_street_address,
+        longitude: wifi_network.longitude,
+        latitude: wifi_network.latitude,
+        average_user_rating: wifi_network.average_user_rating,
+        updated_at: wifi_network.updated_at
+      }
+      @public_networks_hashes_array << network_hash
+    end
+
+    @all_users_visible_networks = {
+      users_networks: @user_networks_hashes_array,
+      users_friends_networks: @users_friends_networks_hashes_array,
+      public_networks: @public_networks_hashes_array
+      }
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @networks_hash }
+      format.json { render json: @all_users_visible_networks }
     end
   end
 
