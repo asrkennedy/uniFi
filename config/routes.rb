@@ -18,6 +18,7 @@ UnifiApp::Application.routes.draw do
 
   devise_for :users
 
+  # get '/users', to: "users#index", as: 'users'
   get '/users/:id', to: "users#show", as: 'user'
   post '/users/:id/friend_add_relationship', to: "users#friend_add_relationship", as: :friend_add_relationship
   post '/users/:id/friend_confirm_relationship', to: "users#friend_confirm_relationship", as: :friend_confirm_relationship

@@ -1,8 +1,15 @@
-%br
+-# = search_form_for @q do |f|
+-#   = f.label :first_name_cont
+-#   = f.text_field :first_name_cont
+-#   = f.label :user_score_gteq, "Score between"
+-#   = f.text_field :user_score_gteq
+-#   = f.label :user_score_gteq, "and"
+-#   = f.text_field :user_score_gteq
+-#   = f.submit
 
 %table
-  - if current_user.friends.any?
-    - current_user.friends.each do |friend|
+  - if @friendships.any?
+    - @friendships.each do |friend|
       %tr
         -if friend.user_image != nil
           %td

@@ -3,8 +3,11 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, skip: [:new, :create]
   # load_and_authorize_resource
 
+
   def show
     @user = User.find(params[:id])
+    @q = User.search(params[:q])
+    @user = @q.result(:distinct => true)
 
     respond_to do |format|
       format.html # show.html.haml
