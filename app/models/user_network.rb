@@ -30,7 +30,8 @@ class UserNetwork < ActiveRecord::Base
     owner_friendship_as_proposee = Friendship.where({proposee_id: self.user_id, proposer_id: user.id}).first
 
     case self.user_sharing_pref
-      when "public" then return true
+      when "public" then return false
+      # public networks are displayed in a different area
       when "private" then return false
       when "acquaintance" then
         if owner_friendship_as_proposer

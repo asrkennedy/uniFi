@@ -19,6 +19,7 @@ gem 'devise'
 gem 'faker'
 gem 'populator'
 gem 'geocoder'
+gem 'active_model_serializers'
 
 
 group :development do

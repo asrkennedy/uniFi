@@ -3,11 +3,11 @@
     =wifi_form.label :ssid
     =wifi_form.text_field :ssid
   %div.field
-    =wifi_form.label :password
-    =wifi_form.text_field :password
-  %div.field
     =wifi_form.label :password_required
     =wifi_form.select(:password_required, [true, false])
+  %div.field{id: "password_input"}
+    =wifi_form.label :password
+    =wifi_form.text_field :password
   %div.field
     =wifi_form.label :house, "Building name or number"
     =wifi_form.text_field :house

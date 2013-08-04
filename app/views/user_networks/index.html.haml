@@ -9,6 +9,8 @@
 = link_to 'Your Friends', friendships_path
 = link_to 'Add A Network', new_user_network_path
 
+#map-canvas
+
 -unless @users_networks.blank?
   %h2 Your Wi-Fi Networks
   %ul
@@ -49,8 +51,12 @@
           Address:
           =wifi_network.full_street_address
         %p
-          Shared By: would be nice to see which friends shared it here
-
+          Shared By:
+          %ul
+            -wifi_network.user_networks.each do |user_network|
+              -if user_network.shareable_with(current_user)
+                %li
+                  ="#{user_network.user.full_name} (rating: #{user_network.user_score} out of 5)"
 
         %p
           =wifi_network.rating_string
@@ -59,4 +65,31 @@
           = distance_of_time_in_words(Time.now, wifi_network.updated_at)
           ago
           = link_to 'Add To Your Networks'
+
+-unless @public_networks.blank?
+  %h2 Wi-Fi Networks Shared Publicly By All Uni-Fi Users
+  %ul
+    -@users_friends_networks.each do |wifi_network|
+      %li
+        %h3
+          SSID:
+          = wifi_network.ssid
+          , Password:
+          = wifi_network.password
+        %p
+          Address:
+          =wifi_network.full_street_address
+        %p
+          =wifi_network.rating_string
+        %p
+          Details for this Wi-Fi network were last updated
+          = distance_of_time_in_words(Time.now, wifi_network.updated_at)
+          ago
+          = link_to 'Add To Your Networks'
+
+
+
+
+
+
 

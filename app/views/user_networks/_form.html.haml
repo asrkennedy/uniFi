@@ -5,14 +5,17 @@
   %div.field
     =f.label :nickname
     =f.text_field :nickname
+  %div.form_fields
+    =render 'fields', f: f
+  %div.field
+    =f.label :user_score
+    =f.select(:user_score, [1,2,3,4,5])
   %div.field
     =f.label :user_sharing_pref
     =f.select(:user_sharing_pref, ['public', 'acquaintance', 'friend', 'close friend', 'private'])
-  %div.field
-    =f.label :user_score
-    =f.select(:user_score, [1,2,3,4,5], selected: 3)
+  #sharing_warning
+    %p All Uni-Fi users will be able to see this network, but they won't who shared it
   %div.field
     =f.submit
-  %div.form_fields
-    =render 'fields', f: f
+
 
