@@ -12,7 +12,7 @@ class Ability
         can [:create, :read], :UserNetwork, :user_sharing_pref => "public"
         can [:update, :destroy], :UserNetwork, :user_id => user.id
         can [:create, :read], :WifiNetwork
-        can [:update, :destroy] :WifiNetwork, :user_network => { :user_id => user.id }
+        can [:update, :destroy], :WifiNetwork, :user_network => { :user_id => user.id }
         can :crud, :WifiNetwork, :password_required => false
         can :crud, :Friendship, :proposee_id => user.id, :proposer_id => user.id
         can :update, :User, :user_id => user.id
