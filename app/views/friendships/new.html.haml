@@ -4,23 +4,24 @@
   -@users.each do |user|
     %tr
       - unless current_user.friends_ids.include? user.id
-        - if user.user_image. != nil
+        - if user != current_user
+          - if user.user_image. != nil
+            %td
+              = link_to user.user_image, user_path(user)
           %td
-            = link_to user.user_image, user_path(user)
-        %td
-          = link_to user.first_name, user_path(user)
-        %td
-          = link_to user.last_name, user_path(user)
-        %td
-          = user.biography
-        %td
-          Networks:
-          = user.user_networks.size
-        %td
-          Friends:
-          = user.friends.size
-        %td
-          = link_to "Add Friend", new_friend_path(user)
-          / Need to change this route to include the id
+            = link_to user.first_name, user_path(user)
+          %td
+            = link_to user.last_name, user_path(user)
+          %td
+            = user.biography
+          %td
+            Networks:
+            = user.user_networks.size
+          %td
+            Friends:
+            = user.friends.size
+          %td
+            = link_to "Add Friend", new_friend_path(user)
+            / Need to change this route to include the id
 
 = link_to 'Back', friendships_path

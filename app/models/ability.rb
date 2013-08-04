@@ -4,21 +4,19 @@ class Ability
   def initialize(user)
     # Define abilities for the passed in user here. For example:
 
-      user ||= User.new # guest user (not logged in)
-      if user.role? :admin
-        can :manage, :all
-      elsif user.role? :user
-        can :read, :all
-        can [:create, :read], :UserNetwork, :user_sharing_pref => "public"
-        can [:update, :destroy], :UserNetwork, :user_id => user.id
-        can [:create, :read], :WifiNetwork
-        can [:update, :destroy], :WifiNetwork, :user_network => { :user_id => user.id }
-        can :crud, :WifiNetwork, :password_required => false
-        can :crud, :Friendship, :proposee_id => user.id, :proposer_id => user.id
-        can :update, :User, :user_id => user.id
-      else
-        can :read, :UserNetwork, :user_sharing_pref => "public"
-      end
+      # user ||= User.new # guest user (not logged in)
+      # if user.role? "admin"
+      #   can :manage, :all
+      # else
+      #   can :read, :all
+      #   can [:create, :read], :UserNetwork, :user_sharing_pref => "public"
+      #   can [:update, :destroy], :UserNetwork, :user_id => user.id
+      #   can [:create, :read], :WifiNetwork
+      #   can [:update, :destroy], :WifiNetwork, :user_network => { :user_id => user.id }
+      #   can :crud, :WifiNetwork, :password_required => false
+      #   can :crud, :Friendship, :proposee_id => user.id, :proposer_id => user.id
+      #   can :update, :User, :user_id => user.id
+      # end
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.
