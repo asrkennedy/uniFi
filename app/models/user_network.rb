@@ -35,21 +35,21 @@ class UserNetwork < ActiveRecord::Base
       when "private" then return false
       when "acquaintance" then
         if owner_friendship_as_proposer
-          ["acquaintance", "friend", "close friend"].include?(owner_friendship_as_proposer.proposer_sharing_pref.downcase)
+          ["acquaintance", "friend", "close friend"].include?(owner_friendship_as_proposer.proposer_sharing_pref)
         elsif owner_friendship_as_proposee
-          ["acquaintance", "friend", "close friend"].include?(owner_friendship_as_proposee.proposee_sharing_pref.downcase)
+          ["acquaintance", "friend", "close friend"].include?(owner_friendship_as_proposee.proposee_sharing_pref)
         end
       when "friend" then
         if owner_friendship_as_proposer
-          ["friend", "close friend"].include?(owner_friendship_as_proposer.proposer_sharing_pref.downcase)
+          ["friend", "close friend"].include?(owner_friendship_as_proposer.proposer_sharing_pref)
         elsif owner_friendship_as_proposee
-          ["friend", "close friend"].include?(owner_friendship_as_proposee.proposee_sharing_pref.downcase)
+          ["friend", "close friend"].include?(owner_friendship_as_proposee.proposee_sharing_pref)
         end
       when "close friend" then
         if owner_friendship_as_proposer
-          owner_friendship_as_proposer.proposer_sharing_pref.downcase == "close friend"
+          owner_friendship_as_proposer.proposer_sharing_pref == "close friend"
         elsif owner_friendship_as_proposee
-          owner_friendship_as_proposee.proposee_sharing_pref.downcase == "close friend"
+          owner_friendship_as_proposee.proposee_sharing_pref == "close friend"
         end
       else
         return false
