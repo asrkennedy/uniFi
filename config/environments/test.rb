@@ -34,4 +34,8 @@ UnifiApp::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  CarrierWave.configure do |config|
+  config.storage = :file
+end
 end
