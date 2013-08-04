@@ -20,7 +20,6 @@ class User < ActiveRecord::Base
 
   SHARING_PREFERENCES = ['public', 'acquaintance', 'friend', 'close friend', 'private']
 
-
     def role?(role)
      self.role == role.to_s
    end

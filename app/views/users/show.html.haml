@@ -1,1 +1,24 @@
-= @user.user_image
+%h2 User Information
+= image_tag @user.user_image.detail.url
+%br
+= @user.full_name
+%br
+= @user.email
+%br
+= @user.biography
+%br
+Number of friends:
+- if @user == current_user
+  = link_to @user.friends.size, friendships_path
+- else
+  = @user.friends.size
+%br
+Number of networks:
+- if @user == current_user
+  = link_to @user.user_networks.size, user_networks_path
+- else
+  = @user.user_networks.size
+%br
+- if @user == current_user
+  = link_to 'Edit', edit_user_registration_path
+= link_to 'Back', user_networks_path

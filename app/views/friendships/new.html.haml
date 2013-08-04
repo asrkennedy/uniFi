@@ -7,7 +7,7 @@
         - if user != current_user
           - if user.user_image. != nil
             %td
-              = link_to user.user_image, user_path(user)
+              = link_to (image_tag user.user_image.thumb.url), user_path(user)
           %td
             = link_to user.first_name, user_path(user)
           %td
