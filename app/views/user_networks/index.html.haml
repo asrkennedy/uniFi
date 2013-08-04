@@ -69,7 +69,7 @@
 -unless @public_networks.blank?
   %h2 Wi-Fi Networks Shared Publicly By All Uni-Fi Users
   %ul
-    -@users_friends_networks.each do |wifi_network|
+    -@public_networks.each do |wifi_network|
       %li
         %h3
           SSID:
