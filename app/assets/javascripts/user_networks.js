@@ -14,16 +14,16 @@ $(function() {
   $("#user_network_user_sharing_pref").change(function(){
     switch($("#user_network_user_sharing_pref").val()){
       case "public":
-        $("#sharing_warning").html("<p>Everyone will be able to see this network</p>");
+        $("#sharing_warning").html("<p>All Uni-Fi users will be able to see this network, but they won't who shared it</p>");
         break;
       case "close friend":
-        $("#sharing_warning").html("<p>Only close friends will be able to see this network</p>");
+        $("#sharing_warning").html("<p>Only close friends will be able to see this network, and they will know you shared it</p>");
         break;
       case "friend":
-        $("#sharing_warning").html("<p>Friends and close friends will be able to see this network</p>");
+        $("#sharing_warning").html("<p>Friends and close friends will be able to see this network,  and they will know you shared it</p>");
         break;
       case "acquaintance":
-        $("#sharing_warning").html("<p>Acquaintances, friends and close friends will be able to see this network</p>");
+        $("#sharing_warning").html("<p>Acquaintances, friends and close friends will be able to see this network,  and they will know you shared it</p>");
         break;
       case "private":
         $("#sharing_warning").html("<p>Only you will be able to see this network</p>");

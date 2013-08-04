@@ -24,4 +24,8 @@ class WifiNetwork < ActiveRecord::Base
       "Average Uni-Fi user rating: #{self.average_user_rating}"
     end
 
+    def is_public
+      self.user_networks.map{|network| network.user_sharing_pref }.include?("public")
+    end
+
 end

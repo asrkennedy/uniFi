@@ -13,6 +13,10 @@ class User < ActiveRecord::Base
 
   SHARING_PREFERENCES = ['public', 'acquaintance', 'friend', 'close friend', 'private']
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   def friends
     proposees = self.friendships_as_proposer.map {|friendship| friendship.proposee}
     proposers = self.friendships_as_proposee.map {|friendship| friendship.proposer}

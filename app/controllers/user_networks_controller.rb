@@ -9,10 +9,17 @@ class UserNetworksController < ApplicationController
     @users_networks = UserNetwork.where(user_id: current_user.id)
     @users_friends_networks = current_user.friends_visible_networks
     @proposers_of_unconfirmed_friendships = current_user.find_unconfirmed_friendships
+    @public_networks = WifiNetwork.all.select {|network| network.is_public}
+
+    @networks_hash = {
+      users_networks: @users_networks,
+      users_friends_networks: @users_friends_networks,
+      public_networks: @public_networks
+         }
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @user_networks }
+      format.json { render json: @networks_hash }
     end
   end
 
