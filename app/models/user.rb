@@ -2,16 +2,28 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
+
+  mount_uploader :user_image, UserImageUploader
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :street_address, :postcode, :biography, :user_image, :role, :remember_me
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :street_address, :postcode, :biography, :user_image, :user_image_cache, :remove_user_image, :role, :remember_me
+
+  validates_presence_of :user_image
+  # validates_integrity_of :user_image
+  # validates_processing_of :user_image
 
   has_many :friendships_as_proposer, class_name: "Friendship", foreign_key: :proposer_id
   has_many :friendships_as_proposee, class_name: "Friendship", foreign_key: :proposee_id
   has_many :user_networks
 
   SHARING_PREFERENCES = ['public', 'acquaintance', 'friend', 'close friend', 'private']
+
+
+  def role?(role)
+   self.role == role.to_s
+ end
 
   def full_name
     "#{first_name} #{last_name}"

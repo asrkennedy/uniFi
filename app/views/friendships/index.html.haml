@@ -6,7 +6,7 @@
       %tr
         -if friend.user_image != nil
           %td
-            = link_to friend.user_image, user_path(friend.id)
+            = link_to (image_tag friend.user_image.thumb.url), user_path(friend.id)
         %td
           = friend.first_name
         %td
