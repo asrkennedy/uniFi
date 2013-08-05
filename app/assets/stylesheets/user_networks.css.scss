@@ -2,15 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body {
+  margin: 0;
+}
+
 #sharing_warning {
   display: hidden;
 }
 
 #map-canvas {
-
+  margin-top: 200px;
   background: transparent no-repeat 1 1;
   position: absolute;
-  z-index: -9;
+  z-index: -10;
   top: 0;
   left: 0;
   bottom: 0;
@@ -20,4 +24,55 @@
   -moz-opacity: 0.6;
   -khtml-opacity: 0.6;
   opacity: 0.6;
+}
+
+.nav {
+  background-color: #000;
+  height: 100px;
+  width: 100%;
+  padding-top: 80px;
+  text-align: center;
+  position: relative;
+  margin: auto;
+}
+
+.nav_links a {
+  font-size: 24px;
+  padding-right: 20px;
+}
+
+.nav a, .nav_links a {
+  font-family: "Calibri";
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav a:hover, a:focus {
+  text-decoration: none;
+  color: #666;
+}
+
+.login {
+  float: right;
+  margin-right: 20px;
+  margin-top: 60px;
+  position: absolute;
+  bottom: 5%;
+  right: 0%;
+}
+
+#search {
+  background-color: #ccc;
+  color: #444;
+  border-bottom: 1px solid #000;
+  padding: 10px;
+}
+
+label {
+  font-family: "Calibri";
+}
+
+#postcode, #distance, #submit {
+  border-radius: 5px;
+  font-family: "Calibri";
 }

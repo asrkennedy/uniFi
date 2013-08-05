@@ -8,11 +8,7 @@
   :javascript
     window.user_params = #{@params.to_json}
 
-= link_to 'Your Friends', friendships_path
-= link_to 'Add A Network', new_user_network_path
-= link_to 'Your Account', user_path(current_user)
-
-= form_tag user_networks_path, :method => :get do
+= form_tag user_networks_path, :id => 'search', :method => :get do
   =label_tag :postcode
   =text_field_tag :postcode, nil, { id: 'postcode' }
   =label_tag :distance
