@@ -6,6 +6,9 @@
     = link_to 'Deny', deny_friend_path(proposer)
 
 
+  :javascript
+    window.user_params = #{@params.to_json}
+
 = link_to 'Your Friends', friendships_path
 = link_to 'Add A Network', new_user_network_path
 = link_to 'Your Account', user_path(current_user)
@@ -18,87 +21,6 @@
   =submit_tag "Search", :name => nil
 
 #map-canvas
-
--unless @users_networks.blank?
-  %h2 Your Wi-Fi Networks
-  %ul
-    -@users_networks.each do |network|
-      %li
-        %h3
-          -unless network.nickname.blank?
-            = network.nickname
-            ,
-          SSID:
-          = network.wifi_network.ssid
-          , Password:
-          = network.wifi_network.password
-        %p
-          Address:
-          =network.address
-        %p
-          =network.sharing_string
-        %p
-          =network.rating_string
-        %p
-          Details for this Wi-Fi network were last updated
-          = distance_of_time_in_words(Time.now, network.wifi_network.updated_at)
-          ago
-          = link_to 'Edit', edit_user_network_path(network)
-
--unless @users_friends_networks.blank?
-  %h2 Wi-Fi Networks Shared By Your Friends
-  %h4 (excludes those already in your networks)
-  %ul
-    -@users_friends_networks.each do |wifi_network|
-      %li
-        %h3
-          SSID:
-          = wifi_network.ssid
-          , Password:
-          = wifi_network.password
-        %p
-          Address:
-          =wifi_network.full_street_address
-        %p
-          Shared By:
-          %ul
-            -wifi_network.user_networks.each do |user_network|
-              -if user_network.shareable_with(current_user)
-                %li
-                  ="#{user_network.user.full_name} (rating: #{user_network.user_score} out of 5)"
-
-        %p
-          =wifi_network.rating_string
-        %p
-
-          Details for this Wi-Fi network were last updated
-          = distance_of_time_in_words(Time.now, wifi_network.updated_at)
-          ago
-          = link_to "Add To Your Networks", new_user_network_path(wifi_network_id: wifi_network.id)
-
--unless @public_networks.blank?
-  %h2 Wi-Fi Networks Shared Publicly By All Uni-Fi Users
-  %h4 (excludes those already in your networks)
-  %ul
-    -@public_networks.each do |wifi_network|
-      %li
-        %h3
-          SSID:
-          = wifi_network.ssid
-          , Password:
-          = wifi_network.password
-        %p
-          Address:
-          =wifi_network.full_street_address
-        %p
-          =wifi_network.rating_string
-        %p
-          Details for this Wi-Fi network were last updated
-          = distance_of_time_in_words(Time.now, wifi_network.updated_at)
-          ago
-
-
-
 
 
 
