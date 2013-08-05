@@ -10,7 +10,7 @@
 
   background: transparent no-repeat 1 1;
   position: absolute;
-  z-index: -9;
+  z-index: -10;
   top: 0;
   left: 0;
   bottom: 0;
@@ -20,4 +20,8 @@
   -moz-opacity: 0.6;
   -khtml-opacity: 0.6;
   opacity: 0.6;
+}
+
+#nav_bar {
+
 }
