@@ -1,4 +1,4 @@
-
+ var markersArray = []
 
 $(function() {
 
@@ -64,9 +64,22 @@ $(function() {
           content: ""
         });
 
-  // get the public networks
-  console.log("before _getJson", window.user_params)
-    $.getJSON('/user_networks.json', {"postcode": window.user_params.postcode, "distance":window.user_params.distance},  function(data){
+
+
+var drawMarkers = function(e) {
+
+  if (typeof e !== "undefined") {
+     e.preventDefault();
+  }
+
+  for (var i = 0; i < markersArray.length; i++ ) {
+    markersArray[i].setMap(null);
+  }
+
+
+
+    // get the public networks
+    $.getJSON('/user_networks.json', {"postcode": $('#postcode').val(), "distance":$('#distance').val()},  function(data){
       var networks_array = data.public_networks;
       for(var i = 0; i < networks_array.length; i++){
         var marker = new google.maps.Marker({
@@ -83,6 +96,8 @@ $(function() {
           average_user_rating: networks_array[i].average_user_rating,
           updated_at: networks_array[i].updated_at,
         })//closes google maps marker
+
+        markersArray.push(marker);
 
         marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
         //create an event to happen on clicking each marker
@@ -103,7 +118,7 @@ $(function() {
 
 
   // now get the user's networks
-  $.getJSON('/user_networks.json', function(data){
+  $.getJSON('/user_networks.json', {"postcode": $('#postcode').val(), "distance":$('#distance').val()}, function(data){
     var users_networks_array = data.users_networks
     for(var i = 0; i < users_networks_array.length; i++){
       var marker = new google.maps.Marker({
@@ -125,6 +140,8 @@ $(function() {
         updated_at: users_networks_array[i].updated_at
       })//closes google maps marker
 
+      markersArray.push(marker);
+
       //create an event to happen on clicking each marker
       google.maps.event.addListener(marker, 'click', function() {
         //content string
@@ -142,7 +159,7 @@ $(function() {
   }) // closes getJSON
 
    // now get the user's friend's networks
-  $.getJSON('/user_networks.json', function(data){
+  $.getJSON('/user_networks.json', {"postcode": $('#postcode').val(), "distance":$('#distance').val()}, function(data){
     var networks_array = data.users_friends_networks
     for(var i = 0; i < networks_array.length; i++){
       var marker = new google.maps.Marker({
@@ -161,6 +178,8 @@ $(function() {
         shared_by: networks_array[i].shared_by
       })//closes google maps marker
 
+      markersArray.push(marker);
+
       marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
       //create an event to happen on clicking each marker
       google.maps.event.addListener(marker, 'click', function() {
@@ -178,8 +197,13 @@ $(function() {
     } //closes for loop
   }) // closes getJSON
 
+}
 
 
+  drawMarkers();
+
+
+  $('#submit').on('click', drawMarkers);
 
 
 }); // closes document ready

@@ -23,8 +23,8 @@ class UsersController < ApplicationController
 
     @proposers_of_unconfirmed_friendships = current_user.find_unconfirmed_friendships
     @user = User.find(params[:id])
-    @q = User.search(params[:q])
-    @user = @q.result(:distinct => true)
+    # @q = User.search(params[:q])
+    # @user = @q.result(:distinct => true)
 
     respond_to do |format|
       format.html # show.html.haml

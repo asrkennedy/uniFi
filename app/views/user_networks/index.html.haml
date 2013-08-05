@@ -15,10 +15,10 @@
 
 = form_tag user_networks_path, :method => :get do
   =label_tag :postcode
-  =text_field_tag :postcode
+  =text_field_tag :postcode, nil, { id: 'postcode' }
   =label_tag :distance
-  =text_field_tag :distance
-  =submit_tag "Search", :name => nil
+  =text_field_tag :distance, nil, {id: "distance"}
+  =submit_tag "Search", :name => nil, id: "submit"
 
 #map-canvas
 
