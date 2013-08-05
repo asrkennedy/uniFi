@@ -15,8 +15,8 @@ User.create! first_name: 'Luke', last_name: 'Robertson', email: 'luke.robertson@
 
 User.create! first_name: 'Emile', last_name: 'Denichaud', email: 'denichaud@gmail.com', password: 'password', password_confirmation: 'password', street_address: '102 Main St', postcode: 'E2', biography: 'My name is Emile', role: 'admin';
 
-User.create! first_name: 'Michael', last_name: 'Pavling', email: 'michael.pavling@gmail.com', password: 'password', password_confirmation: 'password', street_address: '103 Main St', postcode: 'E3', biography: 'My name is Michael', role: nil;
+User.create! first_name: 'Michael', last_name: 'Pavling', email: 'michael.pavling@gmail.com', password: 'password', password_confirmation: 'password', street_address: '103 Main St', postcode: 'E3', biography: 'My name is Michael', role: 'user';
 
-WifiNetwork.create! lat: '51.3', lng: '0.38', password: 'network', password_required: 'network', postcode: 'WX', score: 3, ssid: 'GA Guest', street_address: '9 Back Hill'
+WifiNetwork.create! latitude: '51.3', longitude: '0.38', password: 'network', password_required: 'network', postcode: 'WX', ssid: 'GA Guest', street_address: 'Back Hill', house: '9', city: 'London', country: 'UK'
 
-WifiNetwork.create! lat: '53.3', lng: '0.68', password: 'network', password_required: 'network', postcode: 'W1', score: 4, ssid: 'Prufrock', street_address: '10 Leather Lane'
+WifiNetwork.create! latitude: '53.3', longitude: '0.68', password: 'network', password_required: 'network', postcode: 'W1', ssid: 'Prufrock', street_address: 'Leather Lane', house: '10', city: 'London', country: 'UK'

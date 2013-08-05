@@ -1,9 +1,9 @@
 class WifiNetwork < ActiveRecord::Base
-  attr_accessible :latitude, :longitude, :password, :password_required, :postcode, :score, :ssid, :street_address, :house, :city, :country
+  attr_accessible :latitude, :longitude, :password, :password_required, :postcode, :ssid, :street_address, :house, :city, :country
   has_many :user_networks
 
   geocoded_by :full_street_address
-  after_validation :geocode
+  after_validation :geocode, :if => :address_changed?
 
 
   def full_street_address
@@ -26,6 +26,10 @@ class WifiNetwork < ActiveRecord::Base
 
     def is_public
       self.user_networks.map{|network| network.user_sharing_pref }.include?("public")
+    end
+
+    def is_not_a_user_network_of(user)
+      !((self.user_networks.map{|network| network.user_id}).include?(user.id))
     end
 
 end

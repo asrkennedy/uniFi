@@ -5,11 +5,20 @@ class UserNetworksController < ApplicationController
   # GET /user_networks
   # GET /user_networks.json
   def index
+    if !params[:distance].blank?
+      unless params[:postcode].blank?
+        @public_networks = (WifiNetwork.near(params[:postcode].delete(' ').upcase, params[:distance].to_f).select {|network| network.is_public}).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
+        @users_friends_networks = (current_user.friends_visible_networks).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
+        @users_networks = UserNetwork.where(user_id: current_user.id)
+      end
+    else
+      @public_networks = (WifiNetwork.all.select {|network| network.is_public}).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
+      @users_friends_networks = (current_user.friends_visible_networks).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
+      @users_networks = UserNetwork.where(user_id: current_user.id)
+    end
 
-    @users_networks = UserNetwork.where(user_id: current_user.id)
-    @users_friends_networks = current_user.friends_visible_networks
+
     @proposers_of_unconfirmed_friendships = current_user.find_unconfirmed_friendships
-    @public_networks = WifiNetwork.all.select {|network| network.is_public}
 
 # build custom API
     @user_networks_hashes_array = []
@@ -20,7 +29,7 @@ class UserNetworksController < ApplicationController
         user_score: user_network.user_score,
         user_sharing_pref: user_network.user_sharing_pref,
         user_name: user_network.user.full_name,
-        wifi_network_id: user_network.wifi_network.id,
+        # wifi_network_id: user_network.wifi_network.id,
         ssid: user_network.wifi_network.ssid,
         password:user_network.wifi_network.password,
         password_required: user_network.wifi_network.password_required,
@@ -96,8 +105,9 @@ class UserNetworksController < ApplicationController
   # GET /user_networks/new
   # GET /user_networks/new.json
   def new
+
     @user_network = UserNetwork.new
-    @user_network.wifi_network ||= WifiNetwork.new
+    @user_network.wifi_network = WifiNetwork.where(id: params[:wifi_network_id]).first || WifiNetwork.new
 
     respond_to do |format|
       format.html # new.html.haml
@@ -135,6 +145,8 @@ class UserNetworksController < ApplicationController
       end
     end
   end
+
+
 
   # PUT /user_networks/1
   # PUT /user_networks/1.json
