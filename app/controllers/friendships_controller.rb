@@ -5,10 +5,16 @@ class FriendshipsController < ApplicationController
   # GET /friendships
   # GET /friendships.json
   def index
-    @friendships = current_user.friends
+if params[:name].blank?
+  @friendships = current_user.friends
+else
+  @friendships = current_user.friends.select{|friend| friend.full_name.downcase.include?(params[:name].downcase) }
+
+end
+
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @friendships }
     end
   end
@@ -28,7 +34,9 @@ class FriendshipsController < ApplicationController
   # GET /friendships/new.json
   def new
     @friendship = Friendship.new
-    @users = User.all
+    @q = User.search(params[:q])
+    @users = @q.result(:distinct => true)
+
     respond_to do |format|
       format.html # new.html.haml
       format.json { render json: @friendship }

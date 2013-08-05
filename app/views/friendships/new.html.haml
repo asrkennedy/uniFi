@@ -1,5 +1,13 @@
 %h2 Current Users
 
+= search_form_for @q, :url => url_for(:friendships_controller => "q", :action => "new") do |f|
+  = f.text_field :first_name_or_last_name_or_email_cont
+  = f.submit "Search"
+
+
+
+
+
 %table
   -@users.each do |user|
     %tr
