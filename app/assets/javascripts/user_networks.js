@@ -52,9 +52,30 @@ $(function() {
       }
      })
 
-// create a google map
+// create a google map + With Control Positions for Map only not streetview Will be adding styling element here aswell later
   var mapOptions = {
     zoom:6,
+    mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+        position: google.maps.ControlPosition.TOP_CENTER
+    },
+    panControl: true,
+    panControlOptions: {
+        position: google.maps.ControlPosition.TOP_RIGHT
+    },
+    zoomControl: true,
+    zoomControlOptions: {
+        style: google.maps.ZoomControlStyle.LARGE,
+        position: google.maps.ControlPosition.RIGHT_CENTER
+    },
+    scaleControl: true,
+    scaleControlOptions: {
+        position: google.maps.ControlPosition.TOP_RIGHT
+    },
+    streetViewControl: true,
+    streetViewControlOptions: {
+        position: google.maps.ControlPosition.RIGHT_TOP
+      },
     center: new google.maps.LatLng(51.512769700000000000,-0.128924099999949250),
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
