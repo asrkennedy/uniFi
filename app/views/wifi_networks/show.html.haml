@@ -1,0 +1,22 @@
+%h3
+  SSID:
+  = @wifi_network.ssid
+  Password:
+  = @wifi_network.password
+%p
+  Address:
+  =@wifi_network.full_street_address
+%p
+  Shared By:
+  %ul
+    -@wifi_network.user_networks.each do |user_network|
+      -if user_network.shareable_with(current_user)
+        %li
+          ="#{user_network.user.full_name} (rating: #{user_network.user_score} out of 5)"
+%p
+  =@wifi_network.rating_string
+%p
+  Details for this Wi-Fi network were last updated
+  = distance_of_time_in_words(Time.now, @wifi_network.updated_at)
+  ago
+

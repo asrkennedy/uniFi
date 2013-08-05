@@ -7,7 +7,17 @@
 }
 
 #map-canvas {
-  width: 940px;
-  height: 600px;
 
+  background: transparent no-repeat 1 1;
+  position: absolute;
+  z-index: -9;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  filter: alpha(opacity=60);
+  -moz-opacity: 0.6;
+  -khtml-opacity: 0.6;
+  opacity: 0.6;
 }

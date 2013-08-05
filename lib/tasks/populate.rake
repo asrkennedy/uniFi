@@ -17,6 +17,8 @@ namespace :db do
       wifi_network.created_at = 2.years.ago..Time.now
       wifi_network.updated_at = 2.years.ago..Time.now
       wifi_network.password = Populator.words(1)
+      wifi_network.city = Faker::Address.city
+      wifi_network.country = Faker::address.country
 
     end
 
