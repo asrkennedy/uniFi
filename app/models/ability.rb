@@ -3,7 +3,7 @@ class Ability
 
   def initialize(user)
   user ||= User.new
-  if user.role? :admin
+  if user.role? "admin"
     can :manage, :all
   else
 
@@ -37,23 +37,23 @@ class Ability
 
     can :create, Friendship
     can :read, Friendship do |f|
-      f.propser_id == user.id || f.proposee_id == user.id
+      f.proposer_id == user.id || f.proposee_id == user.id
     end
     can :edit, Friendship do |f|
-      f.propser_id == user.id || f.proposee_id == user.id
+      f.proposer_id == user.id || f.proposee_id == user.id
     end
     can :update, Friendship do |f|
-      f.propser_id == user.id || f.proposee_id == user.id
+      f.proposer_id == user.id || f.proposee_id == user.id
     end
     can :destroy, Friendship do |f|
-      f.propser_id == user.id || f.proposee_id == user.id
+      f.proposer_id == user.id || f.proposee_id == user.id
     end
-  end
 
-  can :create, WifiNetwork
-  can :read, WifiNetwork
-  can :edit, WifiNetwork
-  can :update, WifiNetwork
+    can :read, WifiNetwork
+
+
+
+  end
 
 
 
