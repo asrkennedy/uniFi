@@ -1,5 +1,6 @@
 %h2 User Information
-= image_tag @user.user_image.detail.url
+- if @user.user_image
+  = image_tag @user.user_image.detail.url
 %br
 = @user.full_name
 %br
@@ -59,6 +60,7 @@ Number of networks:
           = distance_of_time_in_words(Time.now, network.wifi_network.updated_at)
           ago
           = link_to 'Edit', edit_user_network_path(network)
+          = link_to 'Show', user_network_path(network)
 
 -unless @users_friends_networks.blank?
   %h2 Wi-Fi Networks Shared By Your Friends
@@ -90,6 +92,7 @@ Number of networks:
           = distance_of_time_in_words(Time.now, wifi_network.updated_at)
           ago
           = link_to "Add To Your Networks", new_user_network_path(wifi_network_id: wifi_network.id)
+          = link_to 'Show', wifi_network_path(wifi_network)
 
 -unless @public_networks.blank?
   %h2 Wi-Fi Networks Shared Publicly By All Uni-Fi Users
@@ -111,7 +114,7 @@ Number of networks:
           Details for this Wi-Fi network were last updated
           = distance_of_time_in_words(Time.now, wifi_network.updated_at)
           ago
-
-
+          = link_to 'Show', wifi_network_path(wifi_network)
+= link_to 'Back', user_networks_path
 
 
