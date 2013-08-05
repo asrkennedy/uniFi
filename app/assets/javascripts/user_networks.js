@@ -65,7 +65,8 @@ $(function() {
         });
 
   // get the public networks
-    $.getJSON('/user_networks.json', function(data){
+  console.log("before _getJson", window.user_params)
+    $.getJSON('/user_networks.json', {"postcode": window.user_params.postcode, "distance":window.user_params.distance},  function(data){
       var networks_array = data.public_networks;
       for(var i = 0; i < networks_array.length; i++){
         var marker = new google.maps.Marker({

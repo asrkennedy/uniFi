@@ -19,17 +19,20 @@ class WifiNetwork < ActiveRecord::Base
     (total_score/self.user_networks.count).round(2)
   end
 
+  def rating_string
+    "Average Uni-Fi user rating: #{self.average_user_rating}"
+  end
 
-    def rating_string
-      "Average Uni-Fi user rating: #{self.average_user_rating}"
-    end
+  def is_public
+    self.user_networks.map{|network| network.user_sharing_pref }.include?("public")
+  end
 
-    def is_public
-      self.user_networks.map{|network| network.user_sharing_pref }.include?("public")
-    end
+  def is_not_a_user_network_of(user)
+    !((self.user_networks.map{|network| network.user_id}).include?(user.id))
+  end
 
-    def is_not_a_user_network_of(user)
-      !((self.user_networks.map{|network| network.user_id}).include?(user.id))
-    end
+  def address_changed?
+    house_changed? || street_address_changed? || city_changed? || postcode_changed? || country_changed?
+  end
 
 end

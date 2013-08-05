@@ -7,16 +7,22 @@ class UserNetworksController < ApplicationController
   def index
     if !params[:distance].blank?
       unless params[:postcode].blank?
-        @public_networks = (WifiNetwork.near(params[:postcode].delete(' ').upcase, params[:distance].to_f).select {|network| network.is_public}).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
-        @users_friends_networks = (current_user.friends_visible_networks).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
-        @users_networks = UserNetwork.where(user_id: current_user.id)
+        @wifi_networks_in_range = WifiNetwork.near(params[:postcode].delete(' ').upcase, params[:distance].to_f)
+        @public_networks = @wifi_networks_in_range.select {|network| network.is_public}.select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
+        @users_wifi_networks = @wifi_networks_in_range.joins(:user_networks).where(user_networks: {user_id: current_user.id})
+        @users_networks = @users_wifi_networks.map{|wifi_network| wifi_network.user_networks.first}
+        @users_friends_networks = (current_user.friends_visible_networks).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}.select{|wifi_network| wifi_network.distance_to(params[:postcode].delete(' ').upcase) <= (params[:distance].to_f)}
       end
     else
-      @public_networks = (WifiNetwork.all.select {|network| network.is_public}).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
-      @users_friends_networks = (current_user.friends_visible_networks).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
+      @wifi_networks_in_range = WifiNetwork.all
+      @public_networks = @wifi_networks_in_range.select {|wifi_network| wifi_network.is_public}.select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
       @users_networks = UserNetwork.where(user_id: current_user.id)
+      @users_friends_networks = (current_user.friends_visible_networks).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
+
     end
 
+
+    @params =params
 
     @proposers_of_unconfirmed_friendships = current_user.find_unconfirmed_friendships
 
@@ -82,7 +88,8 @@ class UserNetworksController < ApplicationController
     @all_users_visible_networks = {
       users_networks: @user_networks_hashes_array,
       users_friends_networks: @users_friends_networks_hashes_array,
-      public_networks: @public_networks_hashes_array
+      public_networks: @public_networks_hashes_array,
+      user_params: params
       }
 
     respond_to do |format|
@@ -125,6 +132,7 @@ class UserNetworksController < ApplicationController
   def create
     params[:user_network]["wifi_network_attributes"]["postcode"] = params[:user_network]["wifi_network_attributes"]["postcode"].delete(' ').upcase
 
+  params[:user_network][:wifi_network_attributes].delete(:id) rescue nil
     wifi_network_hash = {
       ssid: params[:user_network]["wifi_network_attributes"]["ssid"],
       postcode: params[:user_network]["wifi_network_attributes"]["postcode"],
