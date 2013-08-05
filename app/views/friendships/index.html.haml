@@ -27,7 +27,10 @@
         %td
           = link_to "Defriend", defriend_path(friend)
   - else
-    %p You have no friends.
+    - if params[:name]
+      %p No results match your search
+    -else
+      %p You have no friends.
 
 
 = link_to 'Find New Friends', new_friendship_path
