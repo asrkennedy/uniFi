@@ -88,8 +88,7 @@ class UserNetworksController < ApplicationController
     @all_users_visible_networks = {
       users_networks: @user_networks_hashes_array,
       users_friends_networks: @users_friends_networks_hashes_array,
-      public_networks: @public_networks_hashes_array,
-      user_params: params
+      public_networks: @public_networks_hashes_array
       }
 
     respond_to do |format|

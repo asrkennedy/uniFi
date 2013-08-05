@@ -1,11 +1,9 @@
--# = search_form_for @q do |f|
--#   = f.label :first_name_cont
--#   = f.text_field :first_name_cont
--#   = f.label :user_score_gteq, "Score between"
--#   = f.text_field :user_score_gteq
--#   = f.label :user_score_gteq, "and"
--#   = f.text_field :user_score_gteq
--#   = f.submit
+= form_tag friendships_path, :method => :get do
+  =label_tag :name
+  =text_field_tag :name, nil, {value: params[:name]}
+  =submit_tag "Search"
+
+
 
 %table
   - if @friendships.any?
