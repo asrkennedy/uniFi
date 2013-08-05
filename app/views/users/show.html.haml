@@ -62,6 +62,7 @@ Number of networks:
           ago
           = link_to 'Edit', edit_user_network_path(network)
           = link_to 'Show', user_network_path(network)
+          =link_to 'Remove', network, method: :delete, data: { confirm: 'Are you sure?' }
 
 -unless @users_friends_networks.blank?
   %h2 Wi-Fi Networks Shared By Your Friends

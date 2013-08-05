@@ -15,6 +15,10 @@
   =text_field_tag :distance, nil, {id: "distance"}
   =submit_tag "Search", :name => nil, id: "submit"
 
+- if can? :manage, :all
+  HELLO MR ADMIN
+
+
 #map-canvas
 
 

@@ -1,5 +1,5 @@
 class UserNetworksController < ApplicationController
-
+    load_and_authorize_resource
     before_filter :authenticate_user!
 
   # GET /user_networks
@@ -178,7 +178,7 @@ class UserNetworksController < ApplicationController
     @user_network.destroy
 
     respond_to do |format|
-      format.html { redirect_to user_networks_url }
+      format.html { redirect_to user_path(current_user) }
       format.json { head :no_content }
     end
   end

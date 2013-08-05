@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :street_address, :postcode, :biography, :user_image, :user_image_cache, :remove_user_image, :role, :remember_me
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :street_address, :postcode, :biography, :user_image, :user_image_cache, :remove_user_image, :remember_me
 
   # validates_presence_of :user_image
   # validates_integrity_of :user_image
@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   SHARING_PREFERENCES = ['public', 'acquaintance', 'friend', 'close friend', 'private']
 
     def role?(role)
-     self.role == role.to_s
+     self.role == role
    end
 
   def full_name
