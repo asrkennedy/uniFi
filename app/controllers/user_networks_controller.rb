@@ -13,9 +13,9 @@ class UserNetworksController < ApplicationController
         network_hash = {
           wifi_network_id: wifi_network.id,
           ssid: wifi_network.ssid,
-          password: "Please Login",
+          password: "**Restricted**",
           password_required: wifi_network.password_required,
-          address: "Please Login",
+          address: "**Restricted",
           longitude: wifi_network.longitude,
           latitude: wifi_network.latitude,
           average_user_rating: wifi_network.average_user_rating,

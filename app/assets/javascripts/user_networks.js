@@ -1,6 +1,11 @@
  var markersArray = [];
 
-
+  function toggleBounce(marker) {
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+      setTimeout(function(){
+            marker.setAnimation(null)
+          }, 5000);
+    }
 
 $(function() {
 
@@ -97,18 +102,7 @@ var drawMarkers = function(e) {
   for (var i = 0; i < markersArray.length; i++ ) {
     markersArray[i].setMap(null);
   }
-
-
-
-
-  function toggleBounce(marker) {
-      marker.setAnimation(google.maps.Animation.BOUNCE);
-      setTimeout(function(){
-            marker.setAnimation(null)
-          }, 5000);
-    }
-
-
+  markersArray = [];
 
     // get the public networks
     $.getJSON('/user_networks.json', {"postcode": $('#postcode').val(), "distance":$('#distance').val()},  function(data){
@@ -127,13 +121,13 @@ var drawMarkers = function(e) {
           latitude: networks_array[i].latitude,
           average_user_rating: networks_array[i].average_user_rating,
           updated_at: networks_array[i].updated_at,
-          animation: google.maps.Animation.DROP
-        })//closes google maps marker
+          animation: google.maps.Animation.DROP,
+          icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+        });//closes google maps marker
 
 
         markersArray.push(marker);
 
-        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
         //create an event to happen on clicking each marker
         google.maps.event.addListener(marker, 'click', function() {
          //content string
@@ -151,6 +145,7 @@ var drawMarkers = function(e) {
           toggleBounce(this);
         });  //closes the google maps listener event
       } //closes for loop
+
     }) // closes getJSON
 
 
@@ -161,7 +156,7 @@ var drawMarkers = function(e) {
     for(var i = 0; i < users_networks_array.length; i++){
       var marker = new google.maps.Marker({
         position: new google.maps.LatLng(users_networks_array[i].latitude, users_networks_array[i].longitude),
-        map: map,
+        map: null,
         title: users_networks_array[i].nickname +' [SSID: ' + users_networks_array[i].ssid + ', Password: ' + users_networks_array[i].password + ']',
         id: parseInt(users_networks_array[i].id),
         nickname: users_networks_array[i].nickname,
@@ -182,6 +177,8 @@ var drawMarkers = function(e) {
 
 
       markersArray.push(marker);
+
+
 
       //create an event to happen on clicking each marker
       google.maps.event.addListener(marker, 'click', function() {
@@ -209,7 +206,7 @@ var drawMarkers = function(e) {
     for(var i = 0; i < networks_array.length; i++){
       var marker = new google.maps.Marker({
         position: new google.maps.LatLng(networks_array[i].latitude, networks_array[i].longitude),
-        map: map,
+        map: null,
         title: 'Shared Network [SSID: ' + networks_array[i].ssid + ', Password: ' + networks_array[i].password + ']',
         wifi_network_id: networks_array[i].wifi_network_id,
         ssid: networks_array[i].ssid,
@@ -245,7 +242,7 @@ var drawMarkers = function(e) {
           '</div>';
         //finally, define what happens when we click the marker
         infowindow.open(map, this);
-         toggleBounce(this);
+        toggleBounce(this);
 
 
 
@@ -262,8 +259,6 @@ var drawMarkers = function(e) {
 
   $("#unregistered_user").delay(1500).animate({"opacity": "1"}, 500);
   drawMarkers();
-
-
 
   $('#submit').on('click', drawMarkers);
 
