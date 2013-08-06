@@ -7,7 +7,13 @@ class UserNetworksController < ApplicationController
   def index
 
     unless current_user
-      @all_networks = WifiNetwork.all
+      if !params[:distance].blank?
+        unless params[:postcode].blank?
+          @all_networks = WifiNetwork.near(params[:postcode].delete(' ').upcase, params[:distance].to_f)
+        end
+      else
+        @all_networks = WifiNetwork.all
+      end
 
       @all_networks_hashes_array = []
       @all_networks.each do |wifi_network|
@@ -25,11 +31,12 @@ class UserNetworksController < ApplicationController
         @all_networks_hashes_array << network_hash
       end
 
+      @empty_array = []
       @all_users_visible_networks = {
-        public_networks: @all_networks_hashes_array
+        public_networks: @all_networks_hashes_array,
+        users_friends_networks: @empty_array,
+        users_networks: @empty_array,
         }
-
-
 
 
     end
