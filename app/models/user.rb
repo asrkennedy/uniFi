@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :friendships_as_proposer, class_name: "Friendship", foreign_key: :proposer_id
   has_many :friendships_as_proposee, class_name: "Friendship", foreign_key: :proposee_id
   has_many :user_networks
+  before_destroy :delete_friendships_and_networks_before_destroying_user
 
   SHARING_PREFERENCES = ['public', 'acquaintance', 'friend', 'close friend', 'private']
 
@@ -121,6 +122,18 @@ class User < ActiveRecord::Base
       self.friendships_as_proposee.where( proposer_id: current_user.id).first.proposer_sharing_pref.capitalize
     else
       self.friendships_as_proposer.where(proposee_id: current_user.id).first.proposee_sharing_pref.capitalize
+    end
+  end
+
+  def delete_friendships_and_networks_before_destroying_user
+    Friendship.where(proposer_id: self.id).each do |friendship|
+      friendship.destroy
+    end
+    Friendship.where(proposee_id: self.id).each do |friendship|
+      friendship.destroy
+    end
+    UserNetwork.where(user_id: self.id).each do |network|
+      network.destroy
     end
   end
 

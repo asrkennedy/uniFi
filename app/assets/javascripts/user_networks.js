@@ -357,6 +357,10 @@ var drawMarkers = function(e) {
         }
         $('#friend_popup').append('</ul>')
         $('#friend_popup').slideDown(1000);
+        setTimeout(function(){
+          $('#friend_popup').slideUp(500);
+        }, 5000);
+
       } ;
     }) //closes getJSON
   } //closes checkFriendRequests
@@ -370,11 +374,10 @@ var drawMarkers = function(e) {
 
 
   drawMarkers();
-
+  checkFriendRequests();
   setInterval(function(){
     checkFriendRequests();
-    console.log('hello');
-        }, 10000);
+        }, 30000);
 
 
 
