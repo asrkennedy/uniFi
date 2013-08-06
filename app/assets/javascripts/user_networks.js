@@ -110,10 +110,10 @@ var drawMarkers = function(e) {
           }, 5000);
     }
 
-
-
     // get the public networks
     $.getJSON('/user_networks.json', {"postcode": $('#postcode').val(), "distance":$('#distance').val()},  function(data){
+      var currentUser = data.current_user_boolean;
+      // get the public networks
       var networks_array = data.public_networks;
       for(var i = 0; i < networks_array.length; i++){
         var marker = new google.maps.Marker({
@@ -149,16 +149,16 @@ var drawMarkers = function(e) {
             '</ul>' +
             '</div>';
           //finally, define what happens when we click the marker
-          infowindow.open(map, this);
+
+          if(currentUser){
+            infowindow.open(map, this);
+          };
+
           toggleBounce(this);
         });  //closes the google maps listener event
       } //closes for loop
-    }) // closes getJSON
 
-
-
-  // now get the user's networks
-  $.getJSON('/user_networks.json', {"postcode": $('#postcode').val(), "distance":$('#distance').val()}, function(data){
+      // now get the user's networks
     var users_networks_array = data.users_networks
     for(var i = 0; i < users_networks_array.length; i++){
       var marker = new google.maps.Marker({
@@ -182,7 +182,6 @@ var drawMarkers = function(e) {
         animation: google.maps.Animation.DROP
       })//closes google maps marker
 
-
       markersArray.push(marker);
 
       //create an event to happen on clicking each marker
@@ -203,10 +202,8 @@ var drawMarkers = function(e) {
          toggleBounce(this);
       });  //closes the google maps listener event
     } //closes for loop
-  }) // closes getJSON
 
-   // now get the user's friend's networks
-  $.getJSON('/user_networks.json', {"postcode": $('#postcode').val(), "distance":$('#distance').val()}, function(data){
+    // now get the user's friend's networks
     var networks_array = data.users_friends_networks
     for(var i = 0; i < networks_array.length; i++){
       var marker = new google.maps.Marker({
@@ -226,10 +223,7 @@ var drawMarkers = function(e) {
         animation: google.maps.Animation.DROP
       })//closes google maps marker
 
-
       markersArray.push(marker);
-
-
 
       marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
       //create an event to happen on clicking each marker
@@ -249,14 +243,10 @@ var drawMarkers = function(e) {
         infowindow.open(map, this);
          toggleBounce(this);
 
-
-
       });  //closes the google maps listener events
     }; //closes for loop
+
   }) // closes getJSON
-
-
-
 
 }
 
