@@ -85,7 +85,69 @@ $(function() {
     //   },
     disableDefaultUI: true,
     center: new google.maps.LatLng(51.512769700000000000,-0.128924099999949250),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    styles: [
+              {
+                "featureType": "water",
+                "stylers": [
+                  { "visibility": "on" },
+                  { "color": "#1385eb" }
+                ]
+              },{
+                "featureType": "road.local",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                  { "visibility": "on" },
+                  { "color": "#000000" },
+                  { "weight": 0.7 }
+                ]
+              },{
+                "featureType": "road.highway",
+                "stylers": [
+                  { "visibility": "off" }
+                ]
+              },{
+                "featureType": "road.arterial",
+                "stylers": [
+                  { "color": "#f6003c" },
+                  { "visibility": "simplified" },
+                  { "weight": 4.4 }
+                ]
+              },{
+                "featureType": "landscape",
+                "elementType": "labels.icon",
+                "stylers": [
+                  { "color": "#808080" },
+                  { "visibility": "simplified" }
+                ]
+              },{
+                "featureType": "transit",
+                "stylers": [
+                  { "visibility": "simplified" },
+                  { "invert_lightness": true },
+                  { "lightness": 50 },
+                  { "color": "#ebfa5e" }
+                ]
+              },{
+                "featureType": "poi.park",
+                "stylers": [
+                  { "visibility": "simplified" },
+                  { "color": "#20d6ae" }
+                ]
+              },{
+                "featureType": "poi",
+                "stylers": [
+                  { "visibility": "simplified" }
+                ]
+              },{
+                "featureType": "landscape.man_made",
+                "stylers": [
+                  { "visibility": "simplified" },
+                  { "color": "#bec1bc" }
+                ]
+              }
+            ]
+
   };
 
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
