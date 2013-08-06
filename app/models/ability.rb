@@ -11,9 +11,7 @@ class Ability
     can :edit, User do |u|
       u.id == user.id
     end
-    can :read, User do |u|
-      u.id == user.id
-    end
+    can :read, User
     can :update, User do |u|
       u.id == user.id
     end

@@ -1,35 +1,22 @@
-%h2 Current Users
+%h2 User List
 
 = search_form_for @q, :url => url_for(:friendships_controller => "q", :action => "new") do |f|
   = f.text_field :first_name_or_last_name_or_email_cont
-  = f.submit "Search"
+  = f.submit "Search Name"
 
-
-
-
-
-%table
+%ul
   -@users.each do |user|
-    %tr
-      - unless current_user.friends_ids.include? user.id
-        - if user != current_user
-          - if user.user_image. != nil
-            %td
-              = link_to (image_tag user.user_image.thumb.url), user_path(user)
-          %td
-            = link_to user.first_name, user_path(user)
-          %td
-            = link_to user.last_name, user_path(user)
-          %td
-            = user.biography
-          %td
-            Networks:
-            = user.user_networks.size
-          %td
-            Friends:
-            = user.friends.size
-          %td
+    - unless current_user.friends_ids.include? user.id
+      - unless user == current_user
+        %li
+          - unless user.user_image.blank?
+            = image_tag user.user_image.thumb.url
+          %p
+            = link_to "#{user.full_name}", user_path(user)
+            |
+            =mail_to user.email
+            |
             = link_to "Add Friend", new_friend_path(user)
-            / Need to change this route to include the id
+
 
 = link_to 'Back', friendships_path

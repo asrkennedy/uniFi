@@ -4,33 +4,23 @@
   =submit_tag "Search"
 
 
-
-%table
-  - if @friendships.any?
+- if @friendships.any?
+  %ul
     - @friendships.each do |friend|
-      %tr
-        -if friend.user_image != nil
-          %td
-            = link_to (image_tag friend.user_image.thumb.url), user_path(friend.id)
-        %td
-          = friend.first_name
-        %td
-          = friend.last_name
-        %td
-          = friend.biography
-        %td
-          Networks:
-          = friend.user_networks.size
-        %td
-          Friends:
-          = friend.friends.size
-        %td
-          = link_to "Defriend", defriend_path(friend)
-  - else
-    - if params[:name]
-      %p No results match your search
-    -else
-      %p You have no friends.
+      %li
+      -unless friend.user_image.blank?
+        = image_tag friend.user_image.thumb.url
+      = link_to "#{friend.full_name}", user_path(friend.id)
+      Networks:
+      = friend.user_networks.size
+      Friends:
+      = friend.friends.size
+      = link_to "Defriend", defriend_path(friend)
+- else
+  - if params[:name]
+    %p No results match your search
+  -else
+    %p You have no friends.
 
 
 = link_to 'Find New Friends', new_friendship_path
