@@ -111,7 +111,7 @@ $(function() {
                 "stylers": [
                   { "color": "#f6003c" },
                   { "visibility": "simplified" },
-                  { "weight": 4.4 }
+                  { "weight": 2.5 }
                 ]
               },{
                 "featureType": "landscape",

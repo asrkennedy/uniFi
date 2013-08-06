@@ -1,5 +1,7 @@
 class UserNetworksController < ApplicationController
     load_and_authorize_resource
+
+    prepend_before_filter :remove_wifi_network_id_from_params, only: [:create]
     # before_filter :authenticate_user!
 
   # GET /user_networks
@@ -171,7 +173,6 @@ class UserNetworksController < ApplicationController
   def create
     params[:user_network]["wifi_network_attributes"]["postcode"] = params[:user_network]["wifi_network_attributes"]["postcode"].delete(' ').upcase
 
-  params[:user_network][:wifi_network_attributes].delete(:id) rescue nil
     wifi_network_hash = {
       ssid: params[:user_network]["wifi_network_attributes"]["ssid"],
       postcode: params[:user_network]["wifi_network_attributes"]["postcode"],
@@ -222,4 +223,9 @@ class UserNetworksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+def remove_wifi_network_id_from_params
+  params[:user_network][:wifi_network_attributes].delete(:id) rescue nil
+end
+
 end
