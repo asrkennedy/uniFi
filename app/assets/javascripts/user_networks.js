@@ -57,7 +57,7 @@ $(function() {
 // create a google map + With Control Positions for Map only not streetview Will be adding styling element here aswell later
   var mapOptions = {
     zoom:6,
-    { "featureType": "water", "stylers": [ { "visibility": "on" }, { "color": "#11a1d8" } ] ,
+
     // mapTypeControlOptions: {
     //     style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
     //     position: google.maps.ControlPosition.TOP_CENTER
