@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
     visible_networks.flatten.map{|network| network.wifi_network}.uniq
   end
 
-  def make_friendship(current_user, user, sharing_preferences)
+  def make_friendship(current_user, sharing_preferences)
       Friendship.create proposer_id: current_user.id, proposee_id: self.id, proposer_sharing_pref: sharing_preferences, proposee_sharing_pref: nil
 
   # validates :proposer_sharing_pref, inclusion: { in: User::SHARING_PREFERENCES }

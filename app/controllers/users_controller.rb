@@ -53,7 +53,7 @@ class UsersController < ApplicationController
 
   def friend_add_relationship
     @user = User.find(params[:id])
-    @user.make_friendship(current_user, @user, params[:sharing_preferences])
+    @user.make_friendship(current_user, params[:sharing_preferences])
     friend_name = "#{@user.first_name} #{@user.last_name}"
     redirect_to friendships_path, notice: "You and #{friend_name} are now friends."
   end

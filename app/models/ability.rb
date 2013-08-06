@@ -21,6 +21,13 @@ class Ability
       u.id == user.id
     end
 
+    can :new_friend, User
+    can :friend_add_relationship, User
+    can :friend_confirm_relationship, User
+    can :confirm_friend, User
+    can :defriend, User
+    can :deny_friend, User
+
     can :create, UserNetwork
     can :read, UserNetwork do |n|
       n.user_id == user.id

@@ -1,4 +1,6 @@
- var markersArray = []
+ var markersArray = [];
+
+
 
 $(function() {
 
@@ -96,12 +98,15 @@ var drawMarkers = function(e) {
     markersArray[i].setMap(null);
   }
 
-function toggleBounce(marker) {
-    marker.setAnimation(google.maps.Animation.BOUNCE);
-    setTimeout(function(){
-          marker.setAnimation(null)
-        }, 5000);
-  }
+
+
+
+  function toggleBounce(marker) {
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+      setTimeout(function(){
+            marker.setAnimation(null)
+          }, 5000);
+    }
 
 
 
@@ -124,6 +129,7 @@ function toggleBounce(marker) {
           updated_at: networks_array[i].updated_at,
           animation: google.maps.Animation.DROP
         })//closes google maps marker
+
 
         markersArray.push(marker);
 
@@ -174,6 +180,7 @@ function toggleBounce(marker) {
         animation: google.maps.Animation.DROP
       })//closes google maps marker
 
+
       markersArray.push(marker);
 
       //create an event to happen on clicking each marker
@@ -217,6 +224,7 @@ function toggleBounce(marker) {
         animation: google.maps.Animation.DROP
       })//closes google maps marker
 
+
       markersArray.push(marker);
 
 
@@ -238,9 +246,12 @@ function toggleBounce(marker) {
         //finally, define what happens when we click the marker
         infowindow.open(map, this);
          toggleBounce(this);
-      });  //closes the google maps listener event
-    } //closes for loop
+      });  //closes the google maps listener events
+    }; //closes for loop
   }) // closes getJSON
+
+
+
 
 }
 
@@ -248,7 +259,7 @@ function toggleBounce(marker) {
 
 
   drawMarkers();
-
+  // rescaleMap();
 
   $('#submit').on('click', drawMarkers);
 
