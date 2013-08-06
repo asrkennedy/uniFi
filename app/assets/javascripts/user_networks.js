@@ -246,6 +246,9 @@ var drawMarkers = function(e) {
         //finally, define what happens when we click the marker
         infowindow.open(map, this);
          toggleBounce(this);
+
+
+
       });  //closes the google maps listener events
     }; //closes for loop
   }) // closes getJSON

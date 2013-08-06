@@ -1,9 +1,10 @@
 -unless @proposers_of_unconfirmed_friendships.blank?
-  -@proposers_of_unconfirmed_friendships.each do |proposer|
-    %p Unconfirmed Friendships:
-    = "#{proposer.first_name} #{proposer.last_name}"
-    = link_to 'Confirm', confirm_friend_path(proposer)
-    = link_to 'Deny', deny_friend_path(proposer)
+  #unconfirmed_friendships
+    -@proposers_of_unconfirmed_friendships.each do |proposer|
+      %p Unconfirmed Friendships:
+      = "#{proposer.first_name} #{proposer.last_name}"
+      = link_to 'Confirm', confirm_friend_path(proposer)
+      = link_to 'Deny', deny_friend_path(proposer)
 
   :javascript
     window.user_params = #{@params.to_json}
@@ -18,6 +19,14 @@
 - if can? :manage, :all
   HELLO MR ADMIN
 
+-unless current_user
+  #unregistered_user
+    %h2 Welcome!
+    %p This map displays all of the Wifi networks in our database. You must sign up or sign in to add friends and networks.
+    %h1
+      =link_to "Sign Up", new_user_registration_path
+      |
+      =link_to "Sign In", new_user_session_path
 
 #map-canvas
 
