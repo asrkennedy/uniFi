@@ -4,6 +4,21 @@ class UsersController < ApplicationController
     load_and_authorize_resource
 
 
+  def index
+    @proposers_of_unconfirmed_friendships = current_user.find_unconfirmed_friendships
+
+    @proposers = {
+      proposers: @proposers_of_unconfirmed_friendships
+    }
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @proposers }
+    end
+  end
+
+
+
 
   def show
     if !params[:distance].blank?
