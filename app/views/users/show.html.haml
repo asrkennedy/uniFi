@@ -50,16 +50,8 @@ Number of networks:
           , Password:
           = network.wifi_network.password
         %p
-          Address:
-          =network.address
-        %p
-          =network.sharing_string
-        %p
-          =network.rating_string
-        %p
-          Details for this Wi-Fi network were last updated
-          = distance_of_time_in_words(Time.now, network.wifi_network.updated_at)
-          ago
+          City:
+          =network.wifi_network.city
           = link_to 'Edit', edit_user_network_path(network)
           = link_to 'Show', user_network_path(network)
           =link_to 'Remove', network, method: :delete, data: { confirm: 'Are you sure?' }
@@ -76,23 +68,8 @@ Number of networks:
           , Password:
           = wifi_network.password
         %p
-          Address:
-          =wifi_network.full_street_address
-        %p
-          Shared By:
-          %ul
-            -wifi_network.user_networks.each do |user_network|
-              -if user_network.shareable_with(current_user)
-                %li
-                  ="#{user_network.user.full_name} (rating: #{user_network.user_score} out of 5)"
-
-        %p
-          =wifi_network.rating_string
-        %p
-
-          Details for this Wi-Fi network were last updated
-          = distance_of_time_in_words(Time.now, wifi_network.updated_at)
-          ago
+          City:
+          =wifi_network.city
           = link_to "Add To Your Networks", new_user_network_path(wifi_network_id: wifi_network.id)
           = link_to 'Show', wifi_network_path(wifi_network)
 
@@ -108,14 +85,8 @@ Number of networks:
           , Password:
           = wifi_network.password
         %p
-          Address:
-          =wifi_network.full_street_address
-        %p
-          =wifi_network.rating_string
-        %p
-          Details for this Wi-Fi network were last updated
-          = distance_of_time_in_words(Time.now, wifi_network.updated_at)
-          ago
+          City:
+          =wifi_network.city
           = link_to 'Show', wifi_network_path(wifi_network)
 = link_to 'Back', user_networks_path
 
