@@ -8,21 +8,32 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    %div.nav
-      %div.nav_links
+    .nav
+      .nav_links
         = link_to 'Home', user_networks_path
         - if current_user
           = link_to 'Your Friends', friendships_path
           = link_to 'Add A Network', new_user_network_path
           = link_to 'Your Account', user_path(current_user)
-      %div.login
+      .login
         - if current_user
           = current_user.email
           = link_to "Log out", destroy_user_session_path, method: :delete
         - else
           = link_to "Sign In", new_user_session_path
           = link_to "Register", new_user_registration_path
-    %div.container
+      -unless @proposers_of_unconfirmed_friendships.blank?
+        #unconfirmed_friendships
+          %p
+            Friend request(s)!
+            -@proposers_of_unconfirmed_friendships.each do |proposer|
+              = proposer.full_name
+              |
+              = link_to 'Confirm', confirm_friend_path(proposer)
+              = link_to 'Deny', deny_friend_path(proposer)
+
+
+    .container
       #flash
         - flash.each do |name, message|
           %div{:class => "flash-message flash-message-#{name}"}
