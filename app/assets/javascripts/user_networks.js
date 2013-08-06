@@ -245,6 +245,9 @@ var drawMarkers = function(e) {
 
       marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
       //create an event to happen on clicking each marker
+
+
+
        google.maps.event.addListener(marker, 'click', function() {
         //content string
         infowindow.content = '<div id="content">' +
@@ -261,10 +264,12 @@ var drawMarkers = function(e) {
         infowindow.open(map, this);
          toggleBounce(this);
 
-           google.maps.event.addListener(map, "click", function(){
-            InfoWindow.close();
-            })
       });  //closes the google maps listener events
+
+
+        google.maps.event.addListener(map, "click", function(){
+            infowindow.close();
+        });
     }; //closes for loop
 
 
