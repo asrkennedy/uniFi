@@ -34,6 +34,12 @@ class User < ActiveRecord::Base
     proposees + proposers
   end
 
+  def confirmed_friendships
+    proposees = self.friendships_as_proposer.where(confirmed: true)
+    proposers = self.friendships_as_proposee.where(confirmed: true)
+    proposees + proposers
+  end
+
   def friends_networks
     user_networks = self.friends.map{|friend| friend.user_networks}
     user_networks.flatten.map{|network| network.wifi_network}.uniq
@@ -120,7 +126,11 @@ class User < ActiveRecord::Base
     if friendship.empty?
       self.friendships_as_proposee.where( proposer_id: current_user.id).first.proposer_sharing_pref.capitalize
     else
+      if friendship.first.proposee_sharing_pref != nil
       self.friendships_as_proposer.where(proposee_id: current_user.id).first.proposee_sharing_pref.capitalize
+      else
+        return nil
+      end
     end
   end
 
