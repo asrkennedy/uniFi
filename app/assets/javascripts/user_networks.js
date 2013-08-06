@@ -1,4 +1,8 @@
  var markersArray = [];
+ var latLngList = [];
+
+ var bounds = new google.maps.LatLngBounds();
+
 
 
 
@@ -57,36 +61,111 @@ $(function() {
 // create a google map + With Control Positions for Map only not streetview Will be adding styling element here aswell later
   var mapOptions = {
     zoom:6,
-    mapTypeControlOptions: {
-        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-        position: google.maps.ControlPosition.TOP_CENTER
-    },
-    panControl: true,
-    panControlOptions: {
-        position: google.maps.ControlPosition.TOP_RIGHT
-    },
-    zoomControl: true,
-    zoomControlOptions: {
-        style: google.maps.ZoomControlStyle.LARGE,
-        position: google.maps.ControlPosition.RIGHT_CENTER
-    },
-    scaleControl: true,
-    scaleControlOptions: {
-        position: google.maps.ControlPosition.TOP_RIGHT
-    },
-    streetViewControl: true,
-    streetViewControlOptions: {
-        position: google.maps.ControlPosition.RIGHT_TOP
-      },
+
+    // mapTypeControlOptions: {
+    //     style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+    //     position: google.maps.ControlPosition.TOP_CENTER
+    // },
+    // panControl: true,
+    // panControlOptions: {
+    //     position: google.maps.ControlPosition.TOP_RIGHT
+    // },
+    // zoomControl: true,
+    // zoomControlOptions: {
+    //     style: google.maps.ZoomControlStyle.LARGE,
+    //     position: google.maps.ControlPosition.RIGHT_CENTER
+    // },
+    // scaleControl: true,
+    // scaleControlOptions: {
+    //     position: google.maps.ControlPosition.TOP_RIGHT
+    // },
+    // streetViewControl: true,
+    // streetViewControlOptions: {
+    //     position: google.maps.ControlPosition.RIGHT_TOP
+    //   },
+    disableDefaultUI: true,
     center: new google.maps.LatLng(51.512769700000000000,-0.128924099999949250),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    styles: [
+              {
+                "featureType": "water",
+                "stylers": [
+                  { "visibility": "on" },
+                  { "color": "#1385eb" }
+                ]
+              },{
+                "featureType": "road.local",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                  { "visibility": "on" },
+                  { "color": "#000000" },
+                  { "weight": 0.7 }
+                ]
+              },{
+                "featureType": "road.highway",
+                "stylers": [
+                  { "visibility": "off" }
+                ]
+              },{
+                "featureType": "road.arterial",
+                "stylers": [
+                  { "color": "#f6003c" },
+                  { "visibility": "simplified" },
+                  { "weight": 4.4 }
+                ]
+              },{
+                "featureType": "landscape",
+                "elementType": "labels.icon",
+                "stylers": [
+                  { "color": "#808080" },
+                  { "visibility": "simplified" }
+                ]
+              },{
+                "featureType": "transit",
+                "stylers": [
+                  { "visibility": "simplified" },
+                  { "invert_lightness": true },
+                  { "lightness": 50 },
+                  { "color": "#ebfa5e" }
+                ]
+              },{
+                "featureType": "poi.park",
+                "stylers": [
+                  { "visibility": "simplified" },
+                  { "color": "#20d6ae" }
+                ]
+              },{
+                "featureType": "poi",
+                "stylers": [
+                  { "visibility": "simplified" }
+                ]
+              },{
+                "featureType": "landscape.man_made",
+                "stylers": [
+                  { "visibility": "simplified" },
+                  { "color": "#bec1bc" }
+                ]
+              }
+            ]
+
   };
+
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   //create the info window to populate on clicking a marker
   var infowindow = new google.maps.InfoWindow({
           content: ""
         });
 
+  var resizeMap = function(){
+    for(var i = 0; i <latLngList.length ; i++){
+      bounds.extend(latLngList[i])
+    }
+    map.fitBounds(bounds);
+    latLngList = [];
+    bounds = new google.maps.LatLngBounds();
+    setTimeout(function(){google.maps.event.trigger(map, 'resize')},2000);
+
+  } // closes resizemap
 
 
 var drawMarkers = function(e) {
@@ -108,10 +187,10 @@ var drawMarkers = function(e) {
           }, 5000);
     }
 
-
-
     // get the public networks
     $.getJSON('/user_networks.json', {"postcode": $('#postcode').val(), "distance":$('#distance').val()},  function(data){
+      var currentUser = data.current_user_boolean;
+      // get the public networks
       var networks_array = data.public_networks;
       for(var i = 0; i < networks_array.length; i++){
         var marker = new google.maps.Marker({
@@ -127,11 +206,12 @@ var drawMarkers = function(e) {
           latitude: networks_array[i].latitude,
           average_user_rating: networks_array[i].average_user_rating,
           updated_at: networks_array[i].updated_at,
-          animation: google.maps.Animation.DROP
+          // animation: google.maps.Animation.DROP
         })//closes google maps marker
 
 
         markersArray.push(marker);
+        latLngList.push(marker.position);
 
         marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
         //create an event to happen on clicking each marker
@@ -147,16 +227,16 @@ var drawMarkers = function(e) {
             '</ul>' +
             '</div>';
           //finally, define what happens when we click the marker
-          infowindow.open(map, this);
+
+          if(currentUser){
+            infowindow.open(map, this);
+          };
+
           toggleBounce(this);
         });  //closes the google maps listener event
       } //closes for loop
-    }) // closes getJSON
 
-
-
-  // now get the user's networks
-  $.getJSON('/user_networks.json', {"postcode": $('#postcode').val(), "distance":$('#distance').val()}, function(data){
+      // now get the user's networks
     var users_networks_array = data.users_networks
     for(var i = 0; i < users_networks_array.length; i++){
       var marker = new google.maps.Marker({
@@ -177,11 +257,11 @@ var drawMarkers = function(e) {
         latitude: users_networks_array[i].latitude,
         average_user_rating: users_networks_array[i].average_user_rating,
         updated_at: users_networks_array[i].updated_at,
-        animation: google.maps.Animation.DROP
+        // animation: google.maps.Animation.DROP
       })//closes google maps marker
 
-
       markersArray.push(marker);
+      latLngList.push(marker.position);
 
       //create an event to happen on clicking each marker
       google.maps.event.addListener(marker, 'click', function() {
@@ -201,10 +281,8 @@ var drawMarkers = function(e) {
          toggleBounce(this);
       });  //closes the google maps listener event
     } //closes for loop
-  }) // closes getJSON
 
-   // now get the user's friend's networks
-  $.getJSON('/user_networks.json', {"postcode": $('#postcode').val(), "distance":$('#distance').val()}, function(data){
+    // now get the user's friend's networks
     var networks_array = data.users_friends_networks
     for(var i = 0; i < networks_array.length; i++){
       var marker = new google.maps.Marker({
@@ -221,22 +299,23 @@ var drawMarkers = function(e) {
         average_user_rating: networks_array[i].average_user_rating,
         updated_at: networks_array[i].updated_at,
         shared_by: networks_array[i].shared_by,
-        animation: google.maps.Animation.DROP
+        // animation: google.maps.Animation.DROP
       })//closes google maps marker
 
-
       markersArray.push(marker);
-
-
+      latLngList.push(marker.position);
 
       marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
       //create an event to happen on clicking each marker
+
+
+
        google.maps.event.addListener(marker, 'click', function() {
         //content string
         infowindow.content = '<div id="content">' +
           '<a href="/wifi_networks/' + this.wifi_network_id +'">' +
           '<h4>Shared Network [SSID: ' + this.ssid + ', Password: ' + this.password + ']</h4></a>' +
-          '<img src="http://maps.googleapis.com/maps/api/streetview?size=450x250&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false">' +
+          '<img src="http://maps.googleapis.com/maps/api/streetview?size=450x250&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false" id="streetviewstatic">' +
           '<ul>' +
           '<li>Address: ' + this.address + '</li>' +
           '<li>Average Uni-Fi user rating: ' + this.average_user_rating + ' out of 5</li>' +
@@ -247,14 +326,19 @@ var drawMarkers = function(e) {
         infowindow.open(map, this);
          toggleBounce(this);
 
-
-
       });  //closes the google maps listener events
+
+
+        google.maps.event.addListener(map, "click", function(){
+            infowindow.close();
+        });
     }; //closes for loop
+
+
+
+
+  resizeMap();
   }) // closes getJSON
-
-
-
 
 }
 
@@ -263,10 +347,11 @@ var drawMarkers = function(e) {
   $("#unregistered_user").delay(1500).animate({"opacity": "1"}, 500);
   drawMarkers();
 
-  drawMarkers();
-  // rescaleMap();
+
+
 
   $('#submit').on('click', drawMarkers);
+
 
 
 }); // closes document ready

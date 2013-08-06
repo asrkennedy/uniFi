@@ -5,30 +5,38 @@ class UserNetworksController < ApplicationController
   # GET /user_networks
   # GET /user_networks.json
   def index
+
     unless current_user
-      @all_networks = WifiNetwork.all
+      if !params[:distance].blank?
+        unless params[:postcode].blank?
+          @all_networks = WifiNetwork.near(params[:postcode].delete(' ').upcase, params[:distance].to_f)
+        end
+      else
+        @all_networks = WifiNetwork.all
+      end
 
       @all_networks_hashes_array = []
       @all_networks.each do |wifi_network|
         network_hash = {
           wifi_network_id: wifi_network.id,
-          ssid: wifi_network.ssid,
-          password: "Please Login",
+          ssid: "hidden",
+          password: "hidden",
           password_required: wifi_network.password_required,
-          address: "Please Login",
+          address: "hidden",
           longitude: wifi_network.longitude,
           latitude: wifi_network.latitude,
-          average_user_rating: wifi_network.average_user_rating,
+          average_user_rating: "hidden",
           updated_at: wifi_network.updated_at
         }
         @all_networks_hashes_array << network_hash
       end
 
+      @empty_array = []
       @all_users_visible_networks = {
-        public_networks: @all_networks_hashes_array
+        public_networks: @all_networks_hashes_array,
+        users_friends_networks: @empty_array,
+        users_networks: @empty_array,
         }
-
-
 
 
     end
@@ -122,9 +130,7 @@ class UserNetworksController < ApplicationController
         }
     end
 
-
-
-
+    @all_users_visible_networks["current_user_boolean"] = !!current_user
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @all_users_visible_networks }
