@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+
 body {
   margin: 0;
   font-family: "Calibri";
@@ -78,3 +80,17 @@ label {
   border-radius: 5px;
   font-family: "Calibri";
 }
+
+#unregistered_user {
+position: fixed;
+top: 50%;
+left: 50%;
+width: 30em;
+background: rgba(255,255,255,0.6);
+text-align: center;
+border-radius: 10px;
+margin-left: -15em;
+opacity: 0
+
+}
+

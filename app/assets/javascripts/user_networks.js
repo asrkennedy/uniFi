@@ -260,9 +260,10 @@ var drawMarkers = function(e) {
 
 
 
-
+  $("#unregistered_user").delay(1500).animate({"opacity": "1"}, 500);
   drawMarkers();
-  // rescaleMap();
+
+
 
   $('#submit').on('click', drawMarkers);
 
