@@ -343,6 +343,7 @@ var drawMarkers = function(e) {
 }
 
 
+
   var checkFriendRequests = function(){
     $.getJSON('/users.json', function(data){
       var proposersArray = data.proposers;
@@ -368,8 +369,6 @@ var drawMarkers = function(e) {
 
 
 
-
- $("#overlay").delay(1500).animate({"opacity": "1"}, 500);
   drawMarkers();
 
   setInterval(function(){

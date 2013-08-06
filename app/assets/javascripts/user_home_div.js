@@ -14,7 +14,7 @@ $(function(){
   var sign_up_linkWidth;
   var sign_up_linkHeight = 20;
 
-if ($('canvas').length != 0) {
+if ($('#overlay').length != 0) {
   function on_mousemove (ev) {
     var s_i_x, s_i_y;
     var rect = canvas.getBoundingClientRect();

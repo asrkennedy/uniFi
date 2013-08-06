@@ -34,8 +34,14 @@ UnifiApp::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+ # Add the fonts path
+  config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+  # Precompile additional assets
+  config.assets.precompile += %w( .svg .eot .woff .ttf )
 
   CarrierWave.configure do |config|
   config.storage = :file
+
+
 end
 end

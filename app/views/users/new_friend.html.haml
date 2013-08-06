@@ -6,12 +6,6 @@
       %option{:value => "close friend"}= "Close Friend"
       %option{:value => "friend"}= "Friend"
       %option{:value => "acquaintance"}= "Acquaintance"
+      - @user.friend_exists?(current_user)
   %p
     = submit_tag "Submit"
-
--# - @user.make_friendship(current_user, params[:sharing_preferences])
--# - if current_user.check_friendship(current_user, @user)
--#   %h2
--#     You are now friends with
--#     = @user.first_name
--#     = @user.last_name
