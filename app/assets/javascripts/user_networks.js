@@ -343,8 +343,6 @@ var drawMarkers = function(e) {
 }
 
 
-
- $("#overlay").delay(1500).animate({"opacity": "1"}, 500);
   drawMarkers();
 
 

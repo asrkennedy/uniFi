@@ -109,5 +109,19 @@ class User < ActiveRecord::Base
   # returns an array of proposers (users) of friend requests
   end
 
+  def friend_exists? (current_user)
+      if current_user.friends.include? self
+      self.defriend(current_user, self)
+    end
+  end
+
+  def get_relationship(current_user)
+    friendship = self.friendships_as_proposer.where(proposee_id: current_user.id)
+    if friendship.empty?
+      self.friendships_as_proposee.where( proposer_id: current_user.id).first.proposer_sharing_pref.capitalize
+    else
+      self.friendships_as_proposer.where(proposee_id: current_user.id).first.proposee_sharing_pref.capitalize
+    end
+  end
 
 end

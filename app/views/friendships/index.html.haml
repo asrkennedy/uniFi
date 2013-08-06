@@ -11,11 +11,14 @@
       -unless friend.user_image.blank?
         = image_tag friend.user_image.thumb.url
       = link_to "#{friend.full_name}", user_path(friend.id)
+      Relationship:
+      = friend.get_relationship(current_user)
       Networks:
       = friend.user_networks.size
       Friends:
       = friend.friends.size
       = link_to "Defriend", defriend_path(friend)
+      = link_to "Edit", new_friend_path(friend)
 - else
   - if params[:name]
     %p No results match your search
