@@ -1,4 +1,8 @@
  var markersArray = [];
+ var latLngList = [];
+
+ var bounds = new google.maps.LatLngBounds();
+
 
 
 
@@ -145,12 +149,23 @@ $(function() {
             ]
 
   };
+
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   //create the info window to populate on clicking a marker
   var infowindow = new google.maps.InfoWindow({
           content: ""
         });
 
+  var resizeMap = function(){
+    for(var i = 0; i <latLngList.length ; i++){
+      bounds.extend(latLngList[i])
+    }
+    map.fitBounds(bounds);
+    latLngList = [];
+    bounds = new google.maps.LatLngBounds();
+    setTimeout(function(){google.maps.event.trigger(map, 'resize')},2000);
+
+  } // closes resizemap
 
 
 var drawMarkers = function(e) {
@@ -191,11 +206,12 @@ var drawMarkers = function(e) {
           latitude: networks_array[i].latitude,
           average_user_rating: networks_array[i].average_user_rating,
           updated_at: networks_array[i].updated_at,
-          animation: google.maps.Animation.DROP
+          // animation: google.maps.Animation.DROP
         })//closes google maps marker
 
 
         markersArray.push(marker);
+        latLngList.push(marker.position);
 
         marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
         //create an event to happen on clicking each marker
@@ -241,10 +257,11 @@ var drawMarkers = function(e) {
         latitude: users_networks_array[i].latitude,
         average_user_rating: users_networks_array[i].average_user_rating,
         updated_at: users_networks_array[i].updated_at,
-        animation: google.maps.Animation.DROP
+        // animation: google.maps.Animation.DROP
       })//closes google maps marker
 
       markersArray.push(marker);
+      latLngList.push(marker.position);
 
       //create an event to happen on clicking each marker
       google.maps.event.addListener(marker, 'click', function() {
@@ -282,10 +299,11 @@ var drawMarkers = function(e) {
         average_user_rating: networks_array[i].average_user_rating,
         updated_at: networks_array[i].updated_at,
         shared_by: networks_array[i].shared_by,
-        animation: google.maps.Animation.DROP
+        // animation: google.maps.Animation.DROP
       })//closes google maps marker
 
       markersArray.push(marker);
+      latLngList.push(marker.position);
 
       marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
       //create an event to happen on clicking each marker
@@ -294,7 +312,7 @@ var drawMarkers = function(e) {
         infowindow.content = '<div id="content">' +
           '<a href="/wifi_networks/' + this.wifi_network_id +'">' +
           '<h4>Shared Network [SSID: ' + this.ssid + ', Password: ' + this.password + ']</h4></a>' +
-          '<img src="http://maps.googleapis.com/maps/api/streetview?size=450x250&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false">' +
+          '<img src="http://maps.googleapis.com/maps/api/streetview?size=450x250&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false" id="streetviewstatic">' +
           '<ul>' +
           '<li>Address: ' + this.address + '</li>' +
           '<li>Average Uni-Fi user rating: ' + this.average_user_rating + ' out of 5</li>' +
@@ -305,9 +323,16 @@ var drawMarkers = function(e) {
         infowindow.open(map, this);
          toggleBounce(this);
 
+           google.maps.event.addListener(map, "click", function(){
+            InfoWindow.close();
+            })
       });  //closes the google maps listener events
     }; //closes for loop
 
+
+
+
+  resizeMap();
   }) // closes getJSON
 
 }
@@ -317,10 +342,11 @@ var drawMarkers = function(e) {
   $("#unregistered_user").delay(1500).animate({"opacity": "1"}, 500);
   drawMarkers();
 
-  drawMarkers();
-  // rescaleMap();
+
+
 
   $('#submit').on('click', drawMarkers);
+
 
 
 }); // closes document ready
