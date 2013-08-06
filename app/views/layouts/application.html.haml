@@ -12,8 +12,8 @@
       %div.nav_links
         = link_to 'Home', user_networks_path
         = link_to 'Your Friends', friendships_path
-        = link_to 'Add A Network', new_user_network_path
         - if current_user
+          = link_to 'Add A Network', new_user_network_path
           = link_to 'Your Account', user_path(current_user)
       %div.login
         - if current_user
