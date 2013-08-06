@@ -1,11 +1,23 @@
 // Place all the styles related to the UserNetworks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@font-face {
+  font-family: 'TrendSansFive';
+  src:url('TrendSansFive.eot');
+  src:url('TrendSansFive.eot?#iefix') format('embedded-opentype'),
+    url('TrendSansFive.woff') format('woff');
+    font-weight: normal;
+  font-style: normal;
+}
 
 body {
   margin: 0;
-  font-family: "Calibri";
+  font-family: 'TrendSansFive', sans-serif;
+  font-weight: normal;
+  font-style: normal;
 }
+
+
 
 #sharing_warning {
   display: hidden;
