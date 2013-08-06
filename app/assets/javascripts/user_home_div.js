@@ -1,4 +1,5 @@
 $(function(){
+
   var sign_inLink = false;
   var link_sign_in_text = "Sign In";
   var sign_in_link_x = 190;
@@ -13,6 +14,7 @@ $(function(){
   var sign_up_linkWidth;
   var sign_up_linkHeight = 20;
 
+if ($('canvas').length != 0) {
   function on_mousemove (ev) {
     var s_i_x, s_i_y;
     var rect = canvas.getBoundingClientRect();
@@ -46,10 +48,10 @@ $(function(){
 
 
   function on_click(){
-      if(sign_upLink){
-        document.location.href= "/users/sign_up"
-      } else if (sign_inLink) {
+      if(sign_inLink){
         document.location.href= "/users/sign_in"
+      } else if (sign_upLink) {
+        document.location.href= "/users/sign_up"
       }
   }
 
@@ -60,12 +62,11 @@ $(function(){
   // Choose font
   ctx.font = "Bold 36px 'Helvetica'";
 
-
   var grd = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
       // light blue
-      grd.addColorStop(0, 'rgba(245, 245, 245, 0.8)');
+      grd.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
       // dark blue
-      grd.addColorStop(1, 'rgba(245, 245, 245, 0.8)');
+      grd.addColorStop(1, 'rgba(255, 255, 255, 0.8)');
       ctx.fillStyle = grd;
       ctx.fill();
       // Draw rectangle
@@ -73,13 +74,16 @@ $(function(){
 
   // Punch out the text!
   ctx.globalCompositeOperation = 'destination-out';
+  ctx.fillText("_____________________", 40, 20);
   ctx.fillText("Welcome to uniFi", 100, 80);
+  ctx.fillText("_____________________", 40, 110);
   ctx.fillText(link_sign_in_text, 190, 300);
   sign_in_linkWidth=ctx.measureText(link_sign_in_text).width;
   ctx.fillText(link_sign_up_text, 180, 350);
   sign_up_linkWidth=ctx.measureText(link_sign_up_text).width;
 
-
   canvas.addEventListener('mousemove', on_mousemove, false)
   canvas.addEventListener('click', on_click, false)
+}
+
 })

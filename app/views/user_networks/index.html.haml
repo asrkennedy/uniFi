@@ -19,13 +19,12 @@
 - if can? :manage, :all
   HELLO MR ADMIN
 
--unless current_user
-  %div.canvas
+-if current_user
+  #map-canvas
+-else
+  #canvas
     %canvas{:width => "500px", :height => "400px", id:"overlay"}
-
-#map-canvas
-
-
+  #map-canvas.not_registered
 
 
 

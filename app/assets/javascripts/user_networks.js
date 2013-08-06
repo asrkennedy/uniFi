@@ -344,7 +344,7 @@ var drawMarkers = function(e) {
 
 
 
-  $("#unregistered_user").delay(1500).animate({"opacity": "1"}, 500);
+ $("#overlay").delay(1500).animate({"opacity": "1"}, 500);
   drawMarkers();
 
 
