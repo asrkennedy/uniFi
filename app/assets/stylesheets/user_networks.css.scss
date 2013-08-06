@@ -20,7 +20,6 @@ body {
   left: 0;
   bottom: 0;
   right: 0;
-
   filter: alpha(opacity=60);
   -moz-opacity: 0.6;
   -khtml-opacity: 0.6;
@@ -88,16 +87,61 @@ label {
   font-family: "Calibri";
 }
 
-#unregistered_user {
-position: fixed;
-top: 50%;
-left: 50%;
-width: 30em;
-background: rgba(255,255,255,0.6);
-text-align: center;
-border-radius: 10px;
-margin-left: -15em;
-opacity: 0;
+// #unregistered_user {
+// position: fixed;
+// top: 50%;
+// left: 50%;
+// width: 30em;
+// background: rgba(255,255,255,0.7);
+// text-align: center;
+// border-radius: 10px;
+// margin-left: -15em;
+// -webkit-filter: blur(1px);
+//  box-shadow: 8px 10px 10px rgba(0,0,0,0.5),
+//  inset 8px 10px 10px rgba(255,255,255,0.75);
+//  -o-box-shadow: 8px 10px 10px rgba(0,0,0,0.5),
+//  inset 8px 10px 10px rgba(255,255,255,0.75);
+//  -webkit-box-shadow: 8px 10px 10px rgba(0,0,0,0.5),
+//  inset 8px 10px 10px rgba(255,255,255,0.75);
+//  -moz-box-shadow: 8px 10px 10px rgba(0,0,0,0.5),
+//  inset 8px 10px 10px rgba(255,255,255,0.75);
+//  -webkit-background-clip: text;
+//  -webkit-text-fill-color: transparent;
+// }
+
+// #overlay {
+//   color: #fff
+// }
+
+.canvas {
+  width: 100%;
+  text-align: center;
+  z-index: 0;
+  margin-top: 20px;
+}
+
+#overlay {
+  margin: auto;
+  text-align: center;
+  border-radius: 10px;
+}
 
 
+#unregistered_user p {
+  padding: 30px;
+  margin: 0 20px 0 20px;
+}
+
+#unregistered_user a {
+  text-decoration: none;
+  color: #777;
+}
+
+#unregistered_user a:hover, a:focus {
+  text-decoration: none;
+  color: #333;
+}
+
+#unregistered_user a:hover, a:focus {
+  text-decoration: none;
 }
