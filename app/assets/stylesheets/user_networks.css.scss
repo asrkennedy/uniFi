@@ -244,3 +244,18 @@ list-style: none;
   -khtml-opacity: 0.8;
   opacity: 0.8;
 }
+
+#content{
+  width: 400px;
+}
+
+#content ul {
+  padding-left: 0;
+}
+
+#content li {
+  list-style: none;
+  font-size: 10px;
+}
+
+

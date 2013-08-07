@@ -258,12 +258,13 @@ var drawMarkers = function(e) {
         google.maps.event.addListener(marker, 'click', function() {
          //content string
           infowindow.content = '<div id="content">' +
+            '<h3>Public Network</h3>' +
             '<a href="/wifi_networks/' + this.wifi_network_id +'">' +
-            '<h4>Public Network [SSID: ' + this.ssid + ', Password: ' + this.password + ']</h4></a>' +
-            '<img src="http://maps.googleapis.com/maps/api/streetview?size=450x250&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false">' +
+            '<h4>SSID: ' + this.ssid + '</h4><h4>Password: ' + this.password + '</h4></a>' +
+            '<img src="http://maps.googleapis.com/maps/api/streetview?size=350x200&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false">' +
             '<ul>' +
             '<li>Address: ' + this.address + '</li>' +
-            '<li>Average Uni-Fi user rating: ' + this.average_user_rating + ' out of 5</li>' +
+            '<li>Average UNIFI user rating: ' + this.average_user_rating + ' out of 5</li>' +
             '</ul>' +
             '</div>';
           //finally, define what happens when we click the marker
@@ -308,12 +309,13 @@ var drawMarkers = function(e) {
         //content string
         infowindow.content = '<div id="content">' +
           '<a href="/user_networks/' + this.id +'">' +
-          '<h4>' + this.nickname + ' [SSID: ' + this.ssid + ', Password: ' + this.password + ']</h4></a>' +
-          '<img src="http://maps.googleapis.com/maps/api/streetview?size=450x250&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false">' +
+          '<h3>' + this.nickname + '</h3></a>' +
+          '<h4>SSID: ' + this.ssid + '</h4><h4>Password: ' + this.password + '</h4>' +
+          '<img src="http://maps.googleapis.com/maps/api/streetview?size=350x200&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false">' +
           '<ul>' +
-          '<li>Address: ' + this.address + '</li>' +
-          '<li>Your rating: ' + this.user_score + ' out of 5 (average Uni-Fi user rating: ' + this.average_user_rating + ')</li>' +
-          '<li>Sharing level: ' + this.user_sharing_pref + '</li>' +
+          '<li><strong>Address:</strong> ' + this.address + '</li>' +
+          '<li><strong>Your rating:</strong> ' + this.user_score + ' out of 5 (average UNIFI user rating: ' + this.average_user_rating + ')</li>' +
+          '<li><strong>Sharing level:</strong> ' + this.user_sharing_pref + '</li>' +
           '</ul>' +
           '</div>';
         //finally, define what happens when we click the marker
@@ -353,12 +355,13 @@ var drawMarkers = function(e) {
        google.maps.event.addListener(marker, 'click', function() {
         //content string
         infowindow.content = '<div id="content">' +
+          '<h3>Shared Network</h3>' +
           '<a href="/wifi_networks/' + this.wifi_network_id +'">' +
-          '<h4>Shared Network [SSID: ' + this.ssid + ', Password: ' + this.password + ']</h4></a>' +
+          '<h4>SSID: ' + this.ssid + '</h4><h4>Password: ' + this.password + '</h4></a>' +
           '<img src="http://maps.googleapis.com/maps/api/streetview?size=450x250&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false" id="streetviewstatic">' +
           '<ul>' +
           '<li>Address: ' + this.address + '</li>' +
-          '<li>Average Uni-Fi user rating: ' + this.average_user_rating + ' out of 5</li>' +
+          '<li>Average UNIFI user rating: ' + this.average_user_rating + ' out of 5</li>' +
           '<li>Shared by: ' + this.shared_by + '</li>' +
           '</ul>' +
           '</div>';
