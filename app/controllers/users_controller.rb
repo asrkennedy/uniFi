@@ -72,6 +72,15 @@ def show
     redirect_to friendships_path, notice: "You and #{friend_name} are #{sharing_preferences}."
   end
 
+ def friend_update_relationship
+    @user = User.find(params[:id])
+    @user.update_friendship(current_user, params[:sharing_preferences])
+    sharing_preferences = params[:sharing_preferences].pluralize
+    friend_name = "#{@user.first_name} #{@user.last_name}"
+    redirect_to friendships_path, notice: "You and #{friend_name} are #{sharing_preferences}."
+  end
+
+
   def friend_confirm_relationship
     @user = User.find(params[:id])
     @user.confirm_friendship(current_user, @user, params[:sharing_preferences])
