@@ -22,9 +22,11 @@ class Ability
     can :new_friend, User
     can :friend_add_relationship, User
     can :friend_confirm_relationship, User
+    can :friend_update_relationship, User
     can :confirm_friend, User
     can :defriend, User
     can :deny_friend, User
+    can :update_friend, User
 
     can :create, UserNetwork
     can :read, UserNetwork do |n|
