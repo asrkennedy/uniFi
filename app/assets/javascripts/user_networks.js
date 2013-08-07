@@ -258,12 +258,13 @@ var drawMarkers = function(e) {
         google.maps.event.addListener(marker, 'click', function() {
          //content string
           infowindow.content = '<div id="content">' +
+            '<h3>Public Network</h3>' +
             '<a href="/wifi_networks/' + this.wifi_network_id +'">' +
-            '<h4>Public Network [SSID: ' + this.ssid + ', Password: ' + this.password + ']</h4></a>' +
-            '<img src="http://maps.googleapis.com/maps/api/streetview?size=450x250&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false">' +
+            '<h4>SSID: ' + this.ssid + '</h4><h4>Password: ' + this.password + '</h4></a>' +
+            '<img src="http://maps.googleapis.com/maps/api/streetview?size=350x200&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false">' +
             '<ul>' +
             '<li>Address: ' + this.address + '</li>' +
-            '<li>Average Uni-Fi user rating: ' + this.average_user_rating + ' out of 5</li>' +
+            '<li>Average UNIFI user rating: ' + this.average_user_rating + ' out of 5</li>' +
             '</ul>' +
             '</div>';
           //finally, define what happens when we click the marker
@@ -308,12 +309,13 @@ var drawMarkers = function(e) {
         //content string
         infowindow.content = '<div id="content">' +
           '<a href="/user_networks/' + this.id +'">' +
-          '<h4>' + this.nickname + ' [SSID: ' + this.ssid + ', Password: ' + this.password + ']</h4></a>' +
-          '<img src="http://maps.googleapis.com/maps/api/streetview?size=450x250&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false">' +
+          '<h3>' + this.nickname + '</h3></a>' +
+          '<h4>SSID: ' + this.ssid + '</h4><h4>Password: ' + this.password + '</h4>' +
+          '<img src="http://maps.googleapis.com/maps/api/streetview?size=350x200&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false">' +
           '<ul>' +
-          '<li>Address: ' + this.address + '</li>' +
-          '<li>Your rating: ' + this.user_score + ' out of 5 (average Uni-Fi user rating: ' + this.average_user_rating + ')</li>' +
-          '<li>Sharing level: ' + this.user_sharing_pref + '</li>' +
+          '<li><strong>Address:</strong> ' + this.address + '</li>' +
+          '<li><strong>Your rating:</strong> ' + this.user_score + ' out of 5 (average UNIFI user rating: ' + this.average_user_rating + ')</li>' +
+          '<li><strong>Sharing level:</strong> ' + this.user_sharing_pref + '</li>' +
           '</ul>' +
           '</div>';
         //finally, define what happens when we click the marker
@@ -353,12 +355,13 @@ var drawMarkers = function(e) {
        google.maps.event.addListener(marker, 'click', function() {
         //content string
         infowindow.content = '<div id="content">' +
+          '<h3>Shared Network</h3>' +
           '<a href="/wifi_networks/' + this.wifi_network_id +'">' +
-          '<h4>Shared Network [SSID: ' + this.ssid + ', Password: ' + this.password + ']</h4></a>' +
+          '<h4>SSID: ' + this.ssid + '</h4><h4>Password: ' + this.password + '</h4></a>' +
           '<img src="http://maps.googleapis.com/maps/api/streetview?size=450x250&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false" id="streetviewstatic">' +
           '<ul>' +
           '<li>Address: ' + this.address + '</li>' +
-          '<li>Average Uni-Fi user rating: ' + this.average_user_rating + ' out of 5</li>' +
+          '<li>Average UNIFI user rating: ' + this.average_user_rating + ' out of 5</li>' +
           '<li>Shared by: ' + this.shared_by + '</li>' +
           '</ul>' +
           '</div>';
@@ -390,6 +393,264 @@ var drawMarkers = function(e) {
 
 
   $('#submit').on('click', drawMarkers);
+
+
+
+
+
+//section for network map directions
+  if($('#network_show_map').length >0){
+    $.getJSON('/user_networks/'+$('#resource_id').val()+'.json', function(data){
+
+
+      var mapOptions,
+        canvas,
+        map,
+        directionsDisplay,
+        directionsService;
+
+  mapOptions = {
+    zoom: 14,
+    center: new google.maps.LatLng(data.latitude, data.longitude),
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    styles: [
+              {
+                "featureType": "water",
+                "stylers": [
+                  { "visibility": "on" },
+                  { "color": "#1385eb" }
+                ]
+              },{
+                "featureType": "road.local",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                  { "visibility": "on" },
+                  { "color": "#000000" },
+                  { "weight": 0.7 }
+                ]
+              },{
+                "featureType": "road.highway",
+                "stylers": [
+                  { "visibility": "off" }
+                ]
+              },{
+                "featureType": "road.arterial",
+                "stylers": [
+                  { "color": "#f6003c" },
+                  { "visibility": "simplified" },
+                  { "weight": 2.5 }
+                ]
+              },{
+                "featureType": "landscape",
+                "elementType": "labels.icon",
+                "stylers": [
+                  { "color": "#808080" },
+                  { "visibility": "simplified" }
+                ]
+              },{
+                "featureType": "transit",
+                "stylers": [
+                  { "visibility": "simplified" },
+                  { "invert_lightness": true },
+                  { "lightness": 50 },
+                  { "color": "#ebfa5e" }
+                ]
+              },{
+                "featureType": "poi.park",
+                "stylers": [
+                  { "visibility": "simplified" },
+                  { "color": "#20d6ae" }
+                ]
+              },{
+                "featureType": "poi",
+                "stylers": [
+                  { "visibility": "simplified" }
+                ]
+              },{
+                "featureType": "landscape.man_made",
+                "stylers": [
+                  { "visibility": "simplified" },
+                  { "color": "#bec1bc" }
+                ]
+              }
+            ]
+
+  };
+
+  canvas = document.getElementById("network_show_map");
+   map = new google.maps.Map(canvas, mapOptions);
+
+   var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(data.latitude, data.longitude),
+        map: map,
+        ssid: data.ssid,
+        password: data.password,
+        password_required: data.password_required,
+        address: data.address,
+        longitude: data.longitude,
+        latitude: data.latitude,
+        average_user_rating: data.average_user_rating,
+        updated_at: data.updated_at,
+        shared_by: data.shared_by,
+        animation: google.maps.Animation.DROP
+      })//closes google maps marker
+
+  directionsService = new google.maps.DirectionsService();
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  directionsDisplay.setMap(map);
+  directionsDisplay.setPanel(document.getElementById('directions-panel'));
+
+    $("#search_maps_form").submit(function(e){
+    e.preventDefault();
+    var start = document.getElementById('start').value;
+    var end = new google.maps.LatLng(data.latitude, data.longitude)
+    var transport = document.getElementById('transport').value;
+    var request = {
+      origin: start,
+      destination: end,
+      travelMode: google.maps.TravelMode[transport]
+    };
+
+    directionsService.route(request, function(response, status){
+      if (status == google.maps.DirectionsStatus.OK){
+        directionsDisplay.setDirections(response);
+      }
+
+
+    });
+
+  });
+ }) //ends getJSON
+}; // ends section for map direction
+
+//section for wifi map directions
+  if($('#wifi_network_show_map').length >0){
+    $.getJSON('/wifi_networks/'+$('#resource_id').val()+'.json', function(data){
+
+
+      var mapOptions,
+        canvas,
+        maptwo,
+        directionsDisplay,
+        directionsService;
+
+  mapOptions = {
+    zoom: 14,
+    center: new google.maps.LatLng(data.latitude, data.longitude),
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    styles: [
+              {
+                "featureType": "water",
+                "stylers": [
+                  { "visibility": "on" },
+                  { "color": "#1385eb" }
+                ]
+              },{
+                "featureType": "road.local",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                  { "visibility": "on" },
+                  { "color": "#000000" },
+                  { "weight": 0.7 }
+                ]
+              },{
+                "featureType": "road.highway",
+                "stylers": [
+                  { "visibility": "off" }
+                ]
+              },{
+                "featureType": "road.arterial",
+                "stylers": [
+                  { "color": "#f6003c" },
+                  { "visibility": "simplified" },
+                  { "weight": 2.5 }
+                ]
+              },{
+                "featureType": "landscape",
+                "elementType": "labels.icon",
+                "stylers": [
+                  { "color": "#808080" },
+                  { "visibility": "simplified" }
+                ]
+              },{
+                "featureType": "transit",
+                "stylers": [
+                  { "visibility": "simplified" },
+                  { "invert_lightness": true },
+                  { "lightness": 50 },
+                  { "color": "#ebfa5e" }
+                ]
+              },{
+                "featureType": "poi.park",
+                "stylers": [
+                  { "visibility": "simplified" },
+                  { "color": "#20d6ae" }
+                ]
+              },{
+                "featureType": "poi",
+                "stylers": [
+                  { "visibility": "simplified" }
+                ]
+              },{
+                "featureType": "landscape.man_made",
+                "stylers": [
+                  { "visibility": "simplified" },
+                  { "color": "#bec1bc" }
+                ]
+              }
+            ]
+  };
+
+  canvas = document.getElementById("wifi_network_show_map");
+   maptwo = new google.maps.Map(canvas, mapOptions);
+
+   var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(data.latitude, data.longitude),
+        map: maptwo,
+        ssid: data.ssid,
+        password: data.password,
+        password_required: data.password_required,
+        address: data.address,
+        longitude: data.longitude,
+        latitude: data.latitude,
+        average_user_rating: data.average_user_rating,
+        updated_at: data.updated_at,
+        shared_by: data.shared_by,
+        animation: google.maps.Animation.DROP
+      })//closes google maps marker
+
+  directionsService = new google.maps.DirectionsService();
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  directionsDisplay.setMap(maptwo);
+  directionsDisplay.setPanel(document.getElementById('directions-panel'));
+
+    $("#search_maps_form").submit(function(e){
+    e.preventDefault();
+    var start = document.getElementById('start').value;
+    var end = new google.maps.LatLng(data.latitude, data.longitude)
+    var transport = document.getElementById('transport').value;
+    var request = {
+      origin: start,
+      destination: end,
+      travelMode: google.maps.TravelMode[transport]
+    };
+
+    directionsService.route(request, function(response, status){
+      if (status == google.maps.DirectionsStatus.OK){
+        directionsDisplay.setDirections(response);
+      }
+
+
+    });
+
+  });
+ }) //ends getJSON
+}; // ends section for map direction
+
+
+
+
+
 
 
 

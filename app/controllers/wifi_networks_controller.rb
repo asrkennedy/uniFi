@@ -7,6 +7,7 @@ class WifiNetworksController < ApplicationController
   def index
     @wifi_networks = WifiNetwork.all
 
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @wifi_networks }
@@ -18,9 +19,22 @@ class WifiNetworksController < ApplicationController
   def show
     @wifi_network = WifiNetwork.find(params[:id])
 
+      @network_hash = {
+          id: @wifi_network.id,
+          wifi_network_id: @wifi_network.id,
+          ssid: @wifi_network.ssid,
+          password: @wifi_network.password,
+          password_required: @wifi_network.password_required,
+          address: @wifi_network.full_street_address,
+          longitude: @wifi_network.longitude,
+          latitude: @wifi_network.latitude,
+          average_user_rating: @wifi_network.average_user_rating,
+          updated_at: @wifi_network.updated_at
+        }
+
     respond_to do |format|
       format.html # show.html.haml
-      format.json { render json: @wifi_network }
+      format.json { render json: @network_hash }
     end
   end
 
