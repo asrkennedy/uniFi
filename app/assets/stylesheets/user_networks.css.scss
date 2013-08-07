@@ -40,6 +40,11 @@ body {
   -webkit-filter: brightness(55%);
 }
 
+#logo{
+
+}
+
+
 .nav {
   background-color: #000;
   height: 100px;
@@ -51,8 +56,10 @@ body {
 }
 
 .nav_links a {
-  font-size: 24px;
+  max-width: 60px;
+  max-height: 60px;
   padding-left: 20px;
+
 }
 
 .nav_links a:first-child {
@@ -61,12 +68,12 @@ body {
 }
 
 .nav a, .nav_links a {
+  font-family: "TrendSansOne";
   color: #fff;
   text-decoration: none;
 }
 
 .nav a:hover, a:focus {
-  text-decoration: none;
   color: #666;
 }
 
@@ -92,12 +99,12 @@ body {
 }
 
 label {
-  font-family: "Calibri";
+  font-family: "TrendSansFive";
 }
 
 #postcode, #distance, #submit {
   border-radius: 5px;
-  font-family: "Calibri";
+  font-family: "TrendSansFive";
 }
 
 // #unregistered_user {

@@ -60,6 +60,7 @@ if ($('#overlay').length != 0) {
   var ctx = canvas.getContext("2d");
 
   // Choose font
+
   ctx.font = "Bold 24px 'TrendSansFive' ";
 
   var grd = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);

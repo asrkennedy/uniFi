@@ -10,19 +10,24 @@
   %body
     #friend_popup
     .nav
-      .nav_links
-        = link_to 'Home', user_networks_path
-        - if current_user
-          = link_to 'Your Friends', friendships_path
-          = link_to 'Add A Network', new_user_network_path
-          = link_to 'Your Account', user_path(current_user)
-      .login
-        - if current_user
-          = current_user.email
-          = link_to "Log out", destroy_user_session_path, method: :delete
-        - else
-          = link_to "Sign In", new_user_session_path
-          = link_to "Register", new_user_registration_path
+      - if current_user
+        .nav_links
+          = link_to image_tag( 'home.png' ), user_networks_path
+          = link_to image_tag( 'user-group.png' ), friendships_path
+          #logo
+            = link_to image_tag( 'logo.svg' ), user_networks_path
+          = link_to image_tag( 'wifi_add.png' ), new_user_network_path
+          = link_to image_tag( 'user.png' ), user_path(current_user)
+      - else
+        #logo
+          = link_to image_tag( 'logo.svg' ), user_networks_path
+    .login
+      - if current_user
+        = current_user.email
+        = link_to "Log out", destroy_user_session_path, method: :delete
+      - else
+        = link_to "Sign In", new_user_session_path
+        = link_to "Register", new_user_registration_path
 
 
 
