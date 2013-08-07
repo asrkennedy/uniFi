@@ -292,7 +292,24 @@ list-style: none;
   margin-right: 0;
 }
 
-#content{
+#content a, h4 {
+  text-align: center;
+  color: #000;
+  text-decoration: none;
+}
+#content a:hover,a:focus{
+  text-decoration: none;
+  color:#1E8EF0;
+}
+
+#content img{
+  margin: auto;
+  width: 400px;
+}
+
+#content {
+
+    margin: auto;
   width: 400px;
 }
 
@@ -302,6 +319,7 @@ list-style: none;
 
 #content li {
   list-style: none;
+  margin:auto;
   font-size: 10px;
 }
 
