@@ -12,7 +12,6 @@
   .friend
     = @user.email
     %p
-      Biography:
       = @user.biography
     %p
       Number of friends:
@@ -32,21 +31,21 @@
       -unless @user == current_user
         = link_to 'Back to Friends', friendships_path
 
-.search_form
-  -if @user == current_user
-    = form_tag user_path, :method => :get do
-      =label_tag :postcode
-      =text_field_tag :postcode
-      =label_tag :distance
-      =text_field_tag :distance
-      =submit_tag "Search", :name => nil
+  .search_form
+    -if @user == current_user
+      = form_tag user_path, :method => :get do
+        =label_tag :postcode
+        =text_field_tag :postcode
+        =label_tag :distance
+        =text_field_tag :distance
+        =submit_tag "Search", :name => nil
 
 
     -unless @users_networks.blank?
-      %h2 Your Wi-Fi Networks
-      %ul
+      %h2.network Your Wi-Fi Networks
+      %ul.friend
         -@users_networks.each do |network|
-          %li
+          %li.networks
             %h3
               -unless network.nickname.blank?
                 = network.nickname
@@ -63,11 +62,11 @@
               =link_to 'Remove', network, method: :delete, data: { confirm: 'Are you sure?' }
 
     -unless @users_friends_networks.blank?
-      %h2 Wi-Fi Networks Shared By Your Friends
-      %h4 (excludes those already in your networks)
-      %ul
+      %h2.network Wi-Fi Networks Shared By Your Friends
+      %h4.network (excludes those already in your networks)
+      %ul.friend
         -@users_friends_networks.each do |wifi_network|
-          %li
+          %li.networks
             %h3
               SSID:
               = wifi_network.ssid
@@ -80,11 +79,11 @@
               = link_to 'Show', wifi_network_path(wifi_network)
 
     -unless @public_networks.blank?
-      %h2 Wi-Fi Networks Shared Publicly By All Uni-Fi Users
-      %h4 (excludes those already in your networks)
-      %ul
+      %h2.network Wi-Fi Networks Shared Publicly By All Uni-Fi Users
+      %h4.network (excludes those already in your networks)
+      %ul.friend
         -@public_networks.each do |wifi_network|
-          %li
+          %li.networks
             %h3
               SSID:
               = wifi_network.ssid
@@ -94,7 +93,7 @@
               City:
               =wifi_network.city
               = link_to 'Show', wifi_network_path(wifi_network)
-.links
+.links#networks
   -if @user == current_user
     = link_to 'Back to Map', user_networks_path
 

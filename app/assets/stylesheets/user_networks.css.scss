@@ -22,7 +22,7 @@ body {
 }
 
 #map-canvas {
-  margin-top: 200px;
+  margin-top: 230px;
   background: transparent no-repeat 1 1;
   position: absolute;
   z-index: -10;
@@ -92,7 +92,7 @@ body {
 }
 
 #search {
-  background-color: #ccc;
+  background-color: #eee;
   color: #444;
   border-bottom: 1px solid #000;
   padding: 10px;
@@ -227,3 +227,20 @@ list-style: none;
   text-align: center;
 }
 
+#network_show_map{
+  width:630px;
+  height:380px;
+  filter: alpha(opacity=80);
+  -moz-opacity: 0.8;
+  -khtml-opacity: 0.8;
+  opacity: 0.8;
+}
+
+#wifi_network_show_map{
+  width:630px;
+  height:380px;
+  filter: alpha(opacity=80);
+  -moz-opacity: 0.8;
+  -khtml-opacity: 0.8;
+  opacity: 0.8;
+}

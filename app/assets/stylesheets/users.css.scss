@@ -34,6 +34,7 @@
   width: 350px;
   text-wrap: normal;
   text-align: left;
+  min-height: 340px;
 }
 
 li.friends {
@@ -80,4 +81,19 @@ color: #999;
   padding: 20px;
   float: left;
   width: 300px;
+}
+
+.search_form {
+  margin-bottom: 30px;
+}
+
+li.networks {
+  width: 150px;
+  text-wrap: normal;
+  text-align: left;
+  font-size: 14px;
+}
+
+.network {
+  float: left;
 }

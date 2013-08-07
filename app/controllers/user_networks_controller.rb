@@ -144,9 +144,30 @@ class UserNetworksController < ApplicationController
   def show
     @user_network = UserNetwork.find(params[:id])
 
+    @network_hash = {
+          id: @user_network.id,
+          nickname: @user_network.nickname,
+          user_score: @user_network.user_score,
+          user_sharing_pref: @user_network.user_sharing_pref,
+          user_name: @user_network.user.full_name,
+          wifi_network_id: @user_network.wifi_network.id,
+          ssid: @user_network.wifi_network.ssid,
+          password: @user_network.wifi_network.password,
+          password_required: @user_network.wifi_network.password_required,
+          address: @user_network.wifi_network.full_street_address,
+          longitude: @user_network.wifi_network.longitude,
+          latitude: @user_network.wifi_network.latitude,
+          average_user_rating: @user_network.wifi_network.average_user_rating,
+          updated_at: @user_network.wifi_network.updated_at
+        }
+
+
+
+
+
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @user_network }
+      format.json { render json: @network_hash }
     end
   end
 
