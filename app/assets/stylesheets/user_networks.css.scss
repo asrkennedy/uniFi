@@ -5,10 +5,33 @@
   font-family: 'TrendSansFive';
   src:url('TrendSansFive.eot');
   src:url('TrendSansFive.eot?#iefix') format('embedded-opentype'),
-    url('TrendSansFive.woff') format('woff');
-    font-weight: normal;
-  font-style: normal;
+  url('TrendSansFive.woff') format('woff');
+  font-family: 'AlrightSans-Thin';
+  src:url('AlrightSans-Thin.eot');
+  src:url('AlrightSans-Thin.eot?#iefix') format('embedded-opentype'),
+  url('AlrightSans-Thin.woff') format('woff');
+  font-family: 'DTLHaarlemmerSDSans';
+  src:url('DTLHaarlemmerSDSans.eot');
+  src:url('DTLHaarlemmerSDSans.eot?#iefix') format('embedded-opentype'),
+  url('DTLHaarlemmerSDSans.woff') format('woff');
+  font-family: 'FE11006T';
+  src:url('FE11006T.eot');
+  src:url('FE11006T.eot?#iefix') format('embedded-opentype'),
+  url('FE11006T.woff') format('woff');
+  font-family: 'FuturaTEE Book';
+  src:url('FuturaTEE Book.eot');
+  src:url('FuturaTEE Book.eot?#iefix') format('embedded-opentype'),
+  url('FuturaTEE Book.woff') format('woff');
+  font-family: 'LegacySansITCTTBold';
+  src:url('LegacySansITCTTBold.eot');
+  src:url('LegacySansITCTTBold.eot?#iefix') format('embedded-opentype'),
+  url('LegacySansITCTTBold.woff') format('woff');
+   font-family: 'LegacySansOSITCTTBold';
+  src:url('LegacySansOSITCTTBold.eot');
+  src:url('LegacySansOSITCTTBold.eot?#iefix') format('embedded-opentype'),
+  url('LegacySansOSITCTTBold.woff') format('woff');
 }
+
 
 body {
   margin: 0;
@@ -227,6 +250,15 @@ list-style: none;
   text-align: center;
 }
 
+
+.container_network {
+  width: 60%;
+  margin: auto;
+  text-align: left;
+  margin-top: 50px;
+}
+
+
 #network_show_map{
   width:630px;
   height:380px;
@@ -263,3 +295,4 @@ list-style: none;
   font-size: 0.8em;
 
 }
+

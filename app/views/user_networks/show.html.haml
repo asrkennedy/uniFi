@@ -1,25 +1,33 @@
 - content_for :resource_id, @user_network.id.to_s
 
-%h3
-  - unless @user_network.nickname.blank?
-    = @user_network.nickname
-  SSID:
-  = @user_network.wifi_network.ssid
-  - unless @user_network.wifi_network.password_required == false
+.container_network
+  %h3
+    - unless @user_network.nickname.blank?
+      = @user_network.nickname
+      %br
+    SSID:
+    = @user_network.wifi_network.ssid
+    %br
     Password:
     = @user_network.wifi_network.password
-%p
-  Address:
-  = @user_network.address
-%p
-  = @user_network.sharing_string
-%p
-  = @user_network.rating_string
-%p
-  Details for this Wi-Fi network were last updated
-  = distance_of_time_in_words(Time.now, @user_network.wifi_network.updated_at)
-  ago
-  = link_to 'Edit', edit_user_network_path(@user_network)
+    %br
+  %p
+    Address:
+    = @user_network.address
+    %br
+  %p
+    = @user_network.sharing_string
+    %br
+  %p
+    = @user_network.rating_string
+    %br
+  %p
+    Details for this Wi-Fi network were last updated
+    = distance_of_time_in_words(Time.now, @user_network.wifi_network.updated_at)
+    ago
+    %br
+    .links
+      = link_to 'Edit', edit_user_network_path(@user_network)
 
 #network_show_map
 
@@ -33,3 +41,4 @@
 
 .directions_wrapper
   #directions-panel
+

@@ -1,25 +1,33 @@
 =f.fields_for :wifi_network do |wifi_form|
   %div.field
     =wifi_form.label :ssid
+    %br
     =wifi_form.text_field :ssid
   %div.field
     =wifi_form.label :password_required
+    %br
     =wifi_form.select(:password_required, [true, false])
   %div.field{id: "password_input"}
     =wifi_form.label :password
+    %br
     =wifi_form.text_field :password
   %div.field
     =wifi_form.label :house, "Building name or number"
+    %br
     =wifi_form.text_field :house
   %div.field
     =wifi_form.label :street_address
+    %br
     =wifi_form.text_field :street_address
   %div.field
     =wifi_form.label :city
+    %br
     =wifi_form.text_field :city
   %div.field
     =wifi_form.label :country
+    %br
     =wifi_form.text_field :country
   %div.field
     =wifi_form.label :postcode
+    %br
     =wifi_form.text_field :postcode

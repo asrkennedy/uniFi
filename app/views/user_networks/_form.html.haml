@@ -1,30 +1,29 @@
-%h1 We will use this form to add/edit a UserNetwork
-=nested_form_for(@user_network) do |f|
-  - if @user_network.errors.any?
-    #error_explanation
-      %h3
-        Error: Either a Wi-Fi network with this SSID, password and postcode aready exists in your list of networks, or you have not provided enough information!
+.register
+  %h1 Add Network
+  =nested_form_for(@user_network) do |f|
+    - if @user_network.errors.any?
+      #error_explanation
+        %h3.error
+          Error: Either a Wi-Fi network with this SSID, password and postcode aready exists in your list of networks, or you have not provided enough information!
 
-
-
-
-
-
-  =f.hidden_field :user_id, {value: current_user.id}
-  %div.field
-    =f.label :nickname
-    =f.text_field :nickname
-  %div.form_fields
-    =render 'fields', f: f
-  %div.field
-    =f.label :user_score
-    =f.select(:user_score, [1,2,3,4,5])
-  %div.field
-    =f.label :user_sharing_pref
-    =f.select(:user_sharing_pref, ['public', 'acquaintance', 'friend', 'close friend', 'private'])
-  #sharing_warning
-    %p All Uni-Fi users will be able to see this network, but they won't who shared it
-  %div.field
-    =f.submit
+    =f.hidden_field :user_id, {value: current_user.id}
+    %div.field
+      =f.label :nickname
+      %br
+      =f.text_field :nickname
+    %div.form_fields
+      =render 'fields', f: f
+    %div.field
+      =f.label :user_score
+      %br
+      =f.select(:user_score, [1,2,3,4,5])
+    %div.field
+      =f.label :user_sharing_pref
+      %br
+      =f.select(:user_sharing_pref, ['public', 'acquaintance', 'friend', 'close friend', 'private'])
+    #sharing_warning
+      %p All Uni-Fi users will be able to see this network, but they won't who shared it
+    %div.field
+      =f.submit "Submit", class: 'button'
 
 
