@@ -174,10 +174,31 @@ label {
 }
 
 #friend_popup {
-  background: red;
-  display: none;
-  width: 20%
+  background: #F83363;
+  position:  fixed;
 
+  bottom: 2em;
+  left: 2em;
+  z-index: 50;
+  font-size: .5em;
+  padding: 10px;
+  color: white;
+  display: none;
+  border-radius: 5px
+}
+
+#friend_popup li {
+list-style: none;
 }
 
 
+#friend_popup ul {
+  padding: 0px;
+  margin-top: 2px;
+  margin-bottom: 3px;
+}
+
+#friend_popup a {
+  text-decoration: none;
+  color: white
+}

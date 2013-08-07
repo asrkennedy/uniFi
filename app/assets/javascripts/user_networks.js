@@ -352,16 +352,25 @@ var drawMarkers = function(e) {
         $('#friend_popup').append('<ul>Friend Request(s):');
 
         for(var i = 0; i < proposersArray.length; i++){
-        var string = '<li>' + proposersArray[i].first_name + ' ' + proposersArray[i].last_name + '</li>'
+        var string = '<li>' + proposersArray[i].first_name + ' ' + proposersArray[i].last_name + ':' +
+        '  <a href="/users/' + proposersArray[i].id + '/confirm_friend" >Confirm</a>' +
+        ' | <a href="/users/' + proposersArray[i].id + '/deny_friend" >Deny</a></li>' +
+        '</li>'
         $('#friend_popup').append(string);
         }
-        $('#friend_popup').append('</ul>')
-        $('#friend_popup').slideDown(1000);
-        setTimeout(function(){
-          $('#friend_popup').slideUp(500);
-        }, 5000);
+        $('#friend_popup').append('</ul>');
+        $('#friend_popup').addClass('lukesClass');
+        $('#friend_popup').fadeTo(3000, 1);
 
-      } ;
+      } else {
+        $('#friend_popup').fadeTo(1000, 0);
+        $('#friend_popup').empty();
+
+
+      }
+
+
+
     }) //closes getJSON
   } //closes checkFriendRequests
 
@@ -374,11 +383,16 @@ var drawMarkers = function(e) {
 
 
   drawMarkers();
-  checkFriendRequests();
-  setInterval(function(){
-    checkFriendRequests();
-        }, 30000);
 
+
+  checkFriendRequests();
+
+
+  setInterval(function(){
+     setTimeout(function(){
+    checkFriendRequests();
+        }, 10000);
+   }, 5000);
 
 
   $('#submit').on('click', drawMarkers);
