@@ -6,30 +6,30 @@
   src:url('TrendSansFive.eot');
   src:url('TrendSansFive.eot?#iefix') format('embedded-opentype'),
   url('TrendSansFive.woff') format('woff');
-  font-family: 'AlrightSans-Thin';
-  src:url('AlrightSans-Thin.eot');
-  src:url('AlrightSans-Thin.eot?#iefix') format('embedded-opentype'),
-  url('AlrightSans-Thin.woff') format('woff');
-  font-family: 'DTLHaarlemmerSDSans';
-  src:url('DTLHaarlemmerSDSans.eot');
-  src:url('DTLHaarlemmerSDSans.eot?#iefix') format('embedded-opentype'),
-  url('DTLHaarlemmerSDSans.woff') format('woff');
-  font-family: 'FE11006T';
-  src:url('FE11006T.eot');
-  src:url('FE11006T.eot?#iefix') format('embedded-opentype'),
-  url('FE11006T.woff') format('woff');
-  font-family: 'FuturaTEE Book';
-  src:url('FuturaTEE Book.eot');
-  src:url('FuturaTEE Book.eot?#iefix') format('embedded-opentype'),
-  url('FuturaTEE Book.woff') format('woff');
-  font-family: 'LegacySansITCTTBold';
-  src:url('LegacySansITCTTBold.eot');
-  src:url('LegacySansITCTTBold.eot?#iefix') format('embedded-opentype'),
-  url('LegacySansITCTTBold.woff') format('woff');
-   font-family: 'LegacySansOSITCTTBold';
-  src:url('LegacySansOSITCTTBold.eot');
-  src:url('LegacySansOSITCTTBold.eot?#iefix') format('embedded-opentype'),
-  url('LegacySansOSITCTTBold.woff') format('woff');
+  // font-family: 'AlrightSans-Thin';
+  // src:url('AlrightSans-Thin.eot');
+  // src:url('AlrightSans-Thin.eot?#iefix') format('embedded-opentype'),
+  // url('AlrightSans-Thin.woff') format('woff');
+  // font-family: 'DTLHaarlemmerSDSans';
+  // src:url('DTLHaarlemmerSDSans.eot');
+  // src:url('DTLHaarlemmerSDSans.eot?#iefix') format('embedded-opentype'),
+  // url('DTLHaarlemmerSDSans.woff') format('woff');
+  // font-family: 'FE11006T';
+  // src:url('FE11006T.eot');
+  // src:url('FE11006T.eot?#iefix') format('embedded-opentype'),
+  // url('FE11006T.woff') format('woff');
+  // font-family: 'FuturaTEE Book';
+  // src:url('FuturaTEE Book.eot');
+  // src:url('FuturaTEE Book.eot?#iefix') format('embedded-opentype'),
+  // url('FuturaTEE Book.woff') format('woff');
+  // font-family: 'LegacySansITCTTBold';
+  // src:url('LegacySansITCTTBold.eot');
+  // src:url('LegacySansITCTTBold.eot?#iefix') format('embedded-opentype'),
+  // url('LegacySansITCTTBold.woff') format('woff');
+  //  font-family: 'LegacySansOSITCTTBold';
+  // src:url('LegacySansOSITCTTBold.eot');
+  // src:url('LegacySansOSITCTTBold.eot?#iefix') format('embedded-opentype'),
+  // url('LegacySansOSITCTTBold.woff') format('woff');
 }
 
 
@@ -63,41 +63,38 @@ body {
   -webkit-filter: brightness(55%);
 }
 
-#logo{
-
+#logo a img {
+  text-align: center;
+  height: 200px;
+  width: 300px;
+  vertical-align: middle;
 }
 
+#logo {
+  width: 400px;
+  display: inline;
+}
 
 .nav {
   background-color: #000;
-  height: 100px;
+  height: 200px;
   width: 100%;
-  padding-top: 80px;
   text-align: center;
   position: relative;
   margin: auto;
 }
 
-.nav_links a {
-  max-width: 60px;
-  max-height: 60px;
-  padding-left: 20px;
-
+.nav_links a img {
+  width: 60px;
+  padding-right: 80px;
 }
 
-.nav_links a:first-child {
-  font-size: 24px;
-  padding-left: 0px;
+.nav_links a:nth-child(1) {
+  padding-left: 80px;
 }
 
-.nav a, .nav_links a {
-  font-family: "TrendSansOne";
-  color: #fff;
-  text-decoration: none;
-}
-
-.nav a:hover, a:focus {
-  color: #666;
+#logo a {
+  padding-left: 0;
 }
 
 .login {
@@ -250,7 +247,6 @@ list-style: none;
   text-align: center;
 }
 
-
 .container_network {
   width: 60%;
   margin: auto;
@@ -258,6 +254,23 @@ list-style: none;
   margin-top: 50px;
 }
 
+.direction_map_container {
+  width: 75%;
+  margin: auto;
+}
+
+.form_wrapper {
+  width: 75%;
+  margin: auto;
+  text-align: center;
+}
+
+
+.directions_wrapper {
+  width: 75%;
+  margin: auto;
+  text-align: center;
+}
 
 #network_show_map{
   width:630px;
@@ -266,6 +279,7 @@ list-style: none;
   -moz-opacity: 0.8;
   -khtml-opacity: 0.8;
   opacity: 0.8;
+  margin-right: 0;
 }
 
 #wifi_network_show_map{
@@ -275,6 +289,7 @@ list-style: none;
   -moz-opacity: 0.8;
   -khtml-opacity: 0.8;
   opacity: 0.8;
+  margin-right: 0;
 }
 
 #content{
@@ -293,6 +308,6 @@ list-style: none;
 #directions-panel{
   width: 50%;
   font-size: 0.8em;
-
+  margin-right: 0;
 }
 

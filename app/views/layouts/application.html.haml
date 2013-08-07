@@ -21,15 +21,13 @@
       - else
         #logo
           = link_to image_tag( 'logo.svg' ), user_networks_path
-    .login
-      - if current_user
-        = current_user.email
-        = link_to "Log out", destroy_user_session_path, method: :delete
-      - else
-        = link_to "Sign In", new_user_session_path
-        = link_to "Register", new_user_registration_path
-
-
+      .login.links
+        - if current_user
+          = current_user.email
+          = link_to "Log out", destroy_user_session_path, method: :delete
+        - else
+          = link_to "Sign In", new_user_session_path
+          = link_to "Register", new_user_registration_path
 
     .container
       #flash
@@ -39,4 +37,3 @@
             = message
       =yield
 
-    = hidden_field_tag :resource_id, content_for(:resource_id)
