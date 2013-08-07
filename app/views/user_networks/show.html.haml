@@ -5,8 +5,9 @@
     = @user_network.nickname
   SSID:
   = @user_network.wifi_network.ssid
-  Password:
-  = @user_network.wifi_network.password
+  - unless @user_network.wifi_network.password_required == false
+    Password:
+    = @user_network.wifi_network.password
 %p
   Address:
   = @user_network.address

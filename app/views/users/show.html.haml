@@ -52,8 +52,9 @@
                 ,
               SSID:
               = network.wifi_network.ssid
-              , Password:
-              = network.wifi_network.password
+              -unless network.wifi_network.password_required == false
+                , Password:
+                = network.wifi_network.password
             %p
               City:
               =network.wifi_network.city
@@ -70,8 +71,9 @@
             %h3
               SSID:
               = wifi_network.ssid
-              , Password:
-              = wifi_network.password
+              -unless wifi_network.password_required == false
+                , Password:
+                = wifi_network.password
             %p
               City:
               =wifi_network.city
@@ -87,8 +89,9 @@
             %h3
               SSID:
               = wifi_network.ssid
-              , Password:
-              = wifi_network.password
+              -unless wifi_network.password_required == false
+                , Password:
+                = wifi_network.password
             %p
               City:
               =wifi_network.city
