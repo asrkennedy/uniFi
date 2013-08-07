@@ -8,9 +8,12 @@
     SSID:
     = @user_network.wifi_network.ssid
     %br
-    Password:
-    = @user_network.wifi_network.password
-    %br
+    - if @user_network.wifi_network.password_required == false
+      This network does not require a password
+    - else
+      Password:
+      = @user_network.wifi_network.password
+      %br
   %p
     Address:
     = @user_network.address

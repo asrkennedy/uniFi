@@ -3,7 +3,9 @@
 %h3
   SSID:
   = @wifi_network.ssid
-  -unless @wifi_network.password_required == false
+  -if @wifi_network.password_required == false
+    This network does not require a password
+  -else
     Password:
     = @wifi_network.password
 %p
