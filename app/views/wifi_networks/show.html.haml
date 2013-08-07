@@ -9,12 +9,15 @@
   Address:
   =@wifi_network.full_street_address
 %p
-  Shared By:
-  %ul
-    -@wifi_network.user_networks.each do |user_network|
-      -if user_network.shareable_with(current_user)
-        %li
-          ="#{user_network.user.full_name} (rating: #{user_network.user_score} out of 5)"
+  -if @wifi_network.user_networks.select{ |network| network.shareable_with(current_user)}.any?
+    Shared By:
+    %ul
+      -@wifi_network.user_networks.each do |user_network|
+        -if user_network.shareable_with(current_user)
+          %li
+            ="#{user_network.user.full_name} (rating: #{user_network.user_score} out of 5)"
+  -else
+    Shared Publicly
 %p
   =@wifi_network.rating_string
 %p
