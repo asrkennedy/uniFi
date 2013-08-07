@@ -1,3 +1,83 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container_friends {
+  width: 60%;
+  margin: auto;
+  text-align: center;
+}
+
+.friendshipform {
+  width: 48%;
+  float: left;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.friends {
+  list-style: none;
+  width: 75%;
+  margin: auto;
+  clear: both;
+  display: inline-block;
+  padding: 20px;
+}
+
+.friend {
+  list-style: none;
+  width: 28%;
+  margin: auto;
+  float: left;
+  display: inline-block;
+  padding: 20px;
+  width: 350px;
+  text-wrap: normal;
+  text-align: left;
+}
+
+li.friends {
+  width: 150px;
+  text-wrap: normal;
+  text-align: center;
+  font-size: 14px;
+}
+
+.links a,
+li.friends a,
+.friend_links a {
+  text-decoration: none;
+  color: #666;
+}
+
+.links a {
+  font-size: 12px;
+}
+
+.links a:hover,
+.links a:focus,
+li.friends a:hover,
+li.friends a:focus,
+.friend_links a:focus,
+.friend_links a:hover {
+color: #999;
+}
+
+.friend_links {
+  width: 48%;
+  float: right;
+  text-align: right;
+  padding-right: 10px;
+  padding-top: 10px;
+  color: #666;
+}
+
+.friends ul {
+  padding-left: 0px;
+}
+
+.friend_image {
+  padding: 20px;
+  float: left;
+  width: 300px;
+}

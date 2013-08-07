@@ -47,7 +47,7 @@ class WifiNetworksController < ApplicationController
 
     respond_to do |format|
       if @wifi_network.save
-        format.html { redirect_to @wifi_network, notice: 'Wifi network was successfully created.' }
+        format.html { redirect_to @wifi_network, notice: 'Wifi network was successfully created' }
         format.json { render json: @wifi_network, status: :created, location: @wifi_network }
       else
         format.html { render action: "new" }
@@ -63,7 +63,7 @@ class WifiNetworksController < ApplicationController
 
     respond_to do |format|
       if @wifi_network.update_attributes(params[:wifi_network])
-        format.html { redirect_to @wifi_network, notice: 'Wifi network was successfully updated.' }
+        format.html { redirect_to @wifi_network, notice: 'Wifi network was successfully updated' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

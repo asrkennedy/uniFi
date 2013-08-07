@@ -1,96 +1,101 @@
 
-%h2
-  = "#{@user.full_name}'s Profile"
-- unless @user.user_image.blank?
-  = image_tag @user.user_image.detail.url
+.friends
+  %h2
+    = "#{@user.full_name}'s Profile"
+.container_friends
+  .friend_image
+    - unless @user.user_image.blank?
+      = image_tag @user.user_image.detail.url
+      %br
+
   %br
+  .friend
+    = @user.email
+    %p
+      Biography:
+      = @user.biography
+    %p
+      Number of friends:
+      - if @user == current_user
+        = link_to @user.friends.size, friendships_path
+      - else
+        = @user.friends.size
+    %p
+      Number of networks:
+      - if @user == current_user
+        = link_to @user.user_networks.size, user_networks_path
+      - else
+        = @user.user_networks.size
+    %p.links
+      - if @user == current_user
+        = link_to 'Edit Profile', edit_user_registration_path
+      -unless @user == current_user
+        = link_to 'Back to Friends', friendships_path
 
-%br
-= @user.email
-%p
-  Biography:
-  = @user.biography
-%p
-  Number of friends:
-  - if @user == current_user
-    = link_to @user.friends.size, friendships_path
-  - else
-    = @user.friends.size
-%p
-  Number of networks:
-  - if @user == current_user
-    = link_to @user.user_networks.size, user_networks_path
-  - else
-    = @user.user_networks.size
-%p
-  - if @user == current_user
-    = link_to 'Edit Profile', edit_user_registration_path
-  -unless @user == current_user
-    = link_to 'Back to Friends', friendships_path
-
--if @user == current_user
-  = form_tag user_path, :method => :get do
-    =label_tag :postcode
-    =text_field_tag :postcode
-    =label_tag :distance
-    =text_field_tag :distance
-    =submit_tag "Search", :name => nil
+.search_form
+  -if @user == current_user
+    = form_tag user_path, :method => :get do
+      =label_tag :postcode
+      =text_field_tag :postcode
+      =label_tag :distance
+      =text_field_tag :distance
+      =submit_tag "Search", :name => nil
 
 
-  -unless @users_networks.blank?
-    %h2 Your Wi-Fi Networks
-    %ul
-      -@users_networks.each do |network|
-        %li
-          %h3
-            -unless network.nickname.blank?
-              = network.nickname
-              ,
-            SSID:
-            = network.wifi_network.ssid
-            , Password:
-            = network.wifi_network.password
-          %p
-            City:
-            =network.wifi_network.city
-            = link_to 'Edit', edit_user_network_path(network)
-            = link_to 'Show', user_network_path(network)
-            =link_to 'Remove', network, method: :delete, data: { confirm: 'Are you sure?' }
+    -unless @users_networks.blank?
+      %h2 Your Wi-Fi Networks
+      %ul
+        -@users_networks.each do |network|
+          %li
+            %h3
+              -unless network.nickname.blank?
+                = network.nickname
+                ,
+              SSID:
+              = network.wifi_network.ssid
+              , Password:
+              = network.wifi_network.password
+            %p
+              City:
+              =network.wifi_network.city
+              = link_to 'Edit', edit_user_network_path(network)
+              = link_to 'Show', user_network_path(network)
+              =link_to 'Remove', network, method: :delete, data: { confirm: 'Are you sure?' }
 
-  -unless @users_friends_networks.blank?
-    %h2 Wi-Fi Networks Shared By Your Friends
-    %h4 (excludes those already in your networks)
-    %ul
-      -@users_friends_networks.each do |wifi_network|
-        %li
-          %h3
-            SSID:
-            = wifi_network.ssid
-            , Password:
-            = wifi_network.password
-          %p
-            City:
-            =wifi_network.city
-            = link_to "Add To Your Networks", new_user_network_path(wifi_network_id: wifi_network.id)
-            = link_to 'Show', wifi_network_path(wifi_network)
+    -unless @users_friends_networks.blank?
+      %h2 Wi-Fi Networks Shared By Your Friends
+      %h4 (excludes those already in your networks)
+      %ul
+        -@users_friends_networks.each do |wifi_network|
+          %li
+            %h3
+              SSID:
+              = wifi_network.ssid
+              , Password:
+              = wifi_network.password
+            %p
+              City:
+              =wifi_network.city
+              = link_to "Add To Your Networks", new_user_network_path(wifi_network_id: wifi_network.id)
+              = link_to 'Show', wifi_network_path(wifi_network)
 
-  -unless @public_networks.blank?
-    %h2 Wi-Fi Networks Shared Publicly By All Uni-Fi Users
-    %h4 (excludes those already in your networks)
-    %ul
-      -@public_networks.each do |wifi_network|
-        %li
-          %h3
-            SSID:
-            = wifi_network.ssid
-            , Password:
-            = wifi_network.password
-          %p
-            City:
-            =wifi_network.city
-            = link_to 'Show', wifi_network_path(wifi_network)
-
--if @user == current_user
-  = link_to 'Back to Map', user_networks_path
+    -unless @public_networks.blank?
+      %h2 Wi-Fi Networks Shared Publicly By All Uni-Fi Users
+      %h4 (excludes those already in your networks)
+      %ul
+        -@public_networks.each do |wifi_network|
+          %li
+            %h3
+              SSID:
+              = wifi_network.ssid
+              , Password:
+              = wifi_network.password
+            %p
+              City:
+              =wifi_network.city
+              = link_to 'Show', wifi_network_path(wifi_network)
+.links
+  -if @user == current_user
+    = link_to 'Back to Map', user_networks_path
 
 

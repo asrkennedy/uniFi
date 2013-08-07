@@ -71,7 +71,7 @@ class FriendshipsController < ApplicationController
 
     respond_to do |format|
       if @friendship.update_attributes(params[:friendship])
-        format.html { redirect_to @friendship, notice: 'Friendship was successfully updated.' }
+        format.html { redirect_to @friendship, notice: 'Friendship was successfully updated' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

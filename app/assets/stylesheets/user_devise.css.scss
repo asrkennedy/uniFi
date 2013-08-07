@@ -20,7 +20,7 @@
   color: #777;
 }
 
-input {
+input, #user_biography {
   border-radius: 5px;
   padding: 5px;
   padding-left: 8px;
@@ -81,4 +81,37 @@ input {
 .login_prompts a:hover, a:focus {
   text-decoration: none;
   color: #777;
+}
+
+#user_biography {
+  max-width: 730px;
+  border-bottom-color: rgb(238, 238, 238);
+border-bottom-left-radius: 4.997184753417969px;
+border-bottom-right-radius: 4.997184753417969px;
+border-bottom-style: inset;
+border-bottom-width: 1.501501441001892px;
+border-image-outset: 0px;
+border-image-repeat: stretch;
+border-image-slice: 100%;
+border-image-source: none;
+border-image-width: 1;
+border-left-color: rgb(238, 238, 238);
+border-left-style: inset;
+border-left-width: 1.501501441001892px;
+border-right-color: rgb(238, 238, 238);
+border-right-style: inset;
+border-right-width: 1.501501441001892px;
+border-top-color: rgb(238, 238, 238);
+border-top-left-radius: 4.997184753417969px;
+border-top-right-radius: 4.997184753417969px;
+border-top-style: inset;
+border-top-width: 1.501501441001892px;
+margin-bottom: 2px;
+margin-left: 2px;
+margin-right: 2px;
+margin-top: 2px;
+padding-bottom: 5px;
+padding-left: 8px;
+padding-right: 5px;
+padding-top: 5px;
 }

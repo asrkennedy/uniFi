@@ -10,13 +10,19 @@
   =text_field_tag :distance, nil, {id: "distance"}
   =submit_tag "Search", :name => nil, id: "submit"
 
+#container_div
+  -if current_user
+    #map-canvas
+  -else
+    #canvas
+      #lolzor
+        %canvas{:width => "380px", :height => "330px", id:"overlay"}
+      -# #about
+      -#   %p This map displays user networks.
+      -#   %br
+      -#   %p Please sign in to view more.
 
--if current_user
-  #map-canvas
--else
-  #canvas
-    %canvas{:width => "500px", :height => "400px", id:"overlay"}
-  #map-canvas.not_registered
+    #map-canvas.not_registered
 
 
 

@@ -11,3 +11,7 @@
  *= require_self
  *= require_tree .
  */
+
+body {
+background-image: '../images/bgmap.png', fixed;
+}

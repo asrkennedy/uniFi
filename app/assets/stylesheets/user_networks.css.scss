@@ -17,8 +17,6 @@ body {
   font-style: normal;
 }
 
-
-
 #sharing_warning {
   display: hidden;
 }
@@ -30,7 +28,7 @@ body {
   z-index: -10;
   top: 0;
   left: 0;
-  bottom: 0;
+  bottom: -100px;
   right: 0;
   filter: alpha(opacity=80);
   -moz-opacity: 0.8;
@@ -39,7 +37,7 @@ body {
 }
 
 #map-canvas.not_registered {
-  -webkit-filter: brightness(65%);
+  -webkit-filter: brightness(55%);
 }
 
 .nav {
@@ -63,7 +61,6 @@ body {
 }
 
 .nav a, .nav_links a {
-  font-family: "Calibri";
   color: #fff;
   text-decoration: none;
 }
@@ -137,17 +134,32 @@ label {
 //   margin-right: auto;
 // }
 
+
 #overlay {
   margin: auto;
   text-align: center;
-  border-radius: 10px;
-  position: fixed;
-  top: 50%;
+  position: absolute;
+  top: 45%;
   left: 50%;
-  margin-left: -250px;
-  margin-top: -200px;
+  margin-left: -200px;
+  // margin-top: -200px;
+  border-radius: 5px;
+  box-shadow: 10px 15px 15px #333;
 }
 
+#about {
+  background: transparent;
+  margin-top: 220px;
+  width: 100%;
+  float: center;
+  text-align: center;
+}
+
+#about p {
+  font-size: 11px;
+  color: #000;
+  display: inline-block;
+}
 
 #unregistered_user p {
   padding: 30px;
