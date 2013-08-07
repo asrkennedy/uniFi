@@ -1,3 +1,5 @@
+- content_for :resource_id, @user_network.id.to_s
+
 %h3
   - unless @user_network.nickname.blank?
     = @user_network.nickname
@@ -17,3 +19,16 @@
   = distance_of_time_in_words(Time.now, @user_network.wifi_network.updated_at)
   ago
   = link_to 'Edit', edit_user_network_path(@user_network)
+
+#network_show_map
+
+.form_wrapper
+  = form_tag root_path, method: :get, id:"search_maps_form" do
+    = label_tag 'start', 'Start Location'
+    = text_field_tag :start, params[:start]
+    = label_tag 'transport', 'Transport Method'
+    = select_tag :transport, options_for_select([ ['Driving', 'DRIVING'], ['Walking', 'WALKING'], ['Bike', 'BICYCLING'], ['Public', 'TRANSIT'] ])
+    = submit_tag "Get Directions!", class: "button"
+
+.directions_wrapper
+  #directions-panel

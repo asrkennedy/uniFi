@@ -393,4 +393,87 @@ var drawMarkers = function(e) {
 
 
 
+
+
+//section for map directions
+  if($('#network_show_map').length >0){
+    $.getJSON('/user_networks/'+$('#resource_id').val()+'.json', function(data){
+      console.log(data.id)
+
+      var mapOptions,
+        canvas,
+        map,
+        directionsDisplay,
+        directionsService;
+
+  mapOptions = {
+    zoom: 14,
+    center: new google.maps.LatLng(data.latitude, data.longitude),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+
+  canvas = document.getElementById("network_show_map");
+   map = new google.maps.Map(canvas, mapOptions);
+
+   var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(data.latitude, data.longitude),
+        map: map,
+        ssid: data.ssid,
+        password: data.password,
+        password_required: data.password_required,
+        address: data.address,
+        longitude: data.longitude,
+        latitude: data.latitude,
+        average_user_rating: data.average_user_rating,
+        updated_at: data.updated_at,
+        shared_by: data.shared_by,
+        animation: google.maps.Animation.DROP
+      })//closes google maps marker
+
+  directionsService = new google.maps.DirectionsService();
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  directionsDisplay.setMap(map);
+  directionsDisplay.setPanel(document.getElementById('directions-panel'));
+
+    $("#search_maps_form").submit(function(e){
+    e.preventDefault();
+    var start = document.getElementById('start').value;
+    var end = new google.maps.LatLng(data.latitude, data.longitude)
+    var transport = document.getElementById('transport').value;
+    var request = {
+      origin: start,
+      destination: end,
+      travelMode: google.maps.TravelMode[transport]
+    };
+
+    directionsService.route(request, function(response, status){
+      if (status == google.maps.DirectionsStatus.OK){
+        directionsDisplay.setDirections(response);
+      }
+
+
+    });
+
+  });
+
+
+
+
+
+
+
+
+
+    }) //ends getJSON
+  }; // ends section for map direction
+
+
+
+
+
+
+
+
+
+
 }); // closes document ready
