@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :street_address, :postcode, :biography, :user_image, :user_image_cache, :remove_user_image, :remember_me
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
   # validates_presence_of :user_image
   # validates_integrity_of :user_image
   # validates_processing_of :user_image
@@ -166,5 +168,16 @@ class User < ActiveRecord::Base
       network.destroy
     end
   end
+
+  def get_pref(other_user)
+     f = Friendship.where({proposer_id: self.id, proposee_id: other_user.id}).first
+     if f
+       f.proposee_sharing_pref
+     else
+        Friendship.where({proposer_id: other_user.id, proposee_id: self.id}).first.proposer_sharing_pref
+    end
+  end
+
+
 
 end

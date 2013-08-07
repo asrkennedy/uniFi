@@ -1,6 +1,15 @@
 %h1 We will use this form to add/edit a UserNetwork
-
 =nested_form_for(@user_network) do |f|
+  - if @user_network.errors.any?
+    #error_explanation
+      %h3
+        Error: Either a Wi-Fi network with this SSID, password and postcode aready exists in your list of networks, or you have not provided enough information!
+
+
+
+
+
+
   =f.hidden_field :user_id, {value: current_user.id}
   %div.field
     =f.label :nickname

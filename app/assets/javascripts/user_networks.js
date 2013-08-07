@@ -58,6 +58,46 @@ $(function() {
       }
      })
 
+      var checkFriendRequests = function(){
+    $.getJSON('/users.json', function(data){
+      var proposersArray = data.proposers;
+      if(proposersArray.length >0){
+        $('#friend_popup').empty();
+        $('#friend_popup').append('<ul>Friend Request(s):');
+
+        for(var i = 0; i < proposersArray.length; i++){
+        var string = '<li>' + proposersArray[i].first_name + ' ' + proposersArray[i].last_name + ':' +
+        '  <a href="/users/' + proposersArray[i].id + '/confirm_friend" >Confirm</a>' +
+        ' | <a href="/users/' + proposersArray[i].id + '/deny_friend" >Deny</a></li>' +
+        '</li>'
+        $('#friend_popup').append(string);
+        }
+        $('#friend_popup').append('</ul>');
+        $('#friend_popup').addClass('lukesClass');
+        $('#friend_popup').fadeTo(3000, 1);
+
+      } else {
+        $('#friend_popup').fadeTo(1000, 0);
+        $('#friend_popup').empty();
+
+      }
+    }) //closes getJSON
+  } //closes checkFriendRequests
+
+
+  checkFriendRequests();
+
+
+  setInterval(function(){
+     setTimeout(function(){
+    checkFriendRequests();
+        }, 10000);
+   }, 5000);
+
+
+if($('#map-canvas').length > 0){
+
+
 // create a google map + With Control Positions for Map only not streetview Will be adding styling element here aswell later
   var mapOptions = {
     zoom:6,
@@ -340,45 +380,13 @@ var drawMarkers = function(e) {
   resizeMap();
   }) // closes getJSON
 
-}
+  }
 
+} // closes if wrapper for mapping
 
-
-  var checkFriendRequests = function(){
-    $.getJSON('/users.json', function(data){
-      var proposersArray = data.proposers;
-      if(proposersArray.length >0){
-        $('#friend_popup').empty();
-        $('#friend_popup').append('<ul>Friend Request(s):');
-
-        for(var i = 0; i < proposersArray.length; i++){
-        var string = '<li>' + proposersArray[i].first_name + ' ' + proposersArray[i].last_name + '</li>'
-        $('#friend_popup').append(string);
-        }
-        $('#friend_popup').append('</ul>')
-        $('#friend_popup').slideDown(1000);
-        setTimeout(function(){
-          $('#friend_popup').slideUp(500);
-        }, 5000);
-
-      } ;
-    }) //closes getJSON
-  } //closes checkFriendRequests
-
-
-
-
-
-
-
-
-
-  drawMarkers();
-  checkFriendRequests();
-  setInterval(function(){
-    checkFriendRequests();
-        }, 30000);
-
+  if($('#map-canvas').length > 0){
+    drawMarkers();
+  }
 
 
   $('#submit').on('click', drawMarkers);

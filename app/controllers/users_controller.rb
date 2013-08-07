@@ -55,6 +55,13 @@ def show
     end
   end
 
+  def update_friend
+    @user = User.where(id: params[:id]).first
+    @pref_value = @user.get_pref(current_user)
+
+  end
+
+
   def confirm_friend
     @user = User.find(params[:id])
 
@@ -79,7 +86,6 @@ def show
     friend_name = "#{@user.first_name} #{@user.last_name}"
     redirect_to friendships_path, notice: "You have labeled #{friend_name} as #{sharing_preferences}"
   end
-
 
   def friend_confirm_relationship
     @user = User.find(params[:id])

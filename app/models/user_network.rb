@@ -4,6 +4,9 @@ class UserNetwork < ActiveRecord::Base
   belongs_to :user
 
   validates :user_sharing_pref, inclusion: { in: User::SHARING_PREFERENCES }
+  validates_uniqueness_of :user_id, scope: [:wifi_network_id]
+  validates :nickname, presence: true
+  validates :user_score, presence: true
   accepts_nested_attributes_for :wifi_network
 
   def address

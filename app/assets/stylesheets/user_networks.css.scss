@@ -186,10 +186,37 @@ label {
 }
 
 #friend_popup {
-  background: red;
+  background: #F83363;
+  position:  fixed;
+  bottom: 2.5em;
+  right: 1em;
+  z-index: 50;
+  font-size: .7em;
+  padding: 10px;
+  color: white;
   display: none;
-  width: 20%
-
+  border-radius: 5px
 }
 
+#friend_popup li {
+list-style: none;
+}
+
+
+#friend_popup ul {
+  padding: 0px;
+  margin-top: 2px;
+  margin-bottom: 3px;
+}
+
+#friend_popup a {
+  text-decoration: none;
+  color: white
+}
+
+#flash {
+  color: white;
+  background: #F83363;
+  text-align: center;
+}
 

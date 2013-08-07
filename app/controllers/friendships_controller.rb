@@ -5,6 +5,7 @@ class FriendshipsController < ApplicationController
   # GET /friendships
   # GET /friendships.json
   def index
+      @proposers_of_unconfirmed_friendships = current_user.find_unconfirmed_friendships
       if params[:name].blank?
         @friendships = current_user.friends
       else
