@@ -5,12 +5,12 @@ class FriendshipsController < ApplicationController
   # GET /friendships
   # GET /friendships.json
   def index
-if params[:name].blank?
-  @friendships = current_user.friends
-else
-  @friendships = current_user.friends.select{|friend| friend.full_name.downcase.include?(params[:name].downcase) }
+      if params[:name].blank?
+        @friendships = current_user.friends
+      else
+        @friendships = current_user.friends.select{|friend| friend.full_name.downcase.include?(params[:name].downcase) }
 
-end
+      end
 
 
     respond_to do |format|

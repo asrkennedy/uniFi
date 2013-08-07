@@ -45,6 +45,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def friendships
+    self.friendships_as_proposer + self.friendships_as_proposee
+  end
+
   def friends_visible_networks
     proposees = self.friendships_as_proposer.map {|friendship| friendship.proposee}
     proposees_networks = proposees.map{|proposee| proposee.user_networks}.flatten
@@ -75,6 +79,22 @@ class User < ActiveRecord::Base
     end
   end
 
+  def update_friendship(current_user, sharing_preferences)
+    friendship1 = Friendship.where(proposee_id: current_user.id, proposer_id: self.id)
+    friendship2 = Friendship.where(proposer_id: current_user.id, proposee_id: self.id)
+    f = friendship1 + friendship2
+    f = f.first
+    if f.proposer == current_user
+      # if f.proposee_id != nil
+        f.proposer_sharing_pref = sharing_preferences
+        f.save
+      # end
+    else
+      f.proposee_sharing_pref = sharing_preferences
+      f.save
+    end
+  end
+
   def deny_friendship(current_user, user)
     proposee_friendships = Friendship.where(proposee_id: current_user)
     f = proposee_friendships.where(proposer_id: user)
@@ -100,6 +120,11 @@ class User < ActiveRecord::Base
     end
   end
 
+
+# def update_attributes(current_user, params[:sharing_preferences])
+
+# end
+
   def find_unconfirmed_friendships
     proposee_friendships = Friendship.where(proposee_id: self.id)
     friend_requests = proposee_friendships.where(confirmed: nil)
@@ -109,11 +134,6 @@ class User < ActiveRecord::Base
   # returns an array of proposers (users) of friend requests
   end
 
-  def friend_exists? (current_user)
-      if current_user.friends.include? self
-      self.defriend(current_user, self)
-    end
-  end
 
   def get_relationship(current_user)
     friendship = self.friendships_as_proposer.where(proposee_id: current_user.id)
