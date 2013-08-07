@@ -230,4 +230,17 @@ list-style: none;
 #network_show_map{
   width:630px;
   height:380px;
+  filter: alpha(opacity=80);
+  -moz-opacity: 0.8;
+  -khtml-opacity: 0.8;
+  opacity: 0.8;
+}
+
+#wifi_network_show_map{
+  width:630px;
+  height:380px;
+  filter: alpha(opacity=80);
+  -moz-opacity: 0.8;
+  -khtml-opacity: 0.8;
+  opacity: 0.8;
 }
