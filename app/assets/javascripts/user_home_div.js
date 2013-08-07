@@ -2,15 +2,15 @@ $(function(){
 
   var sign_inLink = false;
   var link_sign_in_text = "Sign In";
-  var sign_in_link_x = 190;
-  var sign_in_link_y = 300;
+  var sign_in_link_x = 50;
+  var sign_in_link_y = 290;
   var sign_in_linkWidth;
   var sign_in_linkHeight = 20;
 
   var sign_upLink = false;
   var link_sign_up_text = "Sign Up";
-  var sign_up_link_x = 180;
-  var sign_up_link_y = 350;
+  var sign_up_link_x = 210;
+  var sign_up_link_y = 290;
   var sign_up_linkWidth;
   var sign_up_linkHeight = 20;
 
@@ -60,7 +60,8 @@ if ($('#overlay').length != 0) {
   var ctx = canvas.getContext("2d");
 
   // Choose font
-  ctx.font = "Bold 36px 'Helvetica";
+
+  ctx.font = "Bold 24px 'TrendSansFive' ";
 
   var grd = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
       // light blue
@@ -74,13 +75,14 @@ if ($('#overlay').length != 0) {
 
   // Punch out the text!
   ctx.globalCompositeOperation = 'destination-out';
-  ctx.fillText("_____________________", 40, 20);
-  ctx.fillText("Welcome to uniFi", 100, 80);
-  ctx.fillText("_____________________", 40, 110);
-  ctx.fillText(link_sign_in_text, 190, 300);
+  ctx.fillText("________________", 30, 30);
+  ctx.fillText("Welcome to Unifi", 40, 80);
+  ctx.fillText("________________", 30, 120);
+  ctx.fillText(link_sign_in_text, 50, 290);
   sign_in_linkWidth=ctx.measureText(link_sign_in_text).width;
-  ctx.fillText(link_sign_up_text, 180, 350);
+  ctx.fillText(link_sign_up_text, 210, 290);
   sign_up_linkWidth=ctx.measureText(link_sign_up_text).width;
+
 
   canvas.addEventListener('mousemove', on_mousemove, false)
   canvas.addEventListener('click', on_click, false)
