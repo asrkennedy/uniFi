@@ -176,11 +176,10 @@ label {
 #friend_popup {
   background: #F83363;
   position:  fixed;
-
-  bottom: 2em;
-  left: 2em;
+  bottom: 2.5em;
+  right: 1em;
   z-index: 50;
-  font-size: .5em;
+  font-size: .7em;
   padding: 10px;
   color: white;
   display: none;
