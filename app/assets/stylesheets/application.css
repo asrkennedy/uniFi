@@ -13,5 +13,5 @@
  */
 
 body {
-background-image: '../images/bgmap.png', fixed;
+background-image: './app/assets/images/bgmap.png', fixed;
 }

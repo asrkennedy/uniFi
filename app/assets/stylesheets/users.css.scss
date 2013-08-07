@@ -37,6 +37,18 @@
   min-height: 340px;
 }
 
+.network_list {
+  list-style: none;
+  width: 28%;
+  margin: auto;
+  float: left;
+  display: inline-block;
+  padding: 20px;
+  width: 350px;
+  text-wrap: normal;
+  text-align: left;
+}
+
 li.friends {
   width: 150px;
   text-wrap: normal;
@@ -46,13 +58,18 @@ li.friends {
 
 .links a,
 li.friends a,
-.friend_links a {
+.friend_links a,
+.friend a {
   text-decoration: none;
   color: #666;
 }
 
 .links a {
   font-size: 12px;
+}
+
+.links {
+  color: #666;
 }
 
 .links a:hover,
@@ -88,7 +105,7 @@ color: #999;
 }
 
 li.networks {
-  width: 150px;
+  width: 300px;
   text-wrap: normal;
   text-align: left;
   font-size: 14px;
@@ -96,4 +113,12 @@ li.networks {
 
 .network {
   float: left;
+}
+
+h4.network {
+  margin-top: 0;
+}
+
+.links#networks {
+  float: right;
 }
