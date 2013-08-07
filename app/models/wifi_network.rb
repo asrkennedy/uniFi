@@ -4,7 +4,9 @@ class WifiNetwork < ActiveRecord::Base
 
   geocoded_by :full_street_address
   after_validation :geocode, :if => :address_changed?
-
+  validates :ssid, presence: true
+  validates :postcode, presence: true
+  validates :street_address, presence: true
 
   def full_street_address
     "#{self.house}, #{self.street_address}, #{self.city}, #{self.postcode}, #{self.country}"
