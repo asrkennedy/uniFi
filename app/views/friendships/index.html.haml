@@ -1,3 +1,16 @@
+-unless @proposers_of_unconfirmed_friendships.blank?
+  #unconfirmed_friendships
+    %p
+      %ul
+        Friend request(s)!
+        -@proposers_of_unconfirmed_friendships.each do |proposer|
+          %li
+            = proposer.full_name
+            = link_to 'Confirm', confirm_friend_path(proposer)
+            |
+            = link_to 'Deny', deny_friend_path(proposer)
+
+
 = form_tag friendships_path, :method => :get do
   =label_tag :name
   =text_field_tag :name, nil, {value: params[:name]}

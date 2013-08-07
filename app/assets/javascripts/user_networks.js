@@ -95,7 +95,7 @@ $(function() {
    }, 5000);
 
 
-
+if($('#map-canvas').length > 0){
 
 
 // create a google map + With Control Positions for Map only not streetview Will be adding styling element here aswell later
@@ -380,18 +380,13 @@ var drawMarkers = function(e) {
   resizeMap();
   }) // closes getJSON
 
-}
+  }
 
+} // closes if wrapper for mapping
 
-
-
-
-
-
-  drawMarkers();
-
-
-
+  if($('#map-canvas').length > 0){
+    drawMarkers();
+  }
 
 
   $('#submit').on('click', drawMarkers);

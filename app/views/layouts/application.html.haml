@@ -23,15 +23,7 @@
         - else
           = link_to "Sign In", new_user_session_path
           = link_to "Register", new_user_registration_path
-      -unless @proposers_of_unconfirmed_friendships.blank?
-        #unconfirmed_friendships
-          %p
-            Friend request(s)!
-            -@proposers_of_unconfirmed_friendships.each do |proposer|
-              = proposer.full_name
-              |
-              = link_to 'Confirm', confirm_friend_path(proposer)
-              = link_to 'Deny', deny_friend_path(proposer)
+
 
 
     .container
