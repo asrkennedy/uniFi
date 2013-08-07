@@ -1,13 +1,7 @@
--unless @proposers_of_unconfirmed_friendships.blank?
-  #unconfirmed_friendships
-    -@proposers_of_unconfirmed_friendships.each do |proposer|
-      %p Unconfirmed Friendships:
-      = "#{proposer.first_name} #{proposer.last_name}"
-      = link_to 'Confirm', confirm_friend_path(proposer)
-      = link_to 'Deny', deny_friend_path(proposer)
 
-  :javascript
-    window.user_params = #{@params.to_json}
+
+:javascript
+  window.user_params = #{@params.to_json}
 
 = form_tag user_networks_path, :id => 'search', :method => :get do
   =label_tag :postcode
@@ -16,8 +10,6 @@
   =text_field_tag :distance, nil, {id: "distance"}
   =submit_tag "Search", :name => nil, id: "submit"
 
-- if can? :manage, :all
-  HELLO MR ADMIN
 
 -if current_user
   #map-canvas

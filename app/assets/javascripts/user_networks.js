@@ -343,8 +343,41 @@ var drawMarkers = function(e) {
 }
 
 
-  drawMarkers();
 
+  var checkFriendRequests = function(){
+    $.getJSON('/users.json', function(data){
+      var proposersArray = data.proposers;
+      if(proposersArray.length >0){
+        $('#friend_popup').empty();
+        $('#friend_popup').append('<ul>Friend Request(s):');
+
+        for(var i = 0; i < proposersArray.length; i++){
+        var string = '<li>' + proposersArray[i].first_name + ' ' + proposersArray[i].last_name + '</li>'
+        $('#friend_popup').append(string);
+        }
+        $('#friend_popup').append('</ul>')
+        $('#friend_popup').slideDown(1000);
+        setTimeout(function(){
+          $('#friend_popup').slideUp(500);
+        }, 5000);
+
+      } ;
+    }) //closes getJSON
+  } //closes checkFriendRequests
+
+
+
+
+
+
+
+
+
+  drawMarkers();
+  checkFriendRequests();
+  setInterval(function(){
+    checkFriendRequests();
+        }, 30000);
 
 
 
