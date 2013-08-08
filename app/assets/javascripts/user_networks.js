@@ -648,10 +648,4 @@ var drawMarkers = function(e) {
 }; // ends section for map direction
 
 
-
-
-
-
-
-
 }); // closes document ready
