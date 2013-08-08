@@ -10,18 +10,17 @@
             |
             = link_to 'Deny', deny_friend_path(proposer)
 
-
-= form_tag friendships_path, :class => "friendshipform", :method => :get do
-  =label_tag :name
-  =text_field_tag :name, nil, {value: params[:name]}
-  =submit_tag "Search"
-
-.friend_links
-  = link_to 'Find New Friends', new_friendship_path
-  |
-  = link_to 'Back', user_networks_path
-
 .container_friends
+  = form_tag friendships_path, :class => "friendshipform", :method => :get do
+    =label_tag :name
+    =text_field_tag :name, nil, {value: params[:name]}
+    =submit_tag "Search", :class => 'button'
+
+  .friend_links
+    = link_to 'Find New Friends', new_friendship_path
+    |
+    = link_to 'Back', user_networks_path
+
   - if @friendships.any?
     .friends
       %ul
@@ -32,9 +31,12 @@
                 = image_tag friend.user_image.thumb.url
               %br
               = link_to "#{friend.full_name}", user_path(friend.id)
+              %br
               = friend.get_relationship(current_user)
+              %br
               Networks:
               = friend.user_networks.size
+              %br
               Friends:
               = friend.friends.size
               .links
@@ -43,8 +45,9 @@
                 = link_to "Defriend", defriend_path(friend)
 
   - else
-    - if params[:name]
-      %p No results match your search
-    -else
-      %p You have no friends.
+    .nofriends
+      - if params[:name]
+        %p No results match your search
+      -else
+        %p You have no friends.
 

@@ -252,10 +252,12 @@ list-style: none;
 }
 
 .container_network {
-  width: 60%;
   margin: auto;
   text-align: left;
-  margin-top: 50px;
+  background-color: #fff;
+  padding: 30px;
+  width: 720px;
+  margin-top: 40px;
 }
 
 .direction_map_container {
@@ -264,16 +266,22 @@ list-style: none;
 }
 
 .form_wrapper {
-  width: 75%;
+  width: 100%;
   margin: auto;
   text-align: center;
 }
 
+#map_container {
+  margin: auto;
+  text-align: center;
+  width: 100%;
+}
 
 .directions_wrapper {
   width: 75%;
   margin: auto;
   text-align: center;
+  padding-left: 150px;
 }
 
 #network_show_map{
@@ -283,7 +291,7 @@ list-style: none;
   -moz-opacity: 0.8;
   -khtml-opacity: 0.8;
   opacity: 0.8;
-  margin-right: 0;
+  margin: auto;
 }
 
 #wifi_network_show_map{
@@ -293,7 +301,14 @@ list-style: none;
   -moz-opacity: 0.8;
   -khtml-opacity: 0.8;
   opacity: 0.8;
+  margin: auto;
+}
+
+.form_wrapper {
+  margin-top: 40px;
+  margin-left: 0;
   margin-right: 0;
+  font-size: 14px;
 }
 
 #content a, h4 {

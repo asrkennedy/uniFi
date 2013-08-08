@@ -30,17 +30,17 @@
     %br
     .links
       = link_to 'Edit', edit_user_network_path(@user_network)
+  #map_container
+    #network_show_map
 
-#network_show_map
+  .form_wrapper
+    = form_tag root_path, method: :get, id:"search_maps_form" do
+      = label_tag 'start', 'Start Location'
+      = text_field_tag :start, params[:start]
+      -# = label_tag 'transport', 'Transport Method'
+      = select_tag :transport, options_for_select([ ['Driving', 'DRIVING'], ['Walking', 'WALKING'], ['Bike', 'BICYCLING'], ['Public', 'TRANSIT'] ])
+      = submit_tag "Get Directions!", class: "button"
 
-.form_wrapper
-  = form_tag root_path, method: :get, id:"search_maps_form" do
-    = label_tag 'start', 'Start Location'
-    = text_field_tag :start, params[:start]
-    = label_tag 'transport', 'Transport Method'
-    = select_tag :transport, options_for_select([ ['Driving', 'DRIVING'], ['Walking', 'WALKING'], ['Bike', 'BICYCLING'], ['Public', 'TRANSIT'] ])
-    = submit_tag "Get Directions!", class: "button"
-
-.directions_wrapper
-  #directions-panel
+  .directions_wrapper
+    #directions-panel
 

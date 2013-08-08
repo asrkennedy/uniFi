@@ -5,15 +5,23 @@
 body {
   background: image_url('bgmap.png') no-repeat center center  fixed;
   background-size: cover;
+}
 
+#unconfirmed_friendships {
+  display: none;
+}
+
+.sharer {
+  list-style: none;
 }
 
 .container_friends {
-  width: 60%;
   margin: auto;
-  text-align: center;
+  text-align: left;
   background-color: #fff;
-  padding: 40px;
+  padding: 20px;
+  width: 720px;
+  margin-top: 40px;
 }
 
 .friend_info {
@@ -29,11 +37,23 @@ body {
 
 .friends {
   list-style: none;
-  width: 75%;
+  width: 92%;
   margin: auto;
-  clear: both;
   display: inline-block;
-  padding: 20px;
+  padding: 30px;
+  text-align: center;
+  text-wrap: normal;
+}
+
+.new_friends {
+  text-align: center;
+  padding: 0;
+}
+
+#new_friend a {
+  font-size: 12px;
+  text-align: center;
+  padding-top: 10px;
 }
 
 .friend {
@@ -41,7 +61,7 @@ body {
   width: 28%;
   margin: auto;
   display: inline-block;
-  padding: 20px;
+  padding: 10px;
   width: 350px;
   text-wrap: normal;
   text-align: left;
@@ -49,8 +69,16 @@ body {
   float: right;
 }
 
+.nofriends {
+  text-align: left;
+  display: block;
+  width: 70%;
+  margin-top: 60px;
+  padding: 10px;
+}
+
 .friend_image {
-  padding: 20px;
+  padding: 10px;
   width: 300px;
   float: left;
 }
@@ -67,10 +95,13 @@ body {
 }
 
 li.friends {
-  width: 150px;
+  width: 200px;
   text-wrap: normal;
   text-align: center;
   font-size: 14px;
+  background-color: #eee;
+  border-radius: 5px;
+  margin: 10px;
 }
 
 .links a,
@@ -99,11 +130,13 @@ color: #999;
 }
 
 .friend_links {
-  width: 48%;
+  width: 45%;
   text-align: right;
   padding-right: 10px;
   padding-top: 10px;
   color: #666;
+  text-align: right;
+  margin-left: 50%;
 }
 
 .friends ul {
@@ -115,8 +148,8 @@ color: #999;
   display: inline-block;
 }
 
-.search_form h3 {
-  margin-bottom: 20px;
+.search_form form {
+  padding-top: 20px;
 }
 
 li.networks {
@@ -126,8 +159,9 @@ li.networks {
   font-size: 14px;
 }
 
-.network {
-
+.networks_container {
+  text-align: left;
+  padding: 20px;
 }
 
 h4.network {

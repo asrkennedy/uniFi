@@ -19,6 +19,25 @@
   padding-bottom: 30px;
 }
 
+.register input, #userbiography {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#error_explanation li {
+  font-size: 14px;
+  list-style: none;
+}
+
+#error_explanation ul {
+ padding: 0;
+}
+
+#error_explanation h2 {
+  font-size: 18px;
+}
+
+
 .register a:hover, a:focus {
   text-decoration: none;
   color: #777;
@@ -50,6 +69,17 @@ input, #user_biography {
     #aa0000);
   background: #DF2E59;
 }
+
+i {
+  font-size: 12px;
+}
+
+#search_button {
+  height: 30px;
+  font-size: 10px;
+  padding-bottom: 10px;
+}
+
 
 .login_prompts a {
   text-decoration: none;
@@ -117,7 +147,7 @@ padding-top: 5px;
   background-color: #fff;
 }
 
-.error {
+#error_explanation {
   font-size: 14px;
   border: 2px dashed #F83363;
   padding: 10px;
@@ -125,5 +155,3 @@ padding-top: 5px;
   border-radius: 5px;
   background-color: #fff;
 }
-
-

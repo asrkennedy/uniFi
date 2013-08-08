@@ -1,4 +1,5 @@
 -# Drop-down for friend sharing preferences
-= form_tag friend_update_relationship_path(@user) do
-  =select_tag "sharing_preferences", options_for_select([["Close Friend","close friend"], ["Friend", "friend"], ["Acquaintance", "acquaintance"]], @pref_value)
-  = submit_tag "Submit"
+.container_friendship
+  = form_tag friend_update_relationship_path(@user) do
+    =select_tag "sharing_preferences", options_for_select([["Close Friend","close friend"], ["Friend", "friend"], ["Acquaintance", "acquaintance"]], @pref_value)
+    = submit_tag "Submit", :class => 'button'
