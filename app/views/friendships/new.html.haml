@@ -10,14 +10,16 @@
       - unless current_user.friends_ids.include? user.id
         - unless user == current_user
           %li.friends#new_friend
-            - unless user.user_image.blank?
+            - if user.user_image.blank?
+              =image_tag "avatar100.png"
+            - else
               = image_tag user.user_image.thumb.url
-              %br
-              = link_to "#{user.full_name}", user_path(user)
-              %br
-              =mail_to user.email
-              %br
-              = link_to "Add Friend", new_friend_path(user)
+            %br
+            = link_to "#{user.full_name}", user_path(user)
+            %br
+            =mail_to user.email
+            %br
+            = link_to "Add Friend", new_friend_path(user)
 
   .friend_links
     = link_to 'Back', friendships_path

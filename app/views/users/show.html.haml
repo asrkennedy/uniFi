@@ -4,11 +4,13 @@
     = "#{@user.full_name}'s Profile"
   .friend_info
     .friend_image
-      - unless @user.user_image.blank?
+      - if @user.user_image.blank?
+        =image_tag "avatar300.png"
+      - else
         = image_tag @user.user_image.detail.url
-        %br
+      %br
 
-    %br
+
     .friend
       = @user.email
       %p
