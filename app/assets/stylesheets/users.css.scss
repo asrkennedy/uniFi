@@ -2,17 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body {
-  background: image_url('bgmap.png') no-repeat center center  fixed;
-  background-size: cover;
-}
 
 #unconfirmed_friendships {
   display: none;
 }
 
+body.map {
+  background:  image_url('fabric_of_squares.png');
+  background-repeat: repeat;
+
 .sharer {
   list-style: none;
+}
+
+body {
+ background: image_url('bgmap.jpg') no-repeat center center  fixed;
+ background-size: cover;
 }
 
 .container_friends {

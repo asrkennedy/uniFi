@@ -7,7 +7,7 @@ class UserNetworksController < ApplicationController
   # GET /user_networks
   # GET /user_networks.json
   def index
-
+    @map = true
     unless current_user
       if !params[:distance].blank?
         unless params[:postcode].blank?
