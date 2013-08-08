@@ -85,6 +85,11 @@ class UserNetworksController < ApplicationController
           average_user_rating: user_network.wifi_network.average_user_rating,
           updated_at: user_network.wifi_network.updated_at
         }
+
+        unless network_hash[:password_required]
+          network_hash[:password] = "Not Required"
+        end
+
         @user_networks_hashes_array << network_hash
       end
 
@@ -106,6 +111,12 @@ class UserNetworksController < ApplicationController
                               end
                             end
         }
+
+         unless network_hash[:password_required]
+          network_hash[:password] = "Not Required"
+        end
+
+
         @users_friends_networks_hashes_array << network_hash
       end
 
@@ -122,6 +133,9 @@ class UserNetworksController < ApplicationController
           average_user_rating: wifi_network.average_user_rating,
           updated_at: wifi_network.updated_at
         }
+         unless network_hash[:password_required]
+          network_hash[:password] = "Not Required"
+        end
         @public_networks_hashes_array << network_hash
       end
 
