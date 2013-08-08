@@ -40,10 +40,10 @@
           =text_field_tag :postcode
           =label_tag :distance
           =text_field_tag :distance
-          =submit_tag "Search", :name => nil
+          =submit_tag "Search", :name => nil, :class => 'button', :id => 'search_button'
 
 
-
+    .networks_container
       -unless @users_networks.blank?
         %h2.network Your Wi-Fi Networks
         %ul.network_list

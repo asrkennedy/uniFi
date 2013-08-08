@@ -1,42 +1,45 @@
 - content_for :resource_id, @wifi_network.id.to_s
+.container_network
+  %h3
+    SSID:
+    = @wifi_network.ssid
+    -if @wifi_network.password_required == false
+      This network does not require a password
+    -else
+      %br
+      Password:
+      = @wifi_network.password
+  %p
+    Address:
+    =@wifi_network.full_street_address
+  %p
+    -if @wifi_network.user_networks.select{ |network| network.shareable_with(current_user)}.any?
+      %br
+      Shared By:
+      %ul
+        -@wifi_network.user_networks.each do |user_network|
+          -if user_network.shareable_with(current_user)
+            %li.sharer
+              ="#{user_network.user.full_name} (rating: #{user_network.user_score} out of 5)"
+    -else
+      %br
+      Shared Publicly
+  %p
+    =@wifi_network.rating_string
+  %p
+    Details for this Wi-Fi network were last updated
+    = distance_of_time_in_words(Time.now, @wifi_network.updated_at)
+    ago
+  #map_container
+    #wifi_network_show_map
 
-%h3
-  SSID:
-  = @wifi_network.ssid
-  -if @wifi_network.password_required == false
-    This network does not require a password
-  -else
-    Password:
-    = @wifi_network.password
-%p
-  Address:
-  =@wifi_network.full_street_address
-%p
-  -if @wifi_network.user_networks.select{ |network| network.shareable_with(current_user)}.any?
-    Shared By:
-    %ul
-      -@wifi_network.user_networks.each do |user_network|
-        -if user_network.shareable_with(current_user)
-          %li
-            ="#{user_network.user.full_name} (rating: #{user_network.user_score} out of 5)"
-  -else
-    Shared Publicly
-%p
-  =@wifi_network.rating_string
-%p
-  Details for this Wi-Fi network were last updated
-  = distance_of_time_in_words(Time.now, @wifi_network.updated_at)
-  ago
+  .form_wrapper
+    = form_tag root_path, method: :get, id:"search_maps_form" do
+      = label_tag 'start', 'Start Location'
+      = text_field_tag :start, params[:start]
+      -# = label_tag 'transport', 'Transport Method'
+      = select_tag :transport, options_for_select([ ['Driving', 'DRIVING'], ['Walking', 'WALKING'], ['Bike', 'BICYCLING'], ['Public', 'TRANSIT'] ])
+      = submit_tag "Get Directions!", class: "button"
 
-#wifi_network_show_map
-
-.form_wrapper
-  = form_tag root_path, method: :get, id:"search_maps_form" do
-    = label_tag 'start', 'Start Location'
-    = text_field_tag :start, params[:start]
-    = label_tag 'transport', 'Transport Method'
-    = select_tag :transport, options_for_select([ ['Driving', 'DRIVING'], ['Walking', 'WALKING'], ['Bike', 'BICYCLING'], ['Public', 'TRANSIT'] ])
-    = submit_tag "Get Directions!", class: "button"
-
-.directions_wrapper
-  #directions-panel
+  .directions_wrapper
+    #directions-panel
