@@ -258,10 +258,10 @@ var drawMarkers = function(e) {
         google.maps.event.addListener(marker, 'click', function() {
          //content string
           infowindow.content = '<div id="content">' +
-            '<h3>Public Network</h3>' +
+            '<h4>Public Network</h4>' +
             '<a href="/wifi_networks/' + this.wifi_network_id +'">' +
-            '<h4>SSID: ' + this.ssid + '</h4><h4>Password: ' + this.password + '</h4></a>' +
-            '<img src="http://maps.googleapis.com/maps/api/streetview?size=350x200&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false">' +
+            '<h5>SSID: ' + this.ssid + '</h5><h5>Password: ' + this.password + '</h5></a>' +
+            '<img src="http://maps.googleapis.com/maps/api/streetview?size=300x150&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false">' +
             '<ul>' +
             '<li>Address: ' + this.address + '</li>' +
             '<li>Average UNIFI user rating: ' + this.average_user_rating + ' out of 5</li>' +
@@ -309,9 +309,9 @@ var drawMarkers = function(e) {
         //content string
         infowindow.content = '<div id="content">' +
           '<a href="/user_networks/' + this.id +'">' +
-          '<h3>' + this.nickname + '</h3></a>' +
-          '<h4>SSID: ' + this.ssid + '</h4><h4>Password: ' + this.password + '</h4>' +
-          '<img src="http://maps.googleapis.com/maps/api/streetview?size=350x200&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false">' +
+          '<h4>' + this.nickname + '</h4></a>' +
+          '<h5>SSID: ' + this.ssid + '</h5><h5>Password: ' + this.password + '</h5>' +
+          '<img src="http://maps.googleapis.com/maps/api/streetview?size=300x150&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false">' +
           '<ul>' +
           '<li><strong>Address:</strong> ' + this.address + '</li>' +
           '<li><strong>Your rating:</strong> ' + this.user_score + ' out of 5 (average UNIFI user rating: ' + this.average_user_rating + ')</li>' +
@@ -355,10 +355,10 @@ var drawMarkers = function(e) {
        google.maps.event.addListener(marker, 'click', function() {
         //content string
         infowindow.content = '<div id="content">' +
-          '<h3>Shared Network</h3>' +
+          '<h4>Shared Network</h4>' +
           '<a href="/wifi_networks/' + this.wifi_network_id +'">' +
-          '<h4>SSID: ' + this.ssid + '</h4><h4>Password: ' + this.password + '</h4></a>' +
-          '<img src="http://maps.googleapis.com/maps/api/streetview?size=450x250&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false" id="streetviewstatic">' +
+          '<h5>SSID: ' + this.ssid + '</h5><h5>Password: ' + this.password + '</h5></a>' +
+          '<img src="http://maps.googleapis.com/maps/api/streetview?size=300x150&location=' + this.latitude + ',' + this.longitude + '&heading=151.78&pitch=-0.76&sensor=false" id="streetviewstatic">' +
           '<ul>' +
           '<li>Address: ' + this.address + '</li>' +
           '<li>Average UNIFI user rating: ' + this.average_user_rating + ' out of 5</li>' +

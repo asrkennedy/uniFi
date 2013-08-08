@@ -102,13 +102,14 @@ body {
 }
 
 li.friends {
-  width: 200px;
-  text-wrap: normal;
+  width: 240px;
   text-align: center;
   font-size: 14px;
   background-color: #eee;
-  border-radius: 5px;
   margin: 10px;
+}
+li.friends p {
+margin: 0
 }
 
 .links a,
@@ -164,6 +165,9 @@ li.networks {
   text-wrap: normal;
   text-align: left;
   font-size: 14px;
+  background-color: #eee;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
 .networks_container {
@@ -171,8 +175,13 @@ li.networks {
   padding: 20px;
 }
 
+.networks_container h2 {
+  margin-bottom: 0;
+}
+
 h4.network {
   margin-top: 0;
+  margin-bottom: 0;
 }
 
 .links#networks {
