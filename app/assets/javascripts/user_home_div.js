@@ -1,5 +1,10 @@
 $(function(){
 
+var drawBox = function(){
+
+setTimeout(function(){
+
+
   var sign_inLink = false;
   var link_sign_in_text = "Sign In";
   var sign_in_link_x = 50;
@@ -86,6 +91,12 @@ if ($('#overlay').length != 0) {
 
   canvas.addEventListener('mousemove', on_mousemove, false)
   canvas.addEventListener('click', on_click, false)
+
+  $('#overlay').css('box-shadow', '10px 15px 15px #333')
 }
+}, 500);
+}
+
+drawBox();
 
 })
