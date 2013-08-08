@@ -94,7 +94,7 @@ if ($('#overlay').length != 0) {
 
   $('#overlay').css('box-shadow', '10px 15px 15px #333')
 }
-}, 500);
+}, 1000);
 }
 
 drawBox();
