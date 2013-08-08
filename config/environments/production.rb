@@ -68,7 +68,7 @@ UnifiApp::Application.configure do
     :aws_access_key_id      => ENV['AWS_ACCESS_KEY_ID'],
     :aws_secret_access_key  => ENV['AWS_SECRET_ACCESS_KEY']
   }
-  config.fog_directory  = 'unifi'
+  config.fog_directory  = 'uniFi'
 end
 
 config.assets.initialize_on_precompile = false
