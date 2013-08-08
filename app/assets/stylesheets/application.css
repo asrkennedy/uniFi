@@ -11,8 +11,3 @@
  *= require_self
  *= require_tree .
  */
-
-body {
-background: image_url('bgmap.png') no-repeat center center  fixed;
-background-size: cover;
-}
