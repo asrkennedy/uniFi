@@ -3,6 +3,7 @@
 :javascript
   window.user_params = #{@params.to_json}
 
+
 = form_tag user_networks_path, :id => 'search', :method => :get do
   =label_tag :postcode
   =text_field_tag :postcode, nil, { id: 'postcode' }
