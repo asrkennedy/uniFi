@@ -102,27 +102,27 @@ if($('#map-canvas').length > 0){
   var mapOptions = {
     zoom:6,
 
-    // mapTypeControlOptions: {
-    //     style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-    //     position: google.maps.ControlPosition.TOP_CENTER
-    // },
-    // panControl: true,
-    // panControlOptions: {
-    //     position: google.maps.ControlPosition.TOP_RIGHT
-    // },
-    // zoomControl: true,
-    // zoomControlOptions: {
-    //     style: google.maps.ZoomControlStyle.LARGE,
-    //     position: google.maps.ControlPosition.RIGHT_CENTER
-    // },
-    // scaleControl: true,
-    // scaleControlOptions: {
-    //     position: google.maps.ControlPosition.TOP_RIGHT
-    // },
-    // streetViewControl: true,
-    // streetViewControlOptions: {
-    //     position: google.maps.ControlPosition.RIGHT_TOP
-    //   },
+    mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+        position: google.maps.ControlPosition. BOTTOM_CENTER
+    },
+    panControl: false,
+    panControlOptions: {
+        position: google.maps.ControlPosition.RIGHT_CENTER
+    },
+    zoomControl: true,
+    zoomControlOptions: {
+        style: google.maps.ZoomControlStyle.LARGE,
+        position: google.maps.ControlPosition.LEFT_CENTER
+    },
+    scaleControl: false,
+    scaleControlOptions: {
+        position: google.maps.ControlPosition.RIGHT_CENTER
+    },
+    streetViewControl: true,
+    streetViewControlOptions: {
+        position: google.maps.ControlPosition.LEFT_CENTER
+      },
     disableDefaultUI: true,
     center: new google.maps.LatLng(51.512769700000000000,-0.128924099999949250),
     mapTypeId: google.maps.MapTypeId.ROADMAP,
