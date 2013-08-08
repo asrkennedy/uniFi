@@ -63,9 +63,12 @@
 
     = image_tag(current_user.user_image.thumb.url)
     %br
-    = f.label :remove_user_image
-    = f.check_box :remove_user_image
-
+    - if current_user.user_image.blank?
+      =image_tag "avatar300.png"
+    -else
+      = image_tag(current_user.user_image.url)
+    = f.label :remove_user_image do
+      = f.check_box :remove_user_image
     = f.file_field :user_image
     = f.hidden_field :user_image_cache
 

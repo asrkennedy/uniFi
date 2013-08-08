@@ -20,6 +20,7 @@ gem 'faker'
 gem 'populator'
 gem 'geocoder'
 gem 'active_model_serializers'
+gem 'haml'
 
 
 group :development do
@@ -30,7 +31,7 @@ group :development do
   gem 'better_errors'
   gem 'meta_request'
   gem 'railroady'
-  gem 'haml'
+
 end
 
 
