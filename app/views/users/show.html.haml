@@ -1,43 +1,46 @@
 .friends
+.container_friends
   %h2
     = "#{@user.full_name}'s Profile"
-.container_friends
-  .friend_image
-    - unless @user.user_image.blank?
-      = image_tag @user.user_image.detail.url
-      %br
+  .friend_info
+    .friend_image
+      - unless @user.user_image.blank?
+        = image_tag @user.user_image.detail.url
+        %br
 
-  %br
-  .friend
-    = @user.email
-    %p
-      = @user.biography
-    %p
-      Number of friends:
-      - if @user == current_user
-        = link_to @user.friends.size, friendships_path
-      - else
-        = @user.friends.size
-    %p
-      Number of networks:
-      - if @user == current_user
-        = link_to @user.user_networks.size, user_networks_path
-      - else
-        = @user.user_networks.size
-    %p.links
-      - if @user == current_user
-        = link_to 'Edit Profile', edit_user_registration_path
-      -unless @user == current_user
-        = link_to 'Back to Friends', friendships_path
+    %br
+    .friend
+      = @user.email
+      %p
+        = @user.biography
+      %p
+        Number of friends:
+        - if @user == current_user
+          = link_to @user.friends.size, friendships_path
+        - else
+          = @user.friends.size
+      %p
+        Number of networks:
+        - if @user == current_user
+          = link_to @user.user_networks.size, user_networks_path
+        - else
+          = @user.user_networks.size
+      %p.links
+        - if @user == current_user
+          = link_to 'Edit Profile', edit_user_registration_path
+        -unless @user == current_user
+          = link_to 'Back to Friends', friendships_path
 
   .search_form
-    -if @user == current_user
-      = form_tag user_path, :method => :get do
-        =label_tag :postcode, "Place"
-        =text_field_tag :postcode
-        =label_tag :distance
-        =text_field_tag :distance
-        =submit_tag "Search", :name => nil
+    %h3
+      Search your networks
+      -if @user == current_user
+        = form_tag user_path, :method => :get do
+          =label_tag :postcode, "Place"
+          =text_field_tag :postcode
+          =label_tag :distance
+          =text_field_tag :distance
+          =submit_tag "Search", :name => nil
 
 
 
@@ -111,7 +114,8 @@
               %p
                 City:
                 =wifi_network.city
-                = link_to 'Show', wifi_network_path(wifi_network)
+                .links
+                  = link_to 'Show', wifi_network_path(wifi_network)
       .links#networks
         -if @user == current_user
           = link_to 'Back to Map', user_networks_path

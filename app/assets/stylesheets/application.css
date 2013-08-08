@@ -13,5 +13,6 @@
  */
 
 body {
-background-image: './app/assets/images/bgmap.png', fixed;
+background: image_url('bgmap.png') no-repeat center center  fixed;
+background-size: cover;
 }

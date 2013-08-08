@@ -63,11 +63,29 @@ body {
   -webkit-filter: brightness(55%);
 }
 
-#logo a img {
+.nav {
+  background-color: #000;
+  height: 160px;
+  width: 100%;
   text-align: center;
-  height: 200px;
-  width: 300px;
-  vertical-align: middle;
+  position: relative;
+  margin: auto;
+  min-width: 940px;
+  padding-top: 40px;
+}
+
+.nav_links a img {
+  width: 60px;
+  padding-right: 60px;
+}
+
+.nav_links a:nth-child(1) {
+  padding-left: 60px;
+}
+
+
+#logo a {
+  padding-left: 0;
 }
 
 #logo {
@@ -75,26 +93,12 @@ body {
   display: inline;
 }
 
-.nav {
-  background-color: #000;
-  height: 200px;
-  width: 100%;
+#logo a img {
   text-align: center;
-  position: relative;
-  margin: auto;
-}
-
-.nav_links a img {
-  width: 60px;
-  padding-right: 80px;
-}
-
-.nav_links a:nth-child(1) {
-  padding-left: 80px;
-}
-
-#logo a {
-  padding-left: 0;
+  height: 200px;
+  width: 300px;
+  vertical-align: middle;
+  margin-top: -45px;
 }
 
 .login {
@@ -308,7 +312,6 @@ list-style: none;
 }
 
 #content {
-
     margin: auto;
   width: 400px;
 }
