@@ -3,6 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+.bio {
+  max-height: 160px;
+  overflow: scroll;
+}
+
 #unconfirmed_friendships {
   display: none;
 }
