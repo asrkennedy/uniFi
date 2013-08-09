@@ -72,13 +72,16 @@ body {
   list-style: none;
   width: 28%;
   margin: auto;
+  margin-top: 10px;
+  margin-bottom: 60px;
   display: inline-block;
-  padding: 10px;
+  padding: 20px;
   width: 350px;
   text-wrap: normal;
   text-align: left;
-  min-height: 340px;
+  max-height: 260px;
   float: right;
+  overflow: scroll;
 }
 
 .nofriends {
@@ -173,6 +176,7 @@ li.networks {
   background-color: #eee;
   padding: 20px;
   margin-bottom: 20px;
+  overflow: scroll;
 }
 
 .networks_container {

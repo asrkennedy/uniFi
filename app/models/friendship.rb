@@ -3,6 +3,9 @@ class Friendship < ActiveRecord::Base
   belongs_to :proposee, class_name: "User"
   attr_accessible :proposee_sharing_pref, :proposer_sharing_pref, :proposee_id, :proposer_id, :confirmed
 
+  validates_uniqueness_of :proposer_id, scope: [:proposee_id]
+  validate :reciprocal_friendship_doesnt_exist
+
 
 
 # def show_users
@@ -13,5 +16,13 @@ class Friendship < ActiveRecord::Base
 #     user.friends.size
 #     end
 # end
+
+  def reciprocal_friendship_doesnt_exist
+    reciprocal_friendships = Friendship.where({proposer_id: self.proposee_id, proposee_id: self.proposer_id})
+    if reciprocal_friendships.any?
+      errors.add(:base, "You already have a friend request from #{proposee.full_name}")
+    end
+  end
+
 
 end

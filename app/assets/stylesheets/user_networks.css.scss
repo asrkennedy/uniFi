@@ -35,14 +35,17 @@
 
 footer {
   background-color: #000;
-  height: 60px;
+  height: 30px;
+  position: fixed;
   bottom: 0px;
+  width: 100%;
+
 }
 
 footer p {
   color: #777;
   font-size: 14px;
-  margin-top: 40px;
+  margin-top: 10px;
   float: right;
   margin-bottom: 0px;
   padding-right: 20px;
@@ -93,22 +96,26 @@ body {
 .nav_links a img {
   width: 60px;
   padding-right: 60px;
+  border: none;
 }
 
 
 
 .nav_links a:nth-child(1) {
   padding-left: 60px;
+  border: none;
 }
 
 
 #logo a {
   padding-left: 0;
+  border: none;
 }
 
 #logo {
   width: 400px;
   display: inline;
+  border: none;
 }
 
 #logo a img {
@@ -117,6 +124,7 @@ body {
   width: 300px;
   vertical-align: middle;
   margin-top: -45px;
+  border: none;
 }
 
 .login {
@@ -277,6 +285,7 @@ list-style: none;
   width: 720px;
   margin-top: 40px;
   margin-bottom: 40px;
+  overflow: scroll;
 
 }
 
