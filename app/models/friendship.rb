@@ -4,7 +4,7 @@ class Friendship < ActiveRecord::Base
   attr_accessible :proposee_sharing_pref, :proposer_sharing_pref, :proposee_id, :proposer_id, :confirmed
 
   validates_uniqueness_of :proposer_id, scope: [:proposee_id]
-
+  validate :reciprocal_friendship_doesnt_exist
 
 
 
