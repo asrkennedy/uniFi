@@ -28,9 +28,9 @@
           - unless current_user.find_unconfirmed_friendships.include? friend
             %li.friends
               -if friend.user_image.blank?
-                =image_tag "avatar100.png"
+                =link_to (image_tag "avatar100.png"), user_path(friend.id)
               -else
-                = image_tag friend.user_image.thumb.url
+                = link_to (image_tag friend.user_image.thumb.url), user_path(friend.id)
               %br
               = link_to "#{friend.full_name}", user_path(friend.id)
               %br
