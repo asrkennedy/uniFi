@@ -51,7 +51,9 @@ class UserNetworksController < ApplicationController
           @public_networks = @wifi_networks_in_range.select {|network| network.is_public}.select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}
           @users_wifi_networks = @wifi_networks_in_range.joins(:user_networks).where(user_networks: {user_id: current_user.id})
           @users_networks = @users_wifi_networks.map{|wifi_network| wifi_network.user_networks.first}
-          @users_friends_networks = (current_user.friends_visible_networks).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}.select{|wifi_network| wifi_network.distance_to(params[:postcode].delete(' ').upcase) <= (params[:distance].to_f)}
+          @users_friends_networks = (current_user.friends_visible_networks).select {|wifi_network| wifi_network.is_not_a_user_network_of(current_user)}.
+          reject{|wifi_network| wifi_network.distance_to(params[:postcode].delete(' ').upcase).nil?}.
+          select{|wifi_network| wifi_network.distance_to(params[:postcode].delete(' ').upcase) <= (params[:distance].to_f)}
         end
       else
         @wifi_networks_in_range = WifiNetwork.all
