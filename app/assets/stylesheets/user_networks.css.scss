@@ -35,14 +35,17 @@
 
 footer {
   background-color: #000;
-  height: 60px;
+  height: 30px;
+  position: fixed;
   bottom: 0px;
+  width: 100%;
+
 }
 
 footer p {
   color: #777;
   font-size: 14px;
-  margin-top: 40px;
+  margin-top: 10px;
   float: right;
   margin-bottom: 0px;
   padding-right: 20px;
