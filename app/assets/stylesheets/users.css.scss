@@ -4,8 +4,26 @@
 
 
 .bio {
-  max-height: 160px;
+  max-height: 146px;
   overflow: scroll;
+}
+
+.bio::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.bio::-webkit-scrollbar:vertical {
+    width: 11px;
+}
+
+.bio::-webkit-scrollbar:horizontal {
+    height: 11px;
+}
+
+.bio::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white; /* should match background, can't be transparent */
+    background-color: rgba(0, 0, 0, .5);
 }
 
 #unconfirmed_friendships {
@@ -81,7 +99,12 @@ body {
   text-align: left;
   max-height: 260px;
   float: right;
-  overflow: scroll;
+}
+
+.friend#show {
+  height: 280px;
+  padding-bottom: 30px;
+  padding-top: 0px;
 }
 
 .nofriends {
